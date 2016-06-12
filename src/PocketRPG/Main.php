@@ -21,7 +21,7 @@ use pocketmine\math\Vector3;
 use pocketmine\level\Level;
 use pocketmine\level\Position;
 
-class Main extends PluginBase implements Listener {
+class Main extends PluginBase implements Listener, CommandExecutor {
   
   public function onEnable() {
     $this->getLogger()->info(TF:: GREEN . "Enabling PocketRPG");
