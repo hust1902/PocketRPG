@@ -11,6 +11,8 @@ use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
 use pocketmine\plugin\PluginBase;
 use pocketmine\level\Level;
+use pocketmine\Server;
+use pocketmine\Player;
 
 class RPGcommands extends PluginBase implements CommandExecutor{
   
