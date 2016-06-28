@@ -26,9 +26,9 @@ class Main extends PluginBase implements Listener {
   public function onEnable() {
     $this->getLogger()->info(TF:: GREEN . "Enabling PocketRPG");
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    $this->getCommand("quest")->setExecutor(new QuestCommands($this));
-    $this->getCommand("rpg")->setExecutor(new RPGcommands($this));
-    $this->getCommand("party")->setExecutor(new PartyCommands($this));
+    $this->getCommand('quest')->setExecutor(new QuestCommands($this));
+    $this->getCommand('rpg')->setExecutor(new RPGcommands($this));
+    $this->getCommand('party')->setExecutor(new PartyCommands($this));
     
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
