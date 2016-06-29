@@ -11,6 +11,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\CommandExecutor;
 use pocketmine\command\PluginCommand;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
