@@ -1,4 +1,4 @@
 # PocketRPG
 An RPG plugin for pocketmine
 
-(In Progress)
+**Please look at the Wiki for a good description.**
