@@ -17,7 +17,7 @@ Amount_reward_1: 10
 Quest_name_2: "quest 2"
 ItemID_for_finish_2: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_2: "Iron ingot"
 Amount_finish_2: 1
 #Capital letters and _ for space item name:
 Reward_quest_2: GOLD_INGOT
@@ -26,7 +26,7 @@ Amount_reward_2: 10
 Quest_name_3: "quest 3"
 ItemID_for_finish_3: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_3: "Iron ingot"
 Amount_finish_3: 1
 #Capital letters and _ for space item name:
 Reward_quest_3: GOLD_INGOT
@@ -35,7 +35,7 @@ Amount_reward_3: 10
 Quest_name_4: "quest 4"
 ItemID_for_finish_4: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_4: "Iron ingot"
 Amount_finish_4: 1
 #Capital letters and _ for space item name:
 Reward_quest_4: GOLD_INGOT
@@ -44,7 +44,7 @@ Amount_reward_4: 10
 Quest_name_5: "quest 5"
 ItemID_for_finish_5: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_5: "Iron ingot"
 Amount_finish_5: 1
 #Capital letters and _ for space item name:
 Reward_quest_5: GOLD_INGOT
@@ -53,7 +53,7 @@ Amount_reward_5: 10
 Quest_name_6: "quest 6"
 ItemID_for_finish_6: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_6: "Iron ingot"
 Amount_finish_6: 1
 #Capital letters and _ for space item name:
 Reward_quest_6: GOLD_INGOT
@@ -71,7 +71,7 @@ Amount_reward_7: 10
 Quest_name_8: "quest 8"
 ItemID_for_finish_8: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_8: "Iron ingot"
 Amount_finish_8: 1
 #Capital letters and _ for space item name:
 Reward_quest_8: GOLD_INGOT
@@ -80,7 +80,7 @@ Amount_reward_8: 10
 Quest_name_9: "quest 9"
 ItemID_for_finish_9: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_9: "Iron ingot"
 Amount_finish_9: 1
 #Capital letters and _ for space item name:
 Reward_quest_9: GOLD_INGOT
@@ -89,9 +89,100 @@ Amount_reward_9: 10
 Quest_name_10: "quest 10"
 ItemID_for_finish_10: 265
 #Same item as above but as item name:
-Item_for_finish_1: "Iron ingot"
+Item_for_finish_10: "Iron ingot"
 Amount_finish_10: 1
 #Capital letters and _ for space item name:
 Reward_quest_10: GOLD_INGOT
 Amount_reward_10: 10
+
+#Everything you can configure per quest:
+Quest_name_11: "quest 11"
+ItemID_for_finish_11: 265
+#Same item as above but as item name:
+Item_for_finish_11: "Iron ingot"
+Amount_finish_11: 1
+#Capital letters and _ for space item name:
+Reward_quest_11: GOLD_INGOT
+Amount_reward_11: 10
+
+Quest_name_12: "quest 12"
+ItemID_for_finish_12: 265
+#Same item as above but as item name:
+Item_for_finish_12: "Iron ingot"
+Amount_finish_12: 1
+#Capital letters and _ for space item name:
+Reward_quest_12: GOLD_INGOT
+Amount_reward_12: 10
+
+Quest_name_13: "quest 13"
+ItemID_for_finish_13: 265
+#Same item as above but as item name:
+Item_for_finish_13: "Iron ingot"
+Amount_finish_13: 1
+#Capital letters and _ for space item name:
+Reward_quest_13: GOLD_INGOT
+Amount_reward_13: 10
+
+Quest_name_14: "quest 14"
+ItemID_for_finish_14: 265
+#Same item as above but as item name:
+Item_for_finish_14: "Iron ingot"
+Amount_finish_14: 1
+#Capital letters and _ for space item name:
+Reward_quest_14: GOLD_INGOT
+Amount_reward_14: 10
+
+Quest_name_15: "quest 15"
+ItemID_for_finish_15: 265
+#Same item as above but as item name:
+Item_for_finish_15: "Iron ingot"
+Amount_finish_15: 1
+#Capital letters and _ for space item name:
+Reward_quest_15: GOLD_INGOT
+Amount_reward_15: 10
+
+Quest_name_16: "quest 16"
+ItemID_for_finish_16: 265
+#Same item as above but as item name:
+Item_for_finish_16: "Iron ingot"
+Amount_finish_16: 1
+#Capital letters and _ for space item name:
+Reward_quest_16: GOLD_INGOT
+Amount_reward_16: 10
+
+Quest_name_17: "quest 17"
+ItemID_for_finish_17: 265
+#Same item as above but as item name:
+Item_for_finish_17: "Iron ingot"
+Amount_finish_17: 1
+#Capital letters and _ for space item name:
+Reward_quest_17: GOLD_INGOT
+Amount_reward_17: 10
+
+Quest_name_18: "quest 18"
+ItemID_for_finish_18: 265
+#Same item as above but as item name:
+Item_for_finish_18: "Iron ingot"
+Amount_finish_18: 1
+#Capital letters and _ for space item name:
+Reward_quest_18: GOLD_INGOT
+Amount_reward_18: 10
+
+Quest_name_19: "quest 19"
+ItemID_for_finish_19: 265
+#Same item as above but as item name:
+Item_for_finish_19: "Iron ingot"
+Amount_finish_19: 1
+#Capital letters and _ for space item name:
+Reward_quest_19: GOLD_INGOT
+Amount_reward_19: 10
+
+Quest_name_20: "quest 20"
+ItemID_for_finish_20: 265
+#Same item as above but as item name:
+Item_for_finish_20: "Iron ingot"
+Amount_finish_20: 1
+#Capital letters and _ for space item name:
+Reward_quest_20: GOLD_INGOT
+Amount_reward_20: 10
 ...
