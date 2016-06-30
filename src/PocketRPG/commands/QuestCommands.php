@@ -55,7 +55,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $gold_2 = Item::get(Item::$this->config->get("Reward_quest_2"), 0, $amount_2);
               $p->getInventory()->addItem($gold_2);
               $p->sendPopup(TF:: GREEN . "You leveled up!");
-            } elseif($p->hasPermission("quest.1.completed")) {
+            } elseif($p->hasPermission("quest.2.completed")) {
               $p->sendMessage(TF:: RED . "You already finished this quest!");
             } else {
               $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
@@ -103,7 +103,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             
           case "5":
               if($p->hasPermission("quest.5.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_5"))->getCount() >= $this->config->get("Amount_finish_5")) {
-              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_3"));
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_5"));
               $p->setPermission("quest.5.completed");
               $p->addExpLevel(1);
               $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
@@ -184,7 +184,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $p->addExpLevel(1);
               $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
               $p->sendMessage(TF:: GRAY . "Rewards obtained");
-              $amount_9 = $this->config->get("Amount_reward_3");
+              $amount_9 = $this->config->get("Amount_reward_9");
               $gold_9 = Item::get(Item::$this->config->get("Reward_quest_9"), 0, $amount_9);
               $p->getInventory()->addItem($gold_9);
               $p->sendPopup(TF:: GREEN . "You leveled up!");
@@ -208,6 +208,196 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($gold_10);
               $p->sendPopup(TF:: GREEN . "You leveled up!");
             } elseif($p->hasPermission("quest.10.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+              case "11":
+              if($p->hasPermission("quest.11.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_11"))->getCount() >= $this->config->get("Amount_finish_11")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_11"));
+              $p->setPermission("quest.11.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_11 = $this->config->get("Amount_reward_11");
+              $gold_11 = Item::get(Item::$this->config->get("Reward_quest_11"), 0, $amount_11);
+              $p->getInventory()->addItem($gold_11);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.11.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "12":
+              if($p->hasPermission("quest.12.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_12"))->getCount() >= $this->config->get("Amount_finish_12")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_12"));
+              $p->setPermission("quest.12.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_12 = $this->config->get("Amount_reward_12");
+              $gold_12 = Item::get(Item::$this->config->get("Reward_quest_12"), 0, $amount_12);
+              $p->getInventory()->addItem($gold_12);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.12.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "13":
+              if($p->hasPermission("quest.13.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_13"))->getCount() >= $this->config->get("Amount_finish_13")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_13"));
+              $p->setPermission("quest.13.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_13 = $this->config->get("Amount_reward_13");
+              $gold_13 = Item::get(Item::$this->config->get("Reward_quest_13"), 0, $amount_13);
+              $p->getInventory()->addItem($gold_13);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.13.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "14":
+              if($p->hasPermission("quest.14.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_14"))->getCount() >= $this->config->get("Amount_finish_14")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_14"));
+              $p->setPermission("quest.14.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_14 = $this->config->get("Amount_reward_14");
+              $gold_14 = Item::get(Item::$this->config->get("Reward_quest_14"), 0, $amount_14);
+              $p->getInventory()->addItem($gold_14);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.14.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "15":
+              if($p->hasPermission("quest.15.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_15"))->getCount() >= $this->config->get("Amount_finish_15")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_15"));
+              $p->setPermission("quest.15.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_15 = $this->config->get("Amount_reward_15");
+              $gold_15 = Item::get(Item::$this->config->get("Reward_quest_15"), 0, $amount_15);
+              $p->getInventory()->addItem($gold_15);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.15.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "16":
+              if($p->hasPermission("quest.16.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_16"))->getCount() >= $this->config->get("Amount_finish_16")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_16"));
+              $p->setPermission("quest.16.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_16 = $this->config->get("Amount_reward_16");
+              $gold_16 = Item::get(Item::$this->config->get("Reward_quest_16"), 0, $amount_16);
+              $p->getInventory()->addItem($gold_16);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.16.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "17":
+              if($p->hasPermission("quest.17.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_17"))->getCount() >= $this->config->get("Amount_finish_17")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_17"));
+              $p->setPermission("quest.17.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_17 = $this->config->get("Amount_reward_17");
+              $gold_17 = Item::get(Item::$this->config->get("Reward_quest_17"), 0, $amount_17);
+              $p->getInventory()->addItem($gold_17);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.17.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "18":
+              if($p->hasPermission("quest.18.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_18"))->getCount() >= $this->config->get("Amount_finish_18")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_18"));
+              $p->setPermission("quest.18.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_18 = $this->config->get("Amount_reward_18");
+              $gold_18 = Item::get(Item::$this->config->get("Reward_quest_18"), 0, $amount_18);
+              $p->getInventory()->addItem($gold_18);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.18.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "19":
+              if($p->hasPermission("quest.19.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_19"))->getCount() >= $this->config->get("Amount_finish_19")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_19"));
+              $p->setPermission("quest.19.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_19 = $this->config->get("Amount_reward_19");
+              $gold_19 = Item::get(Item::$this->config->get("Reward_quest_19"), 0, $amount_19);
+              $p->getInventory()->addItem($gold_19);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.19.completed")) {
+              $p->sendMessage(TF:: RED . "You already finished this quest!");
+            } else {
+              $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
+            }
+            return true;
+            break;
+            
+          case "20":
+              if($p->hasPermission("quest.20.cancomplete") && $p->getInventory()->getId($this->config->get("ItemID_for_finish_20"))->getCount() >= $this->config->get("Amount_finish_20")) {
+              $p->getInventory()->removeItem($this->config->get("ItemID_for_finish_20"));
+              $p->setPermission("quest.20.completed");
+              $p->addExpLevel(1);
+              $p->sendMessage(TF:: GREEN . "Congratulations, you have completed the quest!");
+              $p->sendMessage(TF:: GRAY . "Rewards obtained");
+              $amount_20 = $this->config->get("Amount_reward_20");
+              $gold_20 = Item::get(Item::$this->config->get("Reward_quest_20"), 0, $amount_20);
+              $p->getInventory()->addItem($gold_20);
+              $p->sendPopup(TF:: GREEN . "You leveled up!");
+            } elseif($p->hasPermission("quest.20.completed")) {
               $p->sendMessage(TF:: RED . "You already finished this quest!");
             } else {
               $p->sendMessage(TF:: RED . "You can't finish this quest yet!");
