@@ -23,7 +23,7 @@ class PartyCommands extends PluginBase implements CommandExecutor{
                         case "create":
                           if(isset($args[1])) {
                             $name = $p->getName();
-                            if(isset($this->party->get($name))) {
+                            if($this->party->get($name) !== null) {
                                 $p->sendMessage(TF:: RED . "You are already in a party! use /party leave first!");
                             } else {
                                 $p->sendMessage(TF:: AQUA . "You created a party named " . $args[1] . "!");
