@@ -53,7 +53,7 @@ class PartyCommands extends PluginBase implements CommandExecutor{
                     
                         case "leave":
                             $name = $p->getName();
-                            if(isset($this->party->get($name))) {
+                            if($this->party->get($name) == null) {
                                 $p->sendMessage(TF:: RED . "You are not currently in a party!");
                             } else {
                                 $pname = $this->party->get($name);
