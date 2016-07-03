@@ -36,7 +36,7 @@ class PartyCommands extends PluginBase implements CommandExecutor{
                         case "invite":
                             if(isset($args[1]) && $args[1] instanceof Player) {
                                 $sname = $p->getName();
-                                if(isset($this->party->get($args[1]))) {
+                                if($this->party->get($args[1]) !== null) {
                                     $p->sendMessage(TF:: RED . "The player you invited is already in a party!");
                                 } else {
                                     $p->sendMessage(TF:: AQUA . "You invited the player to your party!");
