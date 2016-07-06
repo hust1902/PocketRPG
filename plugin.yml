@@ -12,7 +12,7 @@ commands:
     aliases: [q]
   rpg:
     description: Main RPG command
-    usage: /rpg start|reset mage|warrior|assassin|tank
+    usage: /rpg start mage|warrior|assassin|tank |reset
   party:
     description: Main party command
-    usage: /party create <partyname|leave|invite <playername>
+    usage: /party create <partyname>|leave|invite <playername>
