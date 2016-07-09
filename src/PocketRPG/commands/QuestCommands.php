@@ -544,7 +544,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           case "list":
             switch(strtolower($args[1])) {
                   case "1":      
-                    $p->sendMessage(TF:: BOLD . AQUA . "Quest list 1");
+                    $p->sendMessage(TF:: AQUA . "Quest list 1");
                     if($p->hasPermission("quest.1.completed")) {
                       $p->sendMessage(TF:: GREEN . "" . $this->config->get("Quest_name_1") . " - level 0");
                     } elseif($p->hasPermission("quest.1.cancomplete")) {
@@ -588,7 +588,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   break;
                                  
                   case "2":
-                    $p->sendMessage(TF:: BOLD . AQUA . "Quest list 2");
+                    $p->sendMessage(TF:: AQUA . "Quest list 2");
                     if($p->hasPermission("quest.6.completed")) {
                       $p->sendMessage(TF:: GREEN . "" . $this->config->get("Quest_name_6") . " - level 5");
                     } elseif($p->hasPermission("quest.6.cancomplete")) {
