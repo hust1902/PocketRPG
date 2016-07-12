@@ -30,20 +30,16 @@ class MyListener extends Main implements Listener {
     if($event instanceof EntityDamageByEntityEvent && $event->getDamager() instanceof Player) {
         $hit = $event->getEntity();
         $damager = $event->getDamager();
-        $cfglevel = $this->config->get("RPG_LEVEL");
-        if($this->party->get($hit) == $this->party->get($damager)) {
-          $event->setCancelled();
-        } elseif($damager->getLevel() == $this->getServer()->getLevelByName($cfglevel)) {
-            if($p->hasPermission("class.assassin")) {
+            if($damager->hasPermission("class.assassin")) {
               if($damager->getItemInHand()->getId() == 388) {
                 $x = $hit->x;
                 $y = $hit->y;
                 $z = $hit->z;
                 $hitpos = $hit->getPosition(new Vector3($x, $y, $z));
                 $level->addParticle(new CriticalParticle($hitpos));
-                $this->setDamage(getDamage() + 3);
+                $this->setDamage($this->getDamage() + 3);
               }
-            } elseif($p->hasPermission("class.mage")) {
+            } elseif($damager->hasPermission("class.mage")) {
               if($damage->getItemInHand()->getId() == 280) {
                 $x = $hit-r>x;
                 $y = $hit->y;
@@ -52,19 +48,19 @@ class MyListener extends Main implements Listener {
                 $level->addParticle(new LavaParticle($hitpos));
                 $this->setKnockBack(1);
                 $hit->setOnFire(4);
-                $this->setDamage(getDamage() + 4);
+                $this->setDamage($this->getDamage() + 3);
               }
-            } elseif($p->hasPermission("class.tanker")) {
-              if($damager->getItemInHand()->getId() == 328) {
+            } elseif($damager->hasPermission("class.tanker")) {
+              if($damager->getItemInHand()->getId() == 336) {
                 $x = $hit->x;
                 $y = $hit->y;
                 $z = $hit->z;
                 $hitpos = $hit->getPosition(new Vector3($x, $y, $z));
                 $level->addParticle(new ExplodeParticle($hitpos));
                 $this->setKnockBack(3);
-                $this->setDamage(getDamage() + 2);
+                $this->setDamage($this->getDamage() + 3);
               }
-            } elseif($p->hasPermission("class.warrior")) {
+            } elseif($damager->hasPermission("class.warrior")) {
               if($damager->getItemInHand()->getId() == 267) {
                 $x = $hit->x;
                 $y = $hit->y;
@@ -72,86 +68,49 @@ class MyListener extends Main implements Listener {
                 $hitpos = $hit->getPosition(new Vector3($x, $y, $z));
                 $level->addParticle(new CriticalParticle($hitpos));
                 $this->setKnockBack(2);
-                $this->setDamage(getDamage() + 6);
+                $this->setDamage($this->getDamage() + 3);
               }
             }
-        }
+        
     }
   }
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
-    $cfglevel = $this->config->get("RPG_LEVEL");
-    if($p->getLevel() == $this->getServer()->getLevelByName() == $cfglevel) {
-      if($p->getItemInHand() == 347) {
+      if($p->getItemInHand() == 388) {
         if($p->hasPermission("class.assassin")) {
-        $effect = Effect::getEffect(14)->setDuration(1)->setAmplifier(1)->setVisible(true);
+        $effect = Effect::getEffect(1)->setDuration(5)->setAmplifier(1)->setVisible(false);
         $p->addEffect($effect);
       }
-    } elseif($p->getItemInHand() == 328) {
+    } elseif($p->getItemInHand() == 336) {
         if($p->hasPermission("class.tanker")) {
-        $effect = Effect::getEffect(11)->setDuration(5)->setAmplifier(2)->setVisible(true);
+        $effect2 = Effect::getEffect(2)->setDuration(5)->setAmplifier(1)->setVisible(false);
+        $effect = Effect::getEffect(11)->setDuration(5)->setAmplifier(1)->setVisible(false);
         $p->addEffect($effect);
+        $p->addEffect($effect2);
         }
       }
-    }
+    
   }
-  public function onBlockPlace(BlockPlaceEvent $event) {
-    $cfglevel = $this->config->get("RPG_LEVEL");
-    $p = $event->getPlayer();
-    if($p instanceof Player) {
-      if($p->getLevel() == $this->getServer()->getLevelByName($cfglevel)) {
-        $event->setCancelled();
-        $p->sendMessage(TF:: RED . "You are not allowed to do that here.");
-      }
-    }
-  }
-  public function onBlockBreak(BlockBreakEvent $event) {
-    $p = $event2->getPlayer();
-    $cfglevel = $this->config->get("RPG_LEVEL")
-    if($p instanceof Player) {
-      if($p->getLevel() == $this->getServer()->getLevelByName($cfglevel)) {
-        $event2->setCancelled();
-        $p->sendMessage(TF:: RED . "You are not allowed to do that here.");
-      }
-    }
-  }
+
     public function onCraft(CraftItemEvent $event) {
-    $rpglvl = $this->config->get("RPG_LEVEL");
-    if($event->getPlayer()->getLevel() == $this->getServer()->getLevelByName($rpglvl)) {
       $event->setCancelled();
-    }
   }
   
   public function onBurn(FurnaceBurnEvent $event2) {
-    $rpglvl = $this->config->get("RPG_LEVEL");
-    if($event2->getPlayer()->getLevel() == $this->getServer()->getLevelByName($rpglvl)) {
       $event2->setCancelled();
-    }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event3) {
-    $rpglvl = $this->config->get("RPG_LEVEL");
-    if($event3->getPlayer()->getLevel() == $this->getServer()->getLevelByName($rpglvl)) {
       $event3->setCancelled();
-    }
   }
   
   public function onDrop(PlayerDropEvent $event4) {
-    $rpglvl = $this->config->get("RPG_LEVEL");
-    if($event4->getPlayer()->getLevel() == $this->getServer()->getLevelByName($rpglvl)) {
       $event4->setCancelled();
     }
-  }
   
   public function onDeath(PlayerDeathEvent $event) {
     $p = $event->getPlayer();
-    $rpglvl = $this->config->get("RPG_LEVEL");
-    if($p->getLevel() == $this->getServer->getLevelByName($rpglvl)) {
-      $p->setKeepInventory();
-      $p->setKeepExperience();
-    } else {
-      $p->setKeepInventory(false);
-      $p->setKeepExperience(false);
-    }
+    $p->setKeepInventory();
+    $p->setKeepExperience();
   }
 }
