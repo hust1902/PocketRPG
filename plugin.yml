@@ -1,3 +1,4 @@
+---
 name: PocketRPG
 author: Sandertv
 main: PocketRPG\Main
@@ -16,3 +17,18 @@ commands:
   party:
     description: Main party command
     usage: /party create <partyname>|leave|invite <playername>
+  
+permissions:
+  class.mage:
+    default: false
+    description: Mage class
+  class.warrior:
+    default: false
+    description: Warrior class
+  class.tanker:
+    default: false
+    description: Tanker class
+  class.assassin:
+    default: false
+    description: Assassin class
+...
