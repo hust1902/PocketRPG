@@ -21,7 +21,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
       case "rpg":
         switch(strtolower($args[0])) {
           case "start":
-            switch(strtolower($args[1])) {
+          switch(strtolower($args[1])) {
           case "mage":
             if($p->hasPermission("class.chosen")) {
               $p->sendMessage(TF:: RED . "You have already picked a class!");
@@ -55,7 +55,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
-              $shield = Item::get(Item::MINECART, 0, 1);
+              $shield = Item::get(Item::BRICK, 0, 1);
               $p->getInventory->addItem($shield);
               $p->setPermission("class.chosen");
               $p->setPermission("class.tanker");
@@ -64,26 +64,10 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             return true;
             break;
    
-          case "archer":
-            if($p->hasPermission("class.chosen")) {
-              $p->sendMessage(TF:: RED . "You have already picked a class!");
-            } else {
-              $p->sendMessage(TF:: AQUA . "You have joined the world as an archer!");
-              $bow = Item::get(Item::BOW, 0, 1);
-              $arrows = Item::get(Item::ARROW, 0, 128);
-              $p->getInventory->addItem($bow);
-              $p->getInventory->addItem($arrows);
-              $p->setPermission("class.chosen");
-              $p->setPermission("class.archer");
-              $p->switchLevel($cfglevel);
-            }
-            return true;
-            break;
-  
           case "assassin":
             if($p->hasPermission("class.chosen")) {
               $p->sendMessage(TF:: RED . "You have already picked a class!");
-            } else {
+            } elseif($p->hasPermission("class.special")) {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $cloak = Item::get(Item::CLOCK, 0, 1);
               $knife = Item::get(Item::FEATHER, 0, 1);
@@ -97,3 +81,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             break;
           }
           break;
+        }
+    }
+  }
+}
+  
