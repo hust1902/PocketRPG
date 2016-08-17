@@ -3,6 +3,7 @@
 namespace FWAcoreclasses;
 
 use pocketmine\scheduler\PluginTask;
+use PocketRPG\eventlistener\EventListener;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -15,7 +16,7 @@ use pocketmine\level\particle\HugeExplodeParticle;
 
 class ExplodeTask extends PluginTask implements Listener{
   
-  public function __construct(Main $plugin) {
+  public function __construct(EventListener $plugin) {
     parent::__construct($plugin);
     $this->plugin = $plugin;
   }
