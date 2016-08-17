@@ -32,7 +32,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory->addItem($wand);
               $p->setPermission("class.chosen");
               $p->setPermission("class.mage");
-              $p->switchLevel($cfglevel);
+              $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
             break;
@@ -46,7 +46,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory->addItem($sword);
               $p->setPermission("class.chosen");
               $p->setPermission("class.warrior");
-              $p->switchLevel($cfglevel);
+              $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
             break;
@@ -60,7 +60,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory->addItem($shield);
               $p->setPermission("class.chosen");
               $p->setPermission("class.tanker");
-              $p->switchLevel($cfglevel);
+              $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
             break;
@@ -70,13 +70,13 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } elseif($p->hasPermission("class.special")) {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
-              $cloak = Item::get(Item::CLOCK, 0, 1);
               $knife = Item::get(Item::FEATHER, 0, 1);
               $p->getInventory->addItem($knife);
-              $p->getInventory->addItem($cloak);
               $p->setPermission("class.chosen");
               $p->setPermission("class.assassin");
-              $p->switchLevel($cfglevel);
+              $p->switchLevel($this->config->get("RPGworld"));
+            } else {
+              $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
             }
             return true;
             break;
