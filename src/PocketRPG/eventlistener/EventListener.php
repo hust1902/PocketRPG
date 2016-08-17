@@ -137,10 +137,6 @@ class EventListener extends PluginBase implements Listener {
         $z = $p->z;
         $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z))); //Rage powder
         }
-    } elseif($p->getItemInHand()->getId() == Item::BLAZE_POWDER) {
-      if($p->hasPermission("class.mage")) {
-        
-      }
     } 
     if($p->getItemInHand()->getId() == Item::STICK) {
         $p->sendPopup(TF:: AQUA . "Wand\n" . TF:: GRAY . "Fireball - Mage");
