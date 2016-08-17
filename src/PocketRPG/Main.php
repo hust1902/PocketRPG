@@ -2,7 +2,6 @@
 
 namespace PocketRPG;
 
-use PocketRPG\commands\PartyCommands;
 use PocketRPG\commands\QuestCommands;
 use PocketRPG\commands\RPGcommands;
 use PocketRPG\eventlistener\EventListener;
