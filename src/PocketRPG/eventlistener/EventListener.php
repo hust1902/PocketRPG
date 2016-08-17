@@ -87,6 +87,7 @@ class EventListener extends Main implements Listener {
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
     $level = $p->getLevel();
+    if($level->getName() == $this->config->get("RPGworld") {
       if($p->getItemInHand()->getId() == Item::FEATHER && $level->getName() == $this->config->get("RPGworld")) {
         if($p->hasPermission("class.assassin")) {
         $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
@@ -172,6 +173,7 @@ class EventListener extends Main implements Listener {
         }
     } elseif($p->getItemInHand()->getId() == Item::IRON_SHOVEL) {
        $p->sendPopup(TF:: AQUA . "Fissure Hammer\n" . TF:: GRAY . "Fissure - Warrior");
+    }
     }
   }
     public function onCraft(CraftItemEvent $event) {
