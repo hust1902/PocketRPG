@@ -3,28 +3,40 @@
 namespace PocketRPG\eventlistener;
 
 use PocketRPG\Main;
-use pocketmine\living\Living;
+use pocketmine\plugin\PluginBase;
+use PocketRPG\commands\RPGcommands;
+use PocketRPG\tasks\ExplodeTask;
+use pocketmine\command\Command;
+use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
-use pocketmine\event\Listener;
-use pocketmine\event\Event;
-use pocketmine\level\Level;
-use pocketmine\math\Vector3;
-use pocketmine\level\Position;
 use pocketmine\permission\Permission;
 use pocketmine\Player;
 use pocketmine\Server;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\Event;
+use pocketmine\math\Vector3;
+use pocketmine\level\Position;
+use pocketmine\level\Level;
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\player\PlayerItemHeldEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\inventory\CraftItemEvent;
+use pocketmine\event\inventory\FurnaceSmeltEvent;
+use pocketmine\event\inventory\FurnaceBurnEvent;
 use pocketmine\level\particle\CriticalParticle;
 use pocketmine\level\particle\LavaParticle;
+use pocketmine\level\particle\HugeExplodeParticle;
 use pocketmine\level\particle\ExplodeParticle;
+use pocketmine\level\particle\HeartParticle;
+use pocketmine\level\particle\EntityFlameParticle;
 use pocketmine\event\player\PlayerItemHeldEvent;
-use pocketmine\event\BlockBreakEvent;
-use pocketmine\event\BlockPlaceEvent;
+use pocketmine\event\player\PlayerDropItemEvent;
+use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\item\Item;
+use pocketmine\entity\Effect;
 
-class EventListener extends Main implements Listener {
+class EventListener extends PluginBase implements Listener {
   
   public function onFight(EntityDamageEvent $event) {
     if($event instanceof EntityDamageByEntityEvent) {
