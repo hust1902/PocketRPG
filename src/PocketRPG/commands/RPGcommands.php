@@ -9,6 +9,7 @@ use pocketmine\command\CommandExecutor;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
+use pocketmine\permission\PermissionAttachment;
 use pocketmine\plugin\PluginBase;
 use pocketmine\level\Level;
 use pocketmine\Server;
