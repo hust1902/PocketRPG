@@ -36,5 +36,5 @@ permissions:
     description: Assassin class
   class.special: 
     default: false 
-    description: Allows acces to assassin class 
+    description: Allows access to assassin class 
 ...
