@@ -3,9 +3,9 @@
 namespace PocketRPG\eventlistener;
 
 use PocketRPG\Main;
-use pocketmine\plugin\PluginBase;
-use PocketRPG\commands\RPGcommands;
 use PocketRPG\tasks\ExplodeTask;
+
+use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TF;
