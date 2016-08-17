@@ -48,9 +48,15 @@ class QuestCommands extends PluginBase implements Listener {
                   } else {
                     $p->sendMessage(TF:: RED . "You did not enter the command correctly");
                   }
+                return true;
+                break;
+                
+                case "questdescription":
+                  //...
               }
             }
           }
+        break;
       }
     }
   }
