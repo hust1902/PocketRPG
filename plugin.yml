@@ -19,6 +19,9 @@ commands:
     usage: /party create <partyname>|leave|invite <playername>
   
 permissions:
+  class.chosen:
+    default: false
+    description: Chosen a class
   class.mage:
     default: false
     description: Mage class
