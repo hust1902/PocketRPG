@@ -9,11 +9,11 @@ load: POSTWORLD
 commands:
   quest:
     description: Main quest command
-    usage: /quest start|end|list|see <1-10>
+    usage: /quest start|end|list|see <name>
     aliases: [q]
   rpg:
     description: Main RPG command
-    usage: /rpg start mage|warrior|assassin|tank |reset
+    usage: /rpg start mage|warrior|assassin|tank
   party:
     description: Main party command
     usage: /party create <partyname>|leave|invite <playername>
@@ -31,4 +31,7 @@ permissions:
   class.assassin:
     default: false
     description: Assassin class
+  class.special: 
+    default: false 
+    description: Allows acces to assassin class 
 ...
