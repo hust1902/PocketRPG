@@ -100,11 +100,11 @@ class EventListener extends PluginBase implements Listener {
     $p = $event->getPlayer();
     $level = $p->getLevel();
     if($level->getName() == $this->config->get("RPGworld") {
-      if($p->getItemInHand()->getId() == Item::FEATHER && $level->getName() == $this->config->get("RPGworld")) {
+      if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
         $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
         $p->addEffect($effect); //gives assassin speed with feather
-      }
+        }
     } elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.tanker")&& $level->getName() == $this->config->get("RPGworld")) {
         $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
