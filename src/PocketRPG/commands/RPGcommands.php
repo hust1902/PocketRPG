@@ -29,7 +29,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
               $wand = Item::get(Item::STICK, 0, 1);
-              $p->getInventory->addItem($wand);
+              $p->getInventory()->addItem($wand);
               $p->setPermission("class.chosen");
               $p->setPermission("class.mage");
               $p->switchLevel($this->config->get("RPGworld"));
@@ -43,7 +43,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
-              $p->getInventory->addItem($sword);
+              $p->getInventory()->addItem($sword);
               $p->setPermission("class.chosen");
               $p->setPermission("class.warrior");
               $p->switchLevel($this->config->get("RPGworld"));
@@ -57,7 +57,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
               $shield = Item::get(Item::BRICK, 0, 1);
-              $p->getInventory->addItem($shield);
+              $p->getInventory()->addItem($shield);
               $p->setPermission("class.chosen");
               $p->setPermission("class.tanker");
               $p->switchLevel($this->config->get("RPGworld"));
@@ -71,7 +71,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
             } elseif($p->hasPermission("class.special")) {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $knife = Item::get(Item::FEATHER, 0, 1);
-              $p->getInventory->addItem($knife);
+              $p->getInventory()->addItem($knife);
               $p->setPermission("class.chosen");
               $p->setPermission("class.assassin");
               $p->switchLevel($this->config->get("RPGworld"));
