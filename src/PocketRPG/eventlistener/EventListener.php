@@ -99,7 +99,7 @@ class EventListener extends PluginBase implements Listener {
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
     $level = $p->getLevel();
-    if($level->getName() == $this->config->get("RPGworld") {
+    if($level->getName() == $this->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
         $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
@@ -185,23 +185,23 @@ class EventListener extends PluginBase implements Listener {
     }
   }
     public function onCraft(CraftItemEvent $event) {
-      if($p->getLevel()->getName() == $this->config->get("RPGworld") {
+      if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
         $event->setCancelled(); //denies any crafting, since that could get rid of important items
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
-    if($p->getLevel()->getName() == $this->config->get("RPGworld") {
+    if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
    public function onBurn(FurnaceBurnEvent $event) {
-      if($p->getLevel()->getName() == $this->config->get("RPGworld") {
+      if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
         $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
   public function onDrop(PlayerDropItemEvent $event) {
-    if($p->getLevel()->getName() == $this->config->get("RPGworld") {
+    if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
   }
