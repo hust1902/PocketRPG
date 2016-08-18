@@ -37,8 +37,6 @@ use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 
 class EventListener extends PluginBase implements Listener {
-  
-  $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
 
   public function onFight(EntityDamageEvent $event) {
     if($event instanceof EntityDamageByEntityEvent) {
@@ -47,6 +45,7 @@ class EventListener extends PluginBase implements Listener {
           if(!$damager instanceof Player){
             return false;
           } else {
+            $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getName() == $this->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
