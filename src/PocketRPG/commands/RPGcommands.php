@@ -20,6 +20,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
    public function __construct(Main $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;
+   }
 
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     switch(strtolower($cmd->getName())) {
