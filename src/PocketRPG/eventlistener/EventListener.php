@@ -38,13 +38,6 @@ use pocketmine\entity\Effect;
 
 class EventListener extends PluginBase implements Listener {
 
-   private $plugin;
-
-   public function __construct(Main $plugin){
-        parent::__construct($plugin);
-        $this->plugin = $plugin;
-   }
-
   public function onFight(EntityDamageEvent $event) {
     if($event instanceof EntityDamageByEntityEvent) {
         $hit = $event->getEntity();
@@ -107,6 +100,7 @@ class EventListener extends PluginBase implements Listener {
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
     $level = $p->getLevel();
+    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($level->getName() == $this->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
@@ -192,23 +186,27 @@ class EventListener extends PluginBase implements Listener {
     }
     }
   }
-    public function onCraft(CraftItemEvent $event) {
-      if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
-        $event->setCancelled(); //denies any crafting, since that could get rid of important items
+  public function onCraft(CraftItemEvent $event) {
+    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+    if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
+      $event->setCancelled(); //denies any crafting, since that could get rid of important items
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
+    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
-   public function onBurn(FurnaceBurnEvent $event) {
-      if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
-        $event->setCancelled(); //same counts for burning items in a furnace
+  public function onBurn(FurnaceBurnEvent $event) {
+    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+    if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
+      $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
   public function onDrop(PlayerDropItemEvent $event) {
+    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($p->getLevel()->getName() == $this->config->get("RPGworld")) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
