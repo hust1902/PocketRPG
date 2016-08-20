@@ -17,13 +17,6 @@ use pocketmine\Player;
 
 class RPGcommands extends PluginBase implements CommandExecutor{
 
-   private $plugin;
-
-   public function __construct(Main $plugin){
-        parent::__construct($plugin);
-        $this->plugin = $plugin;
-   }
-
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     switch(strtolower($cmd->getName())) {
       case "rpg":
