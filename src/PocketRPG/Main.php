@@ -31,6 +31,7 @@ class Main extends PluginBase implements Listener {
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
     $this->config = new Config($this->getDataFolder(). "config.yml", Config::YAML);
+    $this->config = $config;
     @mkdir($this->getDataFolder());
     $this->saveResource("party.yml");
     $this->party = new Config($this->getDataFolder(). "party.yml", Config::YAML);
