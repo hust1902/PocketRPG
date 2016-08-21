@@ -47,7 +47,7 @@ class EventListener extends PluginBase implements Listener {
           } else {
             $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
             $level = $damager->getLevel();
-            if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getName() == $this->config->get("RPGworld")){
+            if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
                 $x = $hit->x;
                 $y = $hit->y;
@@ -55,7 +55,7 @@ class EventListener extends PluginBase implements Listener {
                 $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                 $event->setDamage(4);  //adds a critical particle and does extra damage
               }
-            } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getName() == $this->config->get("RPGworld")) {
+            } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->config->get("RPGworld")) {
               if($damager->hasPermission("class.mage")) {
                 $x = $hit->x;
                 $y = $hit->y;
@@ -65,7 +65,7 @@ class EventListener extends PluginBase implements Listener {
                 $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
                 $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
               }
-            } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getName() == $this->config->get("RPGworld")) {
+            } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->config->get("RPGworld")) {
               if($damager->hasPermission("class.tanker")) {
                 $x = $hit->x;
                 $y = $hit->y;
@@ -74,7 +74,7 @@ class EventListener extends PluginBase implements Listener {
                 $event->setKnockBack(1);
                 $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
               }
-            } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getName() == $this->config->get("RPGworld")) {
+            } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
                 $x = $hit->x;
                 $y = $hit->y;
@@ -83,7 +83,7 @@ class EventListener extends PluginBase implements Listener {
                 $event->setKnockBack(0.8);
                 $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
               }
-            } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getName() == $this->config->get("RPGworld")) {
+            } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
                 $explodetask = new ExplodeTask($this);
                 $handler = $this->getServer()->getScheduler()->scheduleDelayedTask($explodetask, 30);
@@ -101,19 +101,19 @@ class EventListener extends PluginBase implements Listener {
     $p = $event->getPlayer();
     $level = $p->getLevel();
     $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-    if($level->getName() == $this->config->get("RPGworld")) {
+    if($level->getFolderName() == $this->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
         $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
         $p->addEffect($effect); //gives assassin speed with feather
         }
     } elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.tanker")&& $level->getName() == $this->config->get("RPGworld")) {
+        if($p->hasPermission("class.tanker")&& $level->getFolderName() == $this->config->get("RPGworld")) {
         $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
         $p->addEffect($effect);  //gives tanker resistance if experience level is higher than 8 with brick
         }
     } elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.assassin") && $level->getName() == $this->config->get("RPGworld")) {
+        if($p->hasPermission("class.assassin") && $level->getFolderName() == $this->config->get("RPGworld")) {
         $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
         $p->addEffect($effect);
         $x = $p->x;
@@ -122,7 +122,7 @@ class EventListener extends PluginBase implements Listener {
         $level->addParticle(new LavaParticle(new Vector3($x, $y, $z))); //Cloak of invisibility
         }
     } elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.mage") && $p->getLevel()->getName() == $this->config->get("RPGworld")) {
+        if($p->hasPermission("class.mage") && $p->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
         $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
         $p->addEffect($effect);
         $x = $p->x;
@@ -131,7 +131,7 @@ class EventListener extends PluginBase implements Listener {
         $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z))); //Bone of life
         }
     } elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.warrior") && $p->getLevel()->getName() == $this->config->get("RPGworld")) {
+        if($p->hasPermission("class.warrior") && $p->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
         $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
         $p->addEffect($effect);
         $x = $p->x;
@@ -188,26 +188,26 @@ class EventListener extends PluginBase implements Listener {
   }
   public function onCraft(CraftItemEvent $event) {
     $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-    if($event->getPlayer()->getLevel()->getName() == $this->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //denies any crafting, since that could get rid of important items
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
     $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-    if($event->getPlayer()->getLevel()->getName() == $this->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
   public function onBurn(FurnaceBurnEvent $event) {
     $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-    if($event->getPlayer()->getLevel()->getName() == $this->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
   public function onDrop(PlayerDropItemEvent $event) {
     $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-    if($event->getPlayer()->getLevel()->getName() == $this->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
   }
