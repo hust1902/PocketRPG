@@ -42,6 +42,7 @@ class EventListener extends PluginBase implements Listener {
 
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
+    $this->config = $config;
     $this->config = $this->plugin->config;
   }
   
