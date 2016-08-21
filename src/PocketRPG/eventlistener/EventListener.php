@@ -38,6 +38,14 @@ use pocketmine\entity\Effect;
 
 class EventListener extends PluginBase implements Listener {
 
+  public Main $plugin;
+
+  public function __construct(Main $plugin) {
+    paren
+    $this->plugin = $plugin;
+    $this->config = $this->plugin->config;
+
+}
   public function onFight(EntityDamageEvent $event) {
     if($event instanceof EntityDamageByEntityEvent) {
         $hit = $event->getEntity();
