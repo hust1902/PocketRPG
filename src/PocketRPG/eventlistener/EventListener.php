@@ -38,7 +38,7 @@ use pocketmine\entity\Effect;
 
 class EventListener extends PluginBase implements Listener {
 
-  public Main $plugin;
+  public $plugin;
 
   public function __construct(Main $plugin) {
     parent::__construct($plugin);
