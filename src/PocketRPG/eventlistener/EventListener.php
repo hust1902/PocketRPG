@@ -53,7 +53,6 @@ class EventListener extends PluginBase implements Listener {
           if(!$damager instanceof Player){
             return false;
           } else {
-            $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
@@ -108,7 +107,6 @@ class EventListener extends PluginBase implements Listener {
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
     $level = $p->getLevel();
-    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($level->getFolderName() == $this->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
@@ -195,26 +193,22 @@ class EventListener extends PluginBase implements Listener {
     }
   }
   public function onCraft(CraftItemEvent $event) {
-    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //denies any crafting, since that could get rid of important items
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
-    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
   public function onBurn(FurnaceBurnEvent $event) {
-    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
   public function onDrop(PlayerDropItemEvent $event) {
-    $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
     if($event->getPlayer()->getLevel()->getFolderName() == $this->config->get("RPGworld")) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
