@@ -16,13 +16,20 @@ use pocketmine\Server;
 use pocketmine\Player;
 
 class RPGcommands extends PluginBase implements CommandExecutor{
+  
+  public Main $plugin;
+
+  public function __construct(Main $plugin) {
+    parent::__construct($plugin);
+    $this->plugin = $plugin;
+    $this->config = $this->plugin->config;
+  }
 
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     switch(strtolower($cmd->getName())) {
       case "rpg":
         switch(strtolower($args[0])) {
           case "start":
-          $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
           switch(strtolower($args[1])) {
           case "mage":
             if($p->hasPermission("class.chosen")) {
