@@ -17,7 +17,7 @@ use pocketmine\Player;
 
 class RPGcommands extends PluginBase implements CommandExecutor{
   
-  public Main $plugin;
+  public $plugin;
 
   public function __construct(Main $plugin) {
     parent::__construct($plugin);
