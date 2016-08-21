@@ -35,7 +35,8 @@ class Main extends PluginBase implements Listener {
     $this->saveResource("party.yml");
     $this->party = new Config($this->getDataFolder(). "party.yml", Config::YAML);
   }
-  
+  public $config = $this->config;
+
   public function onDisable() {
     $this->getLogger()->info(TF:: RED . "Disabling PocketRPG");
   }
