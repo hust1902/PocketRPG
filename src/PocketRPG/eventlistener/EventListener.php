@@ -44,7 +44,11 @@ class EventListener extends Main implements Listener {
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
   }
-  
+
+  public function getOwner() {
+     return $this->plugin;
+  }
+
   public function onFight(EntityDamageEvent $event) {
     if($event instanceof EntityDamageByEntityEvent) {
         $hit = $event->getEntity();
