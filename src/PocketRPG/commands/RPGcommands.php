@@ -42,8 +42,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
               $wand = Item::get(Item::STICK, 0, 1);
               $p->getInventory()->addItem($wand);
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.mage");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.mage");
               $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             }
             return true;
