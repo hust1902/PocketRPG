@@ -22,8 +22,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
   public $config;
 
   public function __construct(Main $plugin) {
+    parent::__construct($plugin)
     $this->plugin = $plugin;
-    $this->config = $this->plugin->config;
   }
 
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
@@ -41,7 +41,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($wand);
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.mage");
-              $p->switchLevel($this->config->get("RPGworld"));
+              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             }
             return true;
             break;
@@ -55,7 +55,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($sword);
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.warrior");
-              $p->switchLevel($this->config->get("RPGworld"));
+              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             }
             return true;
             break;
@@ -69,7 +69,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($shield);
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.tanker");
-              $p->switchLevel($this->config->get("RPGworld"));
+              $p->switchLevel($this->getOwner->config->get("RPGworld"));
             }
             return true;
             break;
@@ -83,7 +83,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($knife);
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
               $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.assassin");
-              $p->switchLevel($this->config->get("RPGworld"));
+              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             } else {
               $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
             }
