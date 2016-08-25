@@ -36,7 +36,7 @@ use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 
-class EventListener extends PluginBase implements Listener {
+class EventListener extends Main implements Listener {
 
   public $plugin;
   public $config;
