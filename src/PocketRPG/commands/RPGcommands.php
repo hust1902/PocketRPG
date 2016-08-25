@@ -25,6 +25,10 @@ class RPGcommands extends PluginBase implements CommandExecutor{
     $this->plugin = $plugin;
   }
 
+  public function getOwner() {
+     return $this->plugin;
+  }
+
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     switch(strtolower($cmd->getName())) {
       case "rpg":
