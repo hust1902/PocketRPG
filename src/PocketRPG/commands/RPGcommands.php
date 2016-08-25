@@ -56,8 +56,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
               $p->getInventory()->addItem($sword);
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.warrior");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.warrior");
               $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             }
             return true;
@@ -70,8 +70,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
               $shield = Item::get(Item::BRICK, 0, 1);
               $p->getInventory()->addItem($shield);
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.tanker");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.tanker");
               $p->switchLevel($this->getOwner->config->get("RPGworld"));
             }
             return true;
@@ -84,8 +84,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $knife = Item::get(Item::FEATHER, 0, 1);
               $p->getInventory()->addItem($knife);
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
-              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.assassin");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.assassin");
               $p->switchLevel($this->getOwner()->config->get("RPGworld"));
             } else {
               $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
