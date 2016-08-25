@@ -44,7 +44,7 @@ class EventListener extends PluginBase implements Listener {
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
     $this->config = $this->plugin->config;
-    $config = $this->config;
+    $config = $this->config->getAll();
   }
   
   public function onFight(EntityDamageEvent $event) {
