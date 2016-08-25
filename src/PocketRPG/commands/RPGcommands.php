@@ -6,6 +6,7 @@ use Pocketmine\item\Item;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
@@ -39,8 +40,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
               $wand = Item::get(Item::STICK, 0, 1);
               $p->getInventory()->addItem($wand);
-              $p->setPermission("class.chosen");
-              $p->setPermission("class.mage");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.mage");
               $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
@@ -53,8 +54,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
               $p->getInventory()->addItem($sword);
-              $p->setPermission("class.chosen");
-              $p->setPermission("class.warrior");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.warrior");
               $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
@@ -67,8 +68,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
               $shield = Item::get(Item::BRICK, 0, 1);
               $p->getInventory()->addItem($shield);
-              $p->setPermission("class.chosen");
-              $p->setPermission("class.tanker");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.tanker");
               $p->switchLevel($this->config->get("RPGworld"));
             }
             return true;
@@ -81,8 +82,8 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $knife = Item::get(Item::FEATHER, 0, 1);
               $p->getInventory()->addItem($knife);
-              $p->setPermission("class.chosen");
-              $p->setPermission("class.assassin");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.chosen");
+              $this->getServer()->dispatchCommand(new ConsoleCommandSender, "setuperm " . $p->getName() . " class.assassin");
               $p->switchLevel($this->config->get("RPGworld"));
             } else {
               $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
