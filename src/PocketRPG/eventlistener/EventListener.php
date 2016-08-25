@@ -42,7 +42,6 @@ class EventListener extends Main implements Listener {
   public $config;
 
   public function __construct(Main $plugin) {
-    parent::__construct($plugin);
     $this->plugin = $plugin;
   }
   
