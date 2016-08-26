@@ -61,8 +61,13 @@ class QuestCommands extends PluginBase implements Listener {
                   if(file_exists($this->getOwner()->getServer()->getDataParth() . "plugins/PocketRPG/quests/" . $args[1])) {
                     $questdescription = implode(" ", array_shift(array_shift(array_shift($args))));
                     $this->args[1]->set("QuestDescription", $questdescription);
-                    $this->args[1]->save()
+                    $this->args[1]->save();
+                    $p->sendMessage(TF:: GREEN . "You have succesfully set the quest description of " . $args[1] . " to " . $questdescription);
+                  } else {
+                    $p->sendMessage(TF:: RED . "That quest does not exist!");
                   }
+                return true;
+                break;
               }
             }
           }
