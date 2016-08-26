@@ -44,7 +44,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($wand);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.mage");
-              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
+              $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
             break;
