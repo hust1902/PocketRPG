@@ -29,10 +29,14 @@ class ExplodeTask extends PluginTask implements Listener{
     foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p);
     $cause = $p->getLastDamageCause();
     if($cause instanceof EntityDamageByEntityEvent){
-      if($cause->getDamager() instanceof Player and $cause->getDamager()->hasPermission("class.warrior") and $cause->getDamager()->getItemInHand()->getId() == Item::IRON_SHOVEL) {
+      if(!$cause->getDamager() instanceof Player){
+        return false;
+      } else {
+        if($cause->getDamager()->hasPermission("class.warrior") and $cause->getDamager()->getItemInHand()->getId() == Item::IRON_SHOVEL) {
           $damager = $p->getLastDamageCause()->getDamager();
           $damager->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
           $p->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
+        }
       }
     }
   }
