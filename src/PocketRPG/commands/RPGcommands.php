@@ -58,7 +58,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($sword);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.warrior");
-              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
+              $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
             break;
@@ -72,7 +72,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($shield);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.tanker");
-              $p->switchLevel($this->getOwner->config->get("RPGworld"));
+              $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
             break;
@@ -86,7 +86,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($knife);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.assassin");
-              $p->switchLevel($this->getOwner()->config->get("RPGworld"));
+              $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             } else {
               $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
             }
