@@ -34,6 +34,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
       case "rpg":
         switch(strtolower($args[0])) {
           case "start":
+          $this->getOwner()->getServer()->loadLevel($this->getOwner()->config->get("RPGworld");
           switch(strtolower($args[1])) {
           case "mage":
             if($p->hasPermission("class.chosen")) {
