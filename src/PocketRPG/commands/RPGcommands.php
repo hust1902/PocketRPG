@@ -89,7 +89,7 @@ class RPGcommands extends PluginBase implements CommandExecutor{
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.assassin");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             } else {
-              $p->sendMessage(TF:: RED . "You do not have permission to access this class!");
+              $p->sendMessage(TF:: RED . "You do not have permission to access this class! You have to vote to use this class!");
             }
             return true;
             break;
