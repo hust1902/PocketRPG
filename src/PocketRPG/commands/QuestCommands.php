@@ -22,7 +22,7 @@ class QuestCommands extends PluginBase implements Listener {
               $p->sendMessage(TF:: GREEN . "Quest " . $args[1] . "succesfully created");
               @mkdir($this->getDataFolder());
               $this->saveResource("quest.yml");
-              $this->$args[1] = new Config($this->getDataFolder() . "quests/" . $args[1] . "");
+              $this->$args[1] = new Config($this->getDataFolder() . "quests/" . $args[1]);
             } else {
               $p->sendMessage(TF:: RED . "Please choose a prefered number for your quest!");
             }
@@ -38,7 +38,7 @@ class QuestCommands extends PluginBase implements Listener {
               switch(strtolower($args[2])) {
                 case "questname":
                   if(!is_numeric($args[3])) {
-                    if(file_exists($this->getServer()->getDataPath() . "plugins/PocketRPG/quests/" . $args[1] . "")) {
+                    if(file_exists($this->getServer()->getDataPath() . "plugins/PocketRPG/quests/" . $args[1])) {
                       $this->args[1]->set("QuestName", $args[3]);
                       $this->config->save();
                       $p->sendMessage(TF:: GREEN . "You have succesfully set the quest name of " . $args[1] . "to " . $args[3] . "");
