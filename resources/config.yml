@@ -1,6 +1,15 @@
 ---
 #Configuration for PocketRPG plugin
 
-#level you want the RPG to work in:
+#Level you want the RPG to work in:
 RPGworld: ""
+
+#Decide if block placing in RPG world is allowed:
+AllowBlockPlacing: false
+
+#Decide if block breaking in RPG world is allowed:
+AllowBlockBreaking: false
+
+#Message sent to players when a player reaches level 10:
+LevelUpMessage: ""
 ...
