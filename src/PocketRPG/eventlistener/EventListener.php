@@ -221,10 +221,49 @@ class EventListener extends Main implements Listener {
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
     if($p->getExp() == 170) {
-      if($p->hasPermission("class.mage"))
+      if($p->hasPermission("class.mage")) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
-        $event->getPlayer()->
+        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
+        
+      } elseif($p->hasPermission("class.assassin")) {
+        $clock = Item::get(Item::CLOCK, 0, 1); 
+        $p->getInventory()->addItem($clock); 
+        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
+        
+      } elseif($p->hasPermission("class.tanker")) {
+        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
+        
+      } elseif($p->hasPermission("class.warrior")) {
+        $redstone = Item::get(Item::REDSTONE, 0, 1);
+        $p->getInventory()->addItem($redstone);
+        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
+        
+      } else {
+        return false;
+      }
+    } 
+  }
+  
+  public function onBreak(BlockBreakEvent $event) {
+    $p = $event->getPlayer();
+    if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
+      if($this->getOwner()->config->get("AllowBlockBreaking") == false) {
+        $event->setCancelled();
+      }
+    }
+  }
+  
+  public function onPlace(BlockPlaceEvent $event) {
+    $p = $event->getPlayer();
+    if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
+      if($this->getOwner()->config->get("AllowBlockPlacing")) == false) {
+        $event->setCancelled();
+      }
     }
   }
 }
