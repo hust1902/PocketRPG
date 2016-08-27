@@ -45,6 +45,7 @@ class QuestCommands extends PluginBase implements Listener {
           if($p->hasPermission("quests.command") || $p->hasPermission("quests.command.edit")) {
             if(isset($args[1], $args[2], $args[3]) && is_numeric($args[1])) {
               switch(strtolower($args[2])) {
+                
                 case "questname":
                   if(file_exists($this->getOwner()->getServer()->getDataPath() . "plugins/PocketRPG/quests/" . $args[1])) {
                     $questname = implode(" ", array_shift(array_shift(array_shift($args))));
@@ -66,6 +67,21 @@ class QuestCommands extends PluginBase implements Listener {
                   } else {
                     $p->sendMessage(TF:: RED . "That quest does not exist!");
                   }
+                return true;
+                break;
+                
+                case "requiredid":
+                  if(file_exists($this->getOwner()->getServer()->getDataParth() . "plugins/PocketRPG/quests/" . $args[1])) {
+                    $this->args[1]->set("RequiredID", $args[3]);
+                    $this->args[1]->save();
+                    $p->sendMessage(TF:: GREEN . "You have succesfully set the quest description of " . $args[1] . " to " . $args[3]);
+                  } else {
+                    $p->sendMessage(TF:: RED . "That quest does not exist!");
+                  }
+                return true;
+                break;
+                
+                case "requiredamount":
                 return true;
                 break;
                 
