@@ -33,6 +33,7 @@ use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 
@@ -214,6 +215,16 @@ class EventListener extends Main implements Listener {
   public function onDrop(PlayerDropItemEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
+    }
+  }
+  
+  public function onExpChange(PlayerExperienceChangeEvent $event) {
+    $p = $event->getPlayer();
+    if($p->getExp() == 170) {
+      if($p->hasPermission("class.mage"))
+        $bone = Item::get(Item::BONE, 0, 1); 
+        $p->getInventory()->addItem($bone); 
+        $event->getPlayer()->
     }
   }
 }
