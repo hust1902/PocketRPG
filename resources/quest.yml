@@ -1,0 +1,12 @@
+---
+#Quest configuration
+
+QuestName: 
+QuestDescription: 
+RequiredID: 
+RequiredAmount: 
+RewardID: 
+RewardAmount: 
+FinishMsg: 
+CantFinishMsg: 
+...
