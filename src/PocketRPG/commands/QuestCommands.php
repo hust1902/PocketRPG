@@ -68,6 +68,22 @@ class QuestCommands extends PluginBase implements Listener {
                   }
                 return true;
                 break;
+                
+                case "rewardid":
+                return true;
+                break;
+                
+                case "rewardamount":
+                return true;
+                break;
+                  
+                case "finishmsg":
+                return true;
+                break;
+                
+                case "cantfinishmsg":
+                return true;
+                break;
               }
             }
           }
