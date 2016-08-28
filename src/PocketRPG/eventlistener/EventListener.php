@@ -33,6 +33,7 @@ use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
