@@ -3,7 +3,7 @@
 namespace PocketRPG;
 
 use PocketRPG\commands\QuestCommands;
-use PocketRPG\commands\RPGcommands;
+use PocketRPG\commands\RpgCommands;
 use PocketRPG\eventlistener\EventListener;
 
 use pocketmine\plugin\PluginBase;
@@ -26,7 +26,7 @@ class Main extends PluginBase implements Listener {
   public function onEnable() {
     $this->getLogger()->info(TF:: GREEN . "Enabling PocketRPG");
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-    $this->getCommand("rpg")->setExecutor(new RPGcommands($this));
+    $this->getCommand("rpg")->setExecutor(new RpgCommands($this));
     $this->getCommand("quest")->setExecutor(new QuestCommands($this));
     
     @mkdir($this->getDataFolder());
