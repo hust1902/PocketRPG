@@ -16,7 +16,7 @@ use pocketmine\level\Level;
 use pocketmine\Server;
 use pocketmine\Player;
 
-class RPGcommands extends PluginBase implements CommandExecutor{
+class RpgCommands extends PluginBase implements CommandExecutor{
   
   public $plugin;
   public $config;
