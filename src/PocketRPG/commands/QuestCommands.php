@@ -26,7 +26,21 @@ class QuestCommands extends PluginBase implements Listener {
     if(strtolower($cmd->getName() == "quest")) {
       switch(strtolower($args[0])) {
         case "create":
-
+          if ($p->hasPermission ("quest.create") && is_numeric ($args [1])) {
+            @mkdir($this->getDataFolder () . "quests/"
+            @file_put_contents ($this->getDataFolder () . "quests/" . $args [1] . ".yml", yaml_emit([
+            "QuestName" => "",
+            "QuestDescription" => "",
+            "RequiredExpLvl" => "",
+            "RequiredID" => "",
+            "RequiredAmount" => "",
+            "RewardID" => "",
+            "RewardAmount" => "",
+            ]));
+            $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
+          } else {
+            $p->sendMessage (TF::RED . "The Quest ID must be numeric!");
+          }
         return true;
         break;
         
