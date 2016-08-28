@@ -12,4 +12,7 @@ AllowBlockBreaking: false
 
 #Message sent to players when a player reaches level 10:
 LevelUpMessage: ""
+
+#Allow special chat format with classes in RPG world:
+AllowClassChat: true
 ...
