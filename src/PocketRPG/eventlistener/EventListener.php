@@ -261,7 +261,7 @@ class EventListener extends Main implements Listener {
   public function onPlace(BlockPlaceEvent $event) {
     $p = $event->getPlayer();
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
-      if($this->getOwner()->config->get("AllowBlockPlacing")) == false) {
+      if($this->getOwner()->config->get("AllowBlockPlacing") == false) {
         $event->setCancelled();
       }
     }
