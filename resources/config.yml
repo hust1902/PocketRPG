@@ -4,10 +4,10 @@
 #Level you want the RPG to work in:
 RPGworld: ""
 
-#Decide if block placing in RPG world is allowed:
+#Decide if block placing in RPG world is allowed (OPs will always be able to):
 AllowBlockPlacing: false
 
-#Decide if block breaking in RPG world is allowed:
+#Decide if block breaking in RPG world is allowed (OPs will always be able to):
 AllowBlockBreaking: false
 
 #Message sent to players when a player reaches level 10:
