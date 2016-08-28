@@ -273,7 +273,7 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     $rpglevel = $this->getOwner()->config->get("RPGworld");
     if($p->getLevel()->getName() == $rpglevel) {
-     if($this->getOwner()->config->get("EnableClassChat") {
+     if($this->getOwner()->config->get("EnableClassChat") == true) {
       if($p->hasPermission("class.mage")) {
         $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Mage >" . TF::GRAY . $event->getMessage());
         $event->setCancelled();
