@@ -266,4 +266,28 @@ class EventListener extends Main implements Listener {
       }
     }
   }
+
+  //class chat
+
+  public function onChat(PlayerChatEvent $event) {
+    $p = $event->getPlayer();
+    $rpglevel = $this->getOwner()->config->get("RPGworld");
+    if($p->getLevel()->getName() == $rpglevel) {
+     if($this->getOwner()->config->get("EnableClassChat") {
+      if($p->hasPermission("class.mage")) {
+        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Mage >" . TF::GRAY . $event->getMessage());
+        $event->setCancelled();
+      } elseif($p->hasPermission("class.warrior")) {
+        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Warrior >" . TF::GRAY . $event->getMessage());
+        $event->setCancelled();
+      } elseif($p->hasPermission("class.tanker")) {
+        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Tanker >" . TF::GRAY . $event->getMessage());
+        $event->setCancelled();
+      } elseif($p->hasPermission("class.assassin")) {
+        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Assassin >" . TF::GRAY . $event->getMessage());
+        $event->setCancelled();
+      }
+    }
+   }
+  }
 }
