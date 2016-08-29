@@ -141,7 +141,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         case "start":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-            if ($p->hasPermission ("quest." . $args [1]) {
+            if ($p->hasPermission ("quest." . $args [1])) {
               $p->sendMessage (TF::RED . "You have already started this quest!");
             } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
               $this->getOwner ()->getServer ()->dispatchCommand (new ConsoleCommandSender, "setuperm " . $p->getName () . " quest." . $args [1]);
