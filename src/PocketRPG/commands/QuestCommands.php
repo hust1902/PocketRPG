@@ -52,7 +52,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "questname":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-                    $questname = array_shift (array_shift (array_shift ($args)));
+                    $questname = array_shift($args);
+                    $questname = array_shift($questname);
+                    $questname = array_shift($questname);
                     $quest->set ("QuestName", implode (" ", $questname));
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest name of " . $args [1] . " to " . $questname . ".");
                     $quest->save ();
@@ -64,7 +66,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "questdescription":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-                    $questdescription = array_shift (array_shift (array_shift ($args)));
+                    $questdescription = array_shift($args);
+                    $questdescription = array_shift($questname);
+                    $questdescription = array_shift($questname);
                     $quest->set ("QuestDescription", implode (" ", $questdescription));
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest description of " . $args [1] . " to " . $questdescription . ".");
                     $quest->save ();
@@ -88,7 +92,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "requiredamount":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredAmount", $args [3]);
-                    $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
+                    $p->sendMessage (TF::GREEN . "You succesfully changed the required amount of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
