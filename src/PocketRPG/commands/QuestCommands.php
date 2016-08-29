@@ -144,7 +144,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             if($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
-              $player = $config->get("Players", []);
+              $player = $quest->get("Players", []);
               $player[] = $p->getName ();
               $quest->set("Players", $player);
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
