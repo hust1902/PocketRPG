@@ -38,6 +38,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             "RequiredAmount" => "",
             "RewardID" => "",
             "RewardAmount" => "",
+            "Players" => array ()
             ]));
             $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
           } else {
@@ -142,10 +143,10 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         case "start":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-            if ($p->hasPermission ("quest." . $args [1])) {
-              $p->sendMessage (TF::RED . "You have already started this quest!");
-            } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
-              $this->getOwner ()->getServer ()->dispatchCommand (new ConsoleCommandSender, "setuperm " . $p->getName () . " quest." . $args [1]);
+            if($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
+              $player = $config->get("Players", []);
+              $player[] = $p->getName ();
+              $quest->set("Players", $player);
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
             } else {
