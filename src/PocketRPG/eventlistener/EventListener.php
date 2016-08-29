@@ -254,7 +254,7 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->config->get("AllowBlockBreaking") == false) {
-       if(!$p->isOp()) {
+       if(!$p->hasPermission("rpg.break")) {
         $event->setCancelled();
        }
       }
@@ -265,7 +265,7 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->config->get("AllowBlockPlacing") == false) {
-       if(!$p->isOp()) {
+       if(!$p->hasPermission("rpg.place")) {
         $event->setCancelled();
        }
       }
