@@ -53,10 +53,10 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "questname":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     unset($args[0]);
-                    unset($args[0]);
-                    unset($args[0]);
-                    $questname = $args;
-                    $quest->set ("QuestName", implode (" ", $questname));
+                    unset($args[1]);
+                    unset($args[2]);
+                    $questname = implode (" ", $args);
+                    $quest->set ("QuestName", $questname);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest name of " . $args [1] . " to " . $questname . ".");
                     $quest->save ();
                   } else {
@@ -68,10 +68,10 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "questdescription":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     unset($args[0]);
-                    unset($args[0]);
-                    unset($args[0]);
-                    $questdescription = $args;
-                    $quest->set ("QuestDescription", implode (" ", $questdescription));
+                    unset($args[1]);
+                    unset($args[2]);
+                    $questdescription = implode (" ", $args);
+                    $quest->set ("QuestDescription", $questdescription);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest description of " . $args [1] . " to " . $questdescription . ".");
                     $quest->save ();
                   } else {
