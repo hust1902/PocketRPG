@@ -11,7 +11,7 @@ use pocketmine\utils\TextFormat;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
 
-class QuestCommands extends PluginBase implements Listener {
+class QuestCommands extends PluginBase implements CommandExecutor{
   
   public $plugin;
   
