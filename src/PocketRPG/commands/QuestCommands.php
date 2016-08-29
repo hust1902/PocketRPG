@@ -40,7 +40,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             "RewardAmount" => "",
             ]));
             $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
-            $this->getOwner ()->getServer ()->registerPermission("quest." . $args[1])->setDefault ("false")->setDescription("quest " . $args [1]);
           } else {
             $p->sendMessage (TF::RED . "The Quest ID must be numeric!");
           }
