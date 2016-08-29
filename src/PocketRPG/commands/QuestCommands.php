@@ -26,7 +26,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
     if(strtolower($cmd->getName() == "quest")) {
       switch(strtolower($args[0])) {
         case "create":
-          if ($p->hasPermission ("quest.create") && is_numeric ($args [1])) {
+          if ($p->hasPermission ("quest.command") && is_numeric ($args [1])) {
             @mkdir($this->getDataFolder () . "quests/");
             @file_put_contents ($this->getDataFolder () . "quests/" . $args [1] . ".yml", yaml_emit([
             "QuestName" => "",
@@ -46,7 +46,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         
         case "edit":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
-          if($p->hasPermission("quests.command") || $p->hasPermission("quests.command.edit")) {
+          if($p->hasPermission("quests.command")) {
             if(isset($args[3]) && is_numeric($args[1], $args [3])) {
               switch(strtolower($args[2])) {
                 
