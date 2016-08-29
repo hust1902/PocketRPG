@@ -279,18 +279,17 @@ class EventListener extends Main implements Listener {
     $rpglevel = $this->getOwner()->config->get("RPGworld");
     if($p->getLevel()->getName() == $rpglevel) {
      if($this->getOwner()->config->get("EnableClassChat") == true) {
-      if($p->hasPermission("class.mage")) {
-        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Mage >" . TF::GRAY . $event->getMessage());
-        $event->setCancelled();
+      } if($p->hasPermission("class.tanker")) {
+        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $player->getName() . " > Tanker >" . TF::GRAY . $event->getMessage());
       } elseif($p->hasPermission("class.warrior")) {
-        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Warrior >" . TF::GRAY . $event->getMessage());
-        $event->setCancelled();
-      } elseif($p->hasPermission("class.tanker")) {
-        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Tanker >" . TF::GRAY . $event->getMessage());
-        $event->setCancelled();
+        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $player->getName() . " > Warrior >" . TF::GRAY . $event->getMessage());
+        $event->setFormat ($format);
+      } elseif($p->hasPermission("class.mage")) {
+        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $player->getName() . " > Mage >" . TF::GRAY . $event->getMessage());
+        $event->setFormat ($format);
       } elseif($p->hasPermission("class.assassin")) {
-        $this->getOwner()->getServer()->broadcastMessage(TF::WHITE . "< " . $player->getName() . " > Assassin >" . TF::GRAY . $event->getMessage());
-        $event->setCancelled();
+        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $player->getName() . " > Assassin >" . TF::GRAY . $event->getMessage());
+        $event->setFormat($format);
       }
     }
    }
