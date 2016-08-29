@@ -55,6 +55,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                     $questname = array_shift (array_shift (array_shift ($args)));
                     $quest->set ("QuestName", implode (" ", $questname));
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest name of " . $args [1] . " to " . $questname . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -66,6 +67,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                     $questdescription = array_shift (array_shift (array_shift ($args)));
                     $quest->set ("QuestDescription", implode (" ", $questdescription));
                     $p->sendMessage (TF::GREEN . "You succesfully changed the quest description of " . $args [1] . " to " . $questdescription . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -76,6 +78,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -86,6 +89,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -96,6 +100,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RewardID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward ID of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -106,6 +111,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RewardAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward amount of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
@@ -116,6 +122,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredExpLvl", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
                   }
