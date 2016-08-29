@@ -279,7 +279,7 @@ class EventListener extends Main implements Listener {
     $rpglevel = $this->getOwner()->config->get("RPGworld");
     if($p->getLevel()->getName() == $rpglevel) {
      if($this->getOwner()->config->get("EnableClassChat") == true) {
-      } if($p->hasPermission("class.tanker")) {
+      if($p->hasPermission("class.tanker")) {
         $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Tanker >" . TF::GRAY . $event->getMessage());
       } elseif($p->hasPermission("class.warrior")) {
         $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Warrior >" . TF::GRAY . $event->getMessage());
