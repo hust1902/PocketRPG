@@ -45,12 +45,16 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         break;
         
         case "edit":
+          $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if($p->hasPermission("quests.command") || $p->hasPermission("quests.command.edit")) {
             if(isset($args[3]) && is_numeric($args[1])) {
               switch(strtolower($args[2])) {
                 
                 case "questname":
-
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $questname = array_shift (array_shift (array_shift ($args)));
+                    $quest->set ("QuestName", implode (" ", $questname));
+                  }
                 return true;
                 break;
                 
