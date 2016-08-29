@@ -7,7 +7,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
-use pocketmine\utils\TextFormat;
+use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
 
