@@ -38,7 +38,8 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             "RequiredAmount" => "",
             "RewardID" => "",
             "RewardAmount" => "",
-            "Players" => array ()
+            "Started" => array (),
+            "Finished" => array ()
             ]));
             $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
           } else {
@@ -143,7 +144,13 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         case "start":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-            if($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
+            if (in_array ($p->getName (), $quest->get ("Started")) || in_array ($p->getName (), $quest->get ("Finished") {
+              $p->sendMessage (TF::RED . "You have already started this quest!");
+            } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
+              $player = $quest->get("Started", []);
+              $player[] = $p->getName ();
+              $quest->set("Started", $player);
+              $quest->save ();
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
             } else {
@@ -154,9 +161,10 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         break;
  
         case "finish":
-              $player = $quest->get("Players", []);
+              $player = $quest->get("Finished", []);
               $player[] = $p->getName ();
-              $quest->set("Players", $player);
+              $quest->set("Finished", $player);
+              $quests->save();
       }
     }
   }
