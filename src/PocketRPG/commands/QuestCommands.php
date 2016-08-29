@@ -47,7 +47,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         case "edit":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if($p->hasPermission("quests.command") || $p->hasPermission("quests.command.edit")) {
-            if(isset($args[3]) && is_numeric($args[1]) && is_numeric ($args [3])) {
+            if(isset($args[3]) && is_numeric($args[1], $args [3])) {
               switch(strtolower($args[2])) {
                 
                 case "questname":
@@ -73,7 +73,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                 
                 case "requiredid":
-                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml") && is_numeric ($args [3])) {
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
                   } else {
@@ -83,7 +83,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                 
                 case "requiredamount":
-                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml") && is_numeric ($args [3])) {
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
                   } else {
@@ -93,7 +93,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                 
                 case "rewardid":
-                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml") && is_numeric ($args [3])) {
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RewardID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward ID of " . $args [1] . " to " . $args[3] . ".");
                   } else {
@@ -103,7 +103,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                 
                 case "rewardamount":
-                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml") && is_numeric ($args [3])) {
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RewardAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward amount of " . $args [1] . " to " . $args[3] . ".");
                   } else {
@@ -113,7 +113,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                   
                 case "requiredexplvl":
-                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml") && is_numeric ($args [3])) {
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredExpLvl", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
                   } else {
