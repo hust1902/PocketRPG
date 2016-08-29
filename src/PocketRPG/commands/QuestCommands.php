@@ -46,7 +46,7 @@ class QuestCommands extends PluginBase implements Listener {
         
         case "edit":
           if($p->hasPermission("quests.command") || $p->hasPermission("quests.command.edit")) {
-            if(isset($args[1], $args[2], $args[3]) && is_numeric($args[1])) {
+            if(isset($args[3]) && is_numeric($args[1])) {
               switch(strtolower($args[2])) {
                 
                 case "questname":
