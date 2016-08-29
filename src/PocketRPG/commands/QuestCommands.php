@@ -7,6 +7,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
@@ -135,6 +136,22 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               }
             }
           }
+        break;
+
+        case "start":
+          $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
+          if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+            if ($p->hasPermission ("quest." . $args [1]) {
+              $p->sendMessage (TF::RED . "You have already started this quest!");
+            } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
+              $this->getOwner ()->getServer ()->dispatchCommand (new ConsoleCommandSender, "setuperm " . $p->getName () . " quest." . $args [1]);
+              $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName") . ");
+              $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
+            } else {
+              $p->sendMessage (TF::RED . "Your experience level is not high enough to start this quest!");
+            }
+          }
+        return true;
         break;
       }
     }
