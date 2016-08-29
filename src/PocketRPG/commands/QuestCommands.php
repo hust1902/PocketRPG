@@ -27,7 +27,7 @@ class QuestCommands extends PluginBase implements Listener {
       switch(strtolower($args[0])) {
         case "create":
           if ($p->hasPermission ("quest.create") && is_numeric ($args [1])) {
-            @mkdir($this->getDataFolder () . "quests/"
+            @mkdir($this->getDataFolder () . "quests/");
             @file_put_contents ($this->getDataFolder () . "quests/" . $args [1] . ".yml", yaml_emit([
             "QuestName" => "",
             "QuestDescription" => "",
