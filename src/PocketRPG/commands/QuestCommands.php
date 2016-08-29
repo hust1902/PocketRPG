@@ -145,7 +145,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage (TF::RED . "You have already started this quest!");
             } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
               $this->getOwner ()->getServer ()->dispatchCommand (new ConsoleCommandSender, "setuperm " . $p->getName () . " quest." . $args [1]);
-              $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName") . ");
+              $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
             } else {
               $p->sendMessage (TF::RED . "Your experience level is not high enough to start this quest!");
