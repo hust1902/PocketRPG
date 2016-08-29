@@ -57,7 +57,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                     unset($args[2]);
                     $questname = implode (" ", $args);
                     $quest->set ("QuestName", $questname);
-                    $p->sendMessage (TF::GREEN . "You succesfully changed the quest name of " . $args [1] . " to " . $questname . ".");
+                    $p->sendMessage (TF::GREEN . "You succesfully changed the quest name of the quest to " . $questname . ".");
                     $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
@@ -72,7 +72,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                     unset($args[2]);
                     $questdescription = implode (" ", $args);
                     $quest->set ("QuestDescription", $questdescription);
-                    $p->sendMessage (TF::GREEN . "You succesfully changed the quest description of " . $args [1] . " to " . $questdescription . ".");
+                    $p->sendMessage (TF::GREEN . "You succesfully changed the quest description of the quest to " . $questdescription . ".");
                     $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
