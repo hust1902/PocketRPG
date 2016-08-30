@@ -180,6 +180,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->sendPopup (TF::AQUA . "You leveled up!");
                 $items = Item::get($quest->get ("RewardID"), 0, $quest->get ("RewardAmount"));
                 $p->getInventory ()->addItem ($items);
+                $p->setExpLevel ($p->getExpLevel () + 1);
               } else {
                 $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
               }
