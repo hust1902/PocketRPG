@@ -28,7 +28,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
     if(strtolower($cmd->getName() == "quest")) {
       switch(strtolower($args[0])) {
         case "create":
-          if ($p->hasPermission ("quests.command") && is_numeric ($args [1])) {
+          if ($p->hasPermission ("quests.command") && is_numeric ($args [1]) && !file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             @mkdir($this->getDataFolder () . "quests/");
             @file_put_contents ($this->getDataFolder () . "quests/" . $args [1] . ".yml", yaml_emit([
             "QuestName" => "",
@@ -43,7 +43,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             ]));
             $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
           } else {
-            $p->sendMessage (TF::RED . "The Quest ID must be numeric!");
+            $p->sendMessage (TF::RED . "The Quest ID must be numeric and you can't make two quests with the same ID!);
           }
         return true;
         break;
