@@ -131,7 +131,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "requiredexplvl":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     $quest->set ("RequiredExpLvl", $args [3]);
-                    $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
+                    $p->sendMessage (TF::GREEN . "You succesfully changed the required Experience level of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
                   } else {
                     $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
