@@ -189,6 +189,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->sendMessage (TF::RED . "You have finished this quest already!");
             }
           }
+      return true;
+      break;
+  
       }
     }
   }
