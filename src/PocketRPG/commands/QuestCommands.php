@@ -174,7 +174,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               foreach ( $p->getInventory()->getContents()  as  $item) {
               if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
 
-                $p->getInventory ()->remove ($item);
                 $player = $quest->get("Finished", []);
                 $player[] = $p->getName ();
                 $quest->set("Finished", $player);
@@ -185,6 +184,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $items = Item::get($quest->get ("RewardID"), 0, $quest->get ("RewardAmount"));
                 $p->getInventory ()->addItem ($items);
                 $p->setExpLevel ($p->getExpLevel () + 1);
+                $p->getInventory ()->remove ($item);
               } else {
                 $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
               }
