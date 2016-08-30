@@ -55,6 +55,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               switch(strtolower($args[2])) {
                 
                 case "questname":
+                case "name":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     unset($args[0]);
                     unset($args[2]);
@@ -69,6 +70,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 break;
                 
                 case "questdescription":
+                case "name":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
                     unset($args[0]);
                     unset($args[2]);
