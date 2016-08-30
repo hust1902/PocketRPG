@@ -43,7 +43,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             ]));
             $p->sendMessage (TF::GREEN . "You succesfully created the quest with quest ID " . $args [1] . ". Use /quest edit to modify it.");
           } else {
-            $p->sendMessage (TF::RED . "The Quest ID must be numeric and you can't make two quests with the same ID!);
+            $p->sendMessage (TF::RED . "The Quest ID must be numeric and you can't make two quests with the same ID!");
           }
         return true;
         break;
