@@ -28,7 +28,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
     if(strtolower($cmd->getName() == "quest")) {
       switch(strtolower($args[0])) {
         case "create":
-          if ($p->hasPermission ("quest.command") && is_numeric ($args [1])) {
+          if ($p->hasPermission ("quests.command") && is_numeric ($args [1])) {
             @mkdir($this->getDataFolder () . "quests/");
             @file_put_contents ($this->getDataFolder () . "quests/" . $args [1] . ".yml", yaml_emit([
             "QuestName" => "",
@@ -192,6 +192,18 @@ class QuestCommands extends PluginBase implements CommandExecutor{
       return true;
       break;
   
+      case "help":
+       if ($p->hasPermission ("quests.command")) {
+        $p->sendMessage (TF::GREEN . " --- " . TF::YELLOW . "Quest Help" . TF::GREEN . " --- ");
+        $p->sendMessage (TF::GREEN . "/quest create <number>:" . TF::YELLOW . " Create a Quest with the given quest ID.");
+        $p->sendMessage (TF::GREEN . "/quest edit <ID> <subcommand> <value>:" . TF:: YELLOW . " Edit a property of a Quest.");
+        $p->sendMessage (TF::GREEN . "/quest start <ID>:" . TF::YELLOW . " Start a Quest with the given ID.");
+        $p->sendMessage (TF::GREEN . "/quest finish <ID>:" . TF::YELLOW . " Finish a started quest with the given ID.");
+        $p->sendMessage (TF::GREEN . "Subcommands:" . TF::YELLOW . " name, description, requiredexplvl, requiredid, requiredamount, rewardid, rewardamount.");
+       }
+      return true;
+      break;
+
       }
     }
   }
