@@ -8,8 +8,8 @@ load: POSTWORLD
 
 commands:
   quest:
-    description: Main quest command
-    usage: /quest start|end|list|see <name>
+    description: Quest help command
+    usage: /quest help
     aliases: [q]
   rpg:
     description: Main RPG command
