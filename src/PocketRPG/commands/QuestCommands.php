@@ -170,6 +170,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               foreach ( $inventory->getContents()  as  $item) {
               if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
 
+                $p->getInventory ()->remove ($item);
                 $player = $quest->get("Finished", []);
                 $player[] = $p->getName ();
                 $quest->set("Finished", $player);
