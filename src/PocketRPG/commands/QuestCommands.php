@@ -167,7 +167,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             if (in_array ($p->getName (), $quest->get ("Started")) && in_array ($p->getName (), $quest->get ("Finished"))) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
             } elseif(in_array ($p->getName (), $quest->get ("Started"))) {
-              foreach ( $inventory->getContents()  as  $item) {
+              foreach ( $p->getInventory()->getContents()  as  $item) {
               if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
 
                 $p->getInventory ()->remove ($item);
