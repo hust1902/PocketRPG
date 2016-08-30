@@ -161,10 +161,28 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         break;
  
         case "finish":
-              $player = $quest->get("Finished", []);
-              $player[] = $p->getName ();
-              $quest->set("Finished", $player);
-              $quests->save();
+          $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
+          if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+            if (in_array ($p->getName (), $quest->get ("Started")) && in_array ($p->getName (), $quest->get ("Finished"))) {
+              $p->sendMessage (TF::RED . "You have already finished this quest!");
+            } elseif(in_array ($p->getName (), $quest->get ("Started"))) {
+              foreach ( $inventory->getContents()  as  $item) {
+              if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
+
+                $player = $quest->get("Finished", []);
+                $player[] = $p->getName ();
+                $quest->set("Finished", $player);
+                $quests->save();
+                $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
+                $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
+                $p->sendPopup (TF::AQUA . "You leveled up!");
+              } else {
+                $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
+              }
+            } else {
+                $p->sendMessage (TF::RED . "You have finished this quest already!");
+            }
+          }
       }
     }
   }
