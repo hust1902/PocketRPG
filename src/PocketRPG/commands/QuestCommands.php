@@ -11,7 +11,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\permission\Permission;
-use pocketmine\item\Item
+use pocketmine\item\Item;
 
 class QuestCommands extends PluginBase implements CommandExecutor{
   
