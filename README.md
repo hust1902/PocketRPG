@@ -1,4 +1,4 @@
-# PocketRPG
+# PocketRPG  -  Version 0.1 
 An RPG plugin for pocketmine.
 
 **This plugin depends on PurePerms to work properly!**
