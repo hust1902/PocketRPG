@@ -153,7 +153,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $quest->save ();
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
-              $p->sendMessage (TF::GRAY . "To finish this quest you need " . $quest->get ("RequiredAmount") . " items of item ID " . $quest->get ("RequiredAmount"))
+              $p->sendMessage (TF::GRAY . "To finish this quest you need " . $quest->get ("RequiredAmount") . " items of item ID " . $quest->get ("RequiredAmount"));
             } else {
               $p->sendMessage (TF::RED . "Your experience level is not high enough to start this quest!");
             }
