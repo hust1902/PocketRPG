@@ -19,7 +19,7 @@ Next to classes PocketRPG provides Quests which you can create, edit, start and 
 
     Requiredid: the ID of the item you want the player to need when completing a quest.    
  
-    Requiredamount: the amount of that item that is needed to complete.    
+    Requiredamount: the amount of that item that is needed to complete.     
 
     Rewardid: the ID of the item the player gets as a finish reward.     
 
@@ -29,10 +29,11 @@ Next to classes PocketRPG provides Quests which you can create, edit, start and 
 Quests can only be started and finished once, so you won't have any reward cheaters!
 
 
-Commands:
+**Commands:**
 
     /quest   
     
-    /rpg  
+    /rpg    
 
 
+**Report any bugs you may find in the issues please :)**
