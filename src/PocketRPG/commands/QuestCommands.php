@@ -174,7 +174,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $player = $quest->get("Finished", []);
                 $player[] = $p->getName ();
                 $quest->set("Finished", $player);
-                $quests->save();
+                $quest->save();
                 $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
                 $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
                 $p->sendPopup (TF::AQUA . "You leveled up!");
