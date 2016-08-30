@@ -183,6 +183,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               } else {
                 $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
               }
+              }
             } else {
                 $p->sendMessage (TF::RED . "You have finished this quest already!");
             }
