@@ -169,7 +169,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
-              $p->sendMessage (TF::RED . "You have already finished this quest!");
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
               foreach ( $p->getInventory()->getContents()  as  $item) {
               if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
