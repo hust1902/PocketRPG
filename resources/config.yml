@@ -14,5 +14,6 @@ AllowBlockBreaking: false
 LevelUpMessage: ""
 
 #Allow special chat format with classes in RPG world:
+#Not working yet
 AllowClassChat: true
 ...
