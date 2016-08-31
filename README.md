@@ -1,5 +1,5 @@
 # PocketRPG  -  Version 0.1 
-An RPG plugin for pocketmine.
+An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
 **This plugin depends on PurePerms to work properly!**
 
