@@ -1,6 +1,7 @@
 # PocketRPG  -  Version 0.1 
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
+Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/PocketRPG/releases !
 **This plugin depends on PurePerms to work properly!**
 
 **Features:**
