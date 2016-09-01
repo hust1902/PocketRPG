@@ -148,7 +148,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
-            } elseif(in_array ($p->getName (), $quest->get ("Started", array ())));
+            } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
               $p->sendMessage (TF::RED . "You have already started this quest!");
             } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
               $player = $quest->get("Started", []);
@@ -188,8 +188,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
               }
               }
-            } else {
-                $p->sendMessage (TF::RED . "You have finished this quest already!");
             }
           }
       return true;
