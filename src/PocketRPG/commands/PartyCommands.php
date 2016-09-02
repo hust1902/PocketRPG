@@ -30,11 +30,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
       switch(strtolower($args[0])) {
         
         case "invite":
-            @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
-            @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
-              "Pending" => array (),
-              "Allies" => array ()
-            ]));
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
             $target = $this->getPlugin ()->getServer ()->getPlayer($args [1]);
             if ($target instanceof Player) {
