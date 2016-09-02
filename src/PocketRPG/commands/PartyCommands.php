@@ -53,7 +53,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         case "accept":
           if (file_exists ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml")) {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
-            if (in_array ($p->getName (), $quest->get ("Pending", array ()))) {
+            if (in_array ($p->getName (), $party->get ("Pending", array ()))) {
               $p->sendMessage(TF::GREEN . "You have joined the party of " . $args [1] . "!");
               $player = $party->get("Allies", []);
               $player[] = $p->getName ();
@@ -75,7 +75,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         case "reject":
           if (file_exists ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml")) {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
-            if (in_array ($p->getName (), $quest->get ("Pending", array ()))) {
+            if (in_array ($p->getName (), $party->get ("Pending", array ()))) {
               $pending = $party->get("Pending");
               unset($pending[array_search($p->getName (), $pending)]);
               $party->set("Pending", $pending);
