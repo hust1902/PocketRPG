@@ -47,6 +47,11 @@ class PartyCommands extends PluginBase implements CommandExecutor {
           
         return true;
         break;
+        
+        case "help":
+          
+        return true;
+        break;
       }
     }
   }
