@@ -55,8 +55,12 @@ class EventListener extends Main implements Listener {
     if($event instanceof EntityDamageByEntityEvent) {
         $hit = $event->getEntity();
         $damager = $event->getDamager();
+        $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit . ".yml");
+        $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager . ".yml");
           if(!$damager instanceof Player){
             return false;
+          } if(in_array ($damager->getName (), $hitparty->get ("Allies", array ()) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ())) {
+            $event->setCancelled();
           } else {
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
