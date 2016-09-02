@@ -37,7 +37,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
             $target = $this->getPlugin ()->getServer ()->getPlayer($args [1]);
             if ($target instanceof Player) {
-              $player = $quest->get("Pending", []);
+              $player = $party->get("Pending", []);
               $player[] = $target->getName ();
               $party->set("Pending", $player);
               $party->save ();
