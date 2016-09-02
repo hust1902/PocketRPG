@@ -102,6 +102,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             }
           } else {
             $p->sendMessage (TF::RED . "That player did not make a party yet!");
+          }
         return true;
         break;
         
