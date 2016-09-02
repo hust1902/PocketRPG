@@ -29,11 +29,16 @@ class PartyCommands extends PluginBase implements CommandExecutor {
       switch(strtolower($args[0])) {
         
         case "invite":
-          @mkdir($this->getDataFolder () . "plugins/PocketRPG/party");
-          @file_put_contents ($this->getDataFolder () . "quests/" . $p->getName () . ".yml", yaml_emit([
-            "Pending" => array (),
-            "Allies" => array ()
-          ]));
+          if (!file_exists (plugins/PocketRPG/" . $p->getName ()) {
+            @mkdir($this->getDataFolder () . "plugins/PocketRPG/party");
+            @file_put_contents ($this->getDataFolder () . "quests/" . $p->getName () . ".yml", yaml_emit([
+              "Pending" => array (),
+              "Allies" => array ()
+            ]));
+            //...
+          } else {
+            //...
+          }
         return true;
         break;
         
