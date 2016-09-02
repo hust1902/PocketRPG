@@ -29,13 +29,22 @@ class PartyCommands extends PluginBase implements CommandExecutor {
       switch(strtolower($args[0])) {
         
         case "invite":
-          if (!file_exists ("plugins/PocketRPG/" . $p->getName ())) {
-            @mkdir($this->getDataFolder () . "plugins/PocketRPG/party");
-            @file_put_contents ($this->getDataFolder () . "quests/" . $p->getName () . ".yml", yaml_emit([
+          if (!file_exists ("plugins/PocketRPG/party/" . $p->getName ()) && $args[1] instanceof) {
+            @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
+            @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
               "Pending" => array (),
               "Allies" => array ()
             ]));
-            //...
+            $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
+            $target = $this->getPlugin ()->getServer ()->getPlayer($args [1]);
+            if ($target instanceof Player) {
+              $player = $quest->get("Pending", []);
+              $player[] = $target->getName ();
+              $party->set("Pending", $player);
+              $party->save ();
+              $p->sendMessage (TF::GREEN . "A request has been sent to " . $target->>getName () . "!");
+              $target->sendMessage (TF::GREEN . "The Player " . $p->getName () . " has invited you to his/her party!\n" . TF::GREEN . "/party accept " . $p->getName () . TF::AQUA . "To accept.\n" . TF::GREEN . "/party reject " . $p->getName () . TF::AQUA . " to reject.");
+            }
           } else {
             //...
           }
