@@ -68,7 +68,15 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         break;
         
         case "reject":
-          
+          if (file_exists ($this->getDataFolder () . "plugin/PocketRPG/party/" . $args [1] . ".yml")) {
+            $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
+            if (in_array ($p->getName (), $quest->get ("Pending", array ()))) {
+              $pending = $party->get("Pending");
+              unset($pending[array_search($p->getName (), $pending)]);
+              $party->set("Pending", $pending);
+              $party->save();
+            }
+          }
         return true;
         break;
         
