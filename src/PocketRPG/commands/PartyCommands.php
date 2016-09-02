@@ -92,7 +92,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         case "leave":
           if (file_exists ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml")) {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
-            if (in_array ($p->getName (), $quest->get ("Allies", array ()))) {
+            if (in_array ($p->getName (), $party->get ("Allies", array ()))) {
               $allies = $party->get("Allies");
               unset($allies[array_search($p->getName (), $allies)]);
               $party->set("Allies", $allies);
