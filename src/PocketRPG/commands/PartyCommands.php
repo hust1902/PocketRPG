@@ -42,7 +42,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               $party->set("Pending", $player);
               $party->save ();
               $p->sendMessage (TF::GREEN . "A request has been sent to " . $target->getName () . "!");
-              $target->sendMessage (TF::GREEN . "The Player " . $p->getName () . " has invited you to his/her party!\n" . TF::GREEN . "/party accept " . $p->getName () . TF::AQUA . "To accept.\n" . TF::GREEN . "/party reject " . $p->getName () . TF::AQUA . " to reject.");
+              $target->sendMessage (TF::GREEN . "The Player " . $p->getName () . " has invited you to his/her party!\n" . TF::GREEN . "/party accept " . $p->getName () . TF::AQUA . ": to accept.\n" . TF::GREEN . "/party reject " . $p->getName () . TF::AQUA . ": to reject.");
             } else {
               $p->sendMessage (TF::RED . "That player is not online!");
             }
@@ -50,7 +50,20 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         break;
         
         case "accept":
-          
+          if (file_exists ($this->getDataFolder () . "plugin/PocketRPG/party/" . $args [1] . ".yml")) {
+            $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
+            if (in_array ($p->getName (), $quest->get ("Pending", array ()))) {
+              $p->sendMessage(TF::GREEN . "You have joined the party of " . $args [1] . "!");
+              $player = $party->get("Allies", []);
+              $player[] = $p->getName ();
+              $party->set("Allies", $player);
+              $party->save ();
+              $pending = $party->get("Pending");
+              unset($pending[array_search($p->getName (), $pending)]);
+              $party->set("Pending", $pending);
+              $party->save();
+            }
+          }
         return true;
         break;
         
