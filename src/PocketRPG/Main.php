@@ -28,6 +28,7 @@ class Main extends PluginBase implements Listener {
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     $this->getCommand("rpg")->setExecutor(new RpgCommands($this));
     $this->getCommand("quest")->setExecutor(new QuestCommands($this));
+    $this->getCommand("party")->setExecutor(new PartyCommands($this));
     
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
