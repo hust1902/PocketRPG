@@ -29,6 +29,7 @@ use pocketmine\level\particle\ExplodeParticle;
 use pocketmine\level\particle\HeartParticle;
 use pocketmine\level\particle\EntityFlameParticle;
 use pocketmine\event\player\PlayerItemHeldEvent;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\block\BlockBreakEvent;
@@ -49,6 +50,14 @@ class EventListener extends Main implements Listener {
 
   public function getOwner() {
      return $this->plugin;
+  }
+  public function onJoin (PlayerJoinEvent $event) {
+    $p = $event->getPlayer ();
+    @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
+    @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
+    "Pending" => array (),
+    "Allies" => array ()
+    ]));
   }
 
   public function onFight(EntityDamageEvent $event) {
