@@ -26,6 +26,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
   
   public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     if($cmd->getName() == "party") {
+     if (isset ($args [1])) {
       switch(strtolower($args[0])) {
         
         case "invite":
@@ -62,7 +63,11 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               unset($pending[array_search($p->getName (), $pending)]);
               $party->set("Pending", $pending);
               $party->save();
+            } else {
+              $p->sendMessage (TF::RED . "That player did not invite you.");
             }
+          } else {
+            $p->sendMessage (TF::RED . That player did not make a party yet!");
           }
         return true;
         break;
@@ -75,21 +80,41 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               unset($pending[array_search($p->getName (), $pending)]);
               $party->set("Pending", $pending);
               $party->save();
+            } else {
+              $p->sendMessage (TF::RED . "That player did not invite you.");
             }
+          } else {
+            $p->sendMessage (TF::RED . That player did not make a party yet!");
           }
         return true;
         break;
         
         case "leave":
-          
+          if (file_exists ($this->getDataFolder () . "plugin/PocketRPG/party/" . $args [1] . ".yml")) {
+            $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
+            if (in_array ($p->getName (), $quest->get ("Allies", array ()))) {
+              $allies = $party->get("Allies");
+              unset($allies[array_search($p->getName (), $allies)]);
+              $party->set("Allies", $allies);
+              $party->save();
+            } else {
+              $p->sendMessage (TF::RED . "You are not in that party!");
+            }
+          } else {
+            $p->sendMessage (TF::RED . "That player did not make a party yet!");
         return true;
         break;
         
         case "help":
-          
+          $p->sendMessage (TF::GREEN . " --- " . TF::YELLOW . "Party help" . TF::GREEN . " --- ");
+          $p->sendMessage (TF::GREEN . "/party invite <playername>:" . TF::AQUA . "Invite someone to your party.");
+          $p->sendMessage (TF::GREEN . "/party accept <playername>:" . TF::AQUA . "Accept a party invite.");
+          $p->sendMessage (TF::GREEN . "/party reject <playername>:" . TF::AQUA . "Reject a party invite.");
+          $p->sendMessage (TF::GREEN . "/party leave <playername>:" . TF::AQUA . "Leave your current party.");
         return true;
         break;
       }
     }
+   }
   }
 }
