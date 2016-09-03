@@ -48,6 +48,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         case "accept":
           if (file_exists ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml")) {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
+            $target = $this->getPlugin ()->getServer ()->getPlayer($args [1]);
             if (in_array ($p->getName (), $party->get ("Pending", array ()))) {
               $p->sendMessage(TF::GREEN . "You have joined the party of " . $args [1] . "!");
               $player = $party->get("Allies", []);
@@ -58,6 +59,9 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               unset($pending[array_search($p->getName (), $pending)]);
               $party->set("Pending", $pending);
               $party->save();
+            if ($target instanceof Player) {
+              $target->sendMessage (TF::GREEN . "The player " . $p->getName () . " has accepted your invite!");
+            }
             } else {
               $p->sendMessage (TF::RED . "That player did not invite you.");
             }
@@ -70,11 +74,14 @@ class PartyCommands extends PluginBase implements CommandExecutor {
         case "reject":
           if (file_exists ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml")) {
             $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $args [1] . ".yml");
+            $target = $this->getPlugin ()->getServer ()->getPlayer($args [1]);
             if (in_array ($p->getName (), $party->get ("Pending", array ()))) {
               $pending = $party->get("Pending");
               unset($pending[array_search($p->getName (), $pending)]);
               $party->set("Pending", $pending);
               $party->save();
+            if ($target instanceof Player) {
+              $target->sendMessage (TF::RED . "The player " . $p->getName () . " has rejected your invite!");
             } else {
               $p->sendMessage (TF::RED . "That player did not invite you.");
             }
@@ -92,6 +99,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               unset($allies[array_search($p->getName (), $allies)]);
               $party->set("Allies", $allies);
               $party->save();
+              $p->sendMessage (TF::GREEN . "You have succesfully left the party");
             } else {
               $p->sendMessage (TF::RED . "You are not in that party!");
             }
