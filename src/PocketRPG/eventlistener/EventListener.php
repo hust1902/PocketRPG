@@ -198,23 +198,23 @@ class EventListener extends Main implements Listener {
     }
   }
   public function onCraft(CraftItemEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //denies any crafting, since that could get rid of important items
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
   public function onBurn(FurnaceBurnEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
   public function onDrop(PlayerDropItemEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->config->get("DisableItemLosing") == true) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
   }
