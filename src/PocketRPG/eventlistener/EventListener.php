@@ -30,6 +30,7 @@ use pocketmine\level\particle\HeartParticle;
 use pocketmine\level\particle\EntityFlameParticle;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\block\BlockBreakEvent;
@@ -42,7 +43,6 @@ use pocketmine\entity\Effect;
 class EventListener extends Main implements Listener {
 
   public $plugin;
-  public $config;
 
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
@@ -51,6 +51,12 @@ class EventListener extends Main implements Listener {
   public function getOwner() {
      return $this->plugin;
   }
+  public function onQuit (PlayerQuitEvent $event) {
+    $p = $event->getPlayer ();
+    $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
+    unlink ($party);
+  }
+
   public function onJoin (PlayerJoinEvent $event) {
     $p = $event->getPlayer ();
     @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
