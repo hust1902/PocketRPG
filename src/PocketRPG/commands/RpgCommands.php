@@ -43,6 +43,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
               $wand = Item::get(Item::STICK, 0, 1);
               $p->getInventory()->addItem($wand);
+              $book = Item::get (Item::BOOK, 0, 1);
+              $p->getInventory ()->addItem ($book);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.mage");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -57,6 +59,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
               $p->getInventory()->addItem($sword);
+              $book = Item::get (Item::BOOK, 0, 1);
+              $p->getInventory ()->addItem ($book);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.warrior");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -71,6 +75,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
               $shield = Item::get(Item::BRICK, 0, 1);
               $p->getInventory()->addItem($shield);
+              $book = Item::get (Item::BOOK, 0, 1);
+              $p->getInventory ()->addItem ($book);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.tanker");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -85,6 +91,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $knife = Item::get(Item::FEATHER, 0, 1);
               $p->getInventory()->addItem($knife);
+              $book = Item::get (Item::BOOK, 0, 1);
+              $p->getInventory ()->addItem ($book);
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.chosen");
               $this->getOwner()->getServer()->dispatchCommand(new ConsoleCommandSender(), "setuperm " . $p->getName() . " class.assassin");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
