@@ -35,9 +35,6 @@ class Main extends PluginBase implements Listener {
     $this->saveResource("config.yml");
     $this->config = new Config($this->getDataFolder(). "config.yml", Config::YAML);
     $config = $this->config->getAll();
-    @mkdir($this->getDataFolder());
-    $this->saveResource("party.yml");
-    $this->party = new Config($this->getDataFolder(). "party.yml", Config::YAML);
   }
 
   public function onDisable() {
