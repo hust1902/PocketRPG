@@ -82,6 +82,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
               $party->save();
             if ($target instanceof Player) {
               $target->sendMessage (TF::RED . "The player " . $p->getName () . " has rejected your invite!");
+            }
             } else {
               $p->sendMessage (TF::RED . "That player did not invite you.");
             }
