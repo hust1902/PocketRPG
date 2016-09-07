@@ -1,4 +1,4 @@
-# PocketRPG  -  Version 0.1 
+# PocketRPG  -  Version 0.2.0
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
 Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/PocketRPG/releases !
@@ -30,12 +30,15 @@ Next to classes PocketRPG provides Quests which you can create, edit, start and 
 
 Quests can only be started and finished once, so you won't have any reward cheaters!
 
+Parties! Players in the same party won't be able to damage eachother!
 
 **Commands:**
 
     /quest   
     
     /rpg    
+
+    /party     
 
 
 **Report any bugs you may find in the issues please :)**
