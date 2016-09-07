@@ -4,6 +4,7 @@ namespace PocketRPG;
 
 use PocketRPG\commands\QuestCommands;
 use PocketRPG\commands\RpgCommands;
+use PocketRPG\commands\PartyCommands;
 use PocketRPG\eventlistener\EventListener;
 
 use pocketmine\plugin\PluginBase;
@@ -28,14 +29,12 @@ class Main extends PluginBase implements Listener {
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     $this->getCommand("rpg")->setExecutor(new RpgCommands($this));
     $this->getCommand("quest")->setExecutor(new QuestCommands($this));
+    $this->getCommand("party")->setExecutor(new PartyCommands($this));
     
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
     $this->config = new Config($this->getDataFolder(). "config.yml", Config::YAML);
     $config = $this->config->getAll();
-    @mkdir($this->getDataFolder());
-    $this->saveResource("party.yml");
-    $this->party = new Config($this->getDataFolder(). "party.yml", Config::YAML);
   }
 
   public function onDisable() {
