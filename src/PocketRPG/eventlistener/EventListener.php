@@ -116,10 +116,7 @@ class EventListener extends Main implements Listener {
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
-                $explodetask = new ExplodeTask($this);
-                $handler = $this->getServer()->getScheduler()->scheduleDelayedTask($explodetask, 30);
-                $explodetask->setHandler($handler);
-                $this->tasks[$explodetask->getTaskId()] = $explodetask->getTaskId(); //explosion in air task
+                $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
                 $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
                 $event->setKnockBack(1.5);
                 $event->setDamage(1);
