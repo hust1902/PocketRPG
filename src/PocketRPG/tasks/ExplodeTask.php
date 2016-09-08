@@ -16,9 +16,13 @@ use pocketmine\level\particle\HugeExplodeParticle;
 
 class ExplodeTask extends PluginTask implements Listener{
   
-  public function __construct(EventListener $plugin) {
+  private $plugin;
+  private $p;
+
+  public function __construct(EventListener $plugin, Player $p) {
     parent::__construct($plugin);
     $this->plugin = $plugin;
+    $this->player = $p;
   }
   
   public function getPlugin() {
@@ -26,18 +30,7 @@ class ExplodeTask extends PluginTask implements Listener{
   }
   
   public function onRun($tick) {
-    foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p);
-    $cause = $p->getLastDamageCause();
-    if($cause instanceof EntityDamageByEntityEvent){
-      if(!$cause->getDamager() instanceof Player){
-        return false;
-      } else {
-        if($cause->getDamager()->hasPermission("class.warrior") and $cause->getDamager()->getItemInHand()->getId() == Item::IRON_SHOVEL) {
-          $damager = $p->getLastDamageCause()->getDamager();
-          $damager->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
-          $p->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
-        }
-      }
-    }
+    $p->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
+    $p->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
   }
 }
