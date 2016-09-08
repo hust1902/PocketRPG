@@ -30,7 +30,7 @@ class ExplodeTask extends PluginTask implements Listener{
   }
   
   public function onRun($tick) {
-    $p->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
+    $p->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($p->x, $p->y, $p->z)));
     $p->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
   }
 }
