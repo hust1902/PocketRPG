@@ -42,3 +42,5 @@ Parties! Players in the same party won't be able to damage eachother!
 
 
 **Report any bugs you may find in the issues please :)**
+
+New command: /rpg warp. Warps the player to RPG world if he/she has chosen a class already.
