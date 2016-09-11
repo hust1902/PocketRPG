@@ -83,7 +83,7 @@ class EventListener extends Main implements Listener {
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
-                if ($p->getFood() >= 1){
+                if ($damager->getFood() >= 1){
                   $x = $hit->x;
                   $y = $hit->y;
                   $z = $hit->z;
@@ -95,7 +95,7 @@ class EventListener extends Main implements Listener {
               }
             } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.mage")) {
-                if ($p->getFood () >= 1) {
+                if ($damager->getFood () >= 1) {
                   $x = $hit->x;
                   $y = $hit->y;
                   $z = $hit->z;
@@ -109,7 +109,7 @@ class EventListener extends Main implements Listener {
               }
             } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.tanker")) {
-                if ($p->getFood () >= 1) {
+                if ($damager->getFood () >= 1) {
                   $x = $hit->x;
                   $y = $hit->y;
                   $z = $hit->z;
@@ -122,7 +122,7 @@ class EventListener extends Main implements Listener {
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
-                if ($p->getFood () >= 1) {
+                if ($damager->getFood () >= 1) {
                   $x = $hit->x;
                   $y = $hit->y;
                   $z = $hit->z;
@@ -135,7 +135,7 @@ class EventListener extends Main implements Listener {
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
-                if ($p->getFood () >= 1) {
+                if ($damager->getFood () >= 1) {
                   $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
                   $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
                   $event->setKnockBack(1.5);
