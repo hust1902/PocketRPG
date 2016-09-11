@@ -6,6 +6,7 @@ use PocketRPG\commands\QuestCommands;
 use PocketRPG\commands\RpgCommands;
 use PocketRPG\commands\PartyCommands;
 use PocketRPG\eventlistener\EventListener;
+use PocketRPG\tasks\ManaTask;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
