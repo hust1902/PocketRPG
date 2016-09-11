@@ -184,8 +184,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->getInventory ()->addItem ($items);
                 $p->setExpLevel ($p->getExpLevel () + 1);
                 $p->getInventory ()->remove ($item);
-              } else {
-                $p->sendMessage (TF::RED . "You do not have the required items in your inventory to finish this quest!");
               }
               }
             }
