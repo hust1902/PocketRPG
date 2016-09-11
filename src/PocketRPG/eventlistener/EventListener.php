@@ -77,7 +77,7 @@ class EventListener extends Main implements Listener {
           } if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
             $event->setCancelled();
           } else {
-            if ($damager->getHunger() == 0) {
+            if ($damager->getFood() == 0) {
               $event->setCancelled ();
             } else {
             $level = $damager->getLevel();
