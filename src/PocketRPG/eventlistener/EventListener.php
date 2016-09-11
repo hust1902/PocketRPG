@@ -77,51 +77,74 @@ class EventListener extends Main implements Listener {
           } if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
             $event->setCancelled();
           } else {
+            if ($damager->getHunger() == 0) {
+              $event->setCancelled ();
+            } else {
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
-                $x = $hit->x;
-                $y = $hit->y;
-                $z = $hit->z;
-                $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
-                $event->setDamage(4);  //adds a critical particle and does extra damage
+                if ($p->getFood >= 1){
+                  $x = $hit->x;
+                  $y = $hit->y;
+                  $z = $hit->z;
+                  $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
+                  $event->setDamage(4);  //adds a critical particle and does extra damage
+                  $p->setFood ($p->getFood () - 1);
+                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                }
               }
             } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.mage")) {
-                $x = $hit->x;
-                $y = $hit->y;
-                $z = $hit->z;
-                $event->setKnockBack(0.6);
-                $hit->setOnFire(5);
-                $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
-                $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
+                if ($p->getFood () >= 1) {
+                  $x = $hit->x;
+                  $y = $hit->y;
+                  $z = $hit->z;
+                  $event->setKnockBack(0.6);
+                  $hit->setOnFire(5);
+                  $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
+                  $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
+                  $p->setFood ($p->getFood () - 1);
+                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                }
               }
             } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.tanker")) {
-                $x = $hit->x;
-                $y = $hit->y;
-                $z = $hit->z;
-                $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
-                $event->setKnockBack(1);
-                $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
+                if ($p->getFood () >= 1) {
+                  $x = $hit->x;
+                  $y = $hit->y;
+                  $z = $hit->z;
+                  $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
+                  $event->setKnockBack(1);
+                  $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
+                  $p->setFood ($p->getFood () - 1);
+                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                }
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
-                $x = $hit->x;
-                $y = $hit->y;
-                $z = $hit->z;
-                $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
-                $event->setKnockBack(0.8);
-                $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
+                if ($p->getFood () >= 1) {
+                  $x = $hit->x;
+                  $y = $hit->y;
+                  $z = $hit->z;
+                  $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
+                  $event->setKnockBack(0.8);
+                  $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
+                  $p->setFood ($p->getFood () - 1);
+                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                }
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
               if($damager->hasPermission("class.warrior")) {
-                $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
-                $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
-                $event->setKnockBack(1.5);
-                $event->setDamage(1);
+                if ($p->getFood () >= 1) {
+                  $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
+                  $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
+                  $event->setKnockBack(1.5);
+                  $event->setDamage(1);
+                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                }
               }
             }
+           }
          }
     }
   }
@@ -131,40 +154,60 @@ class EventListener extends Main implements Listener {
     if($level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($p->hasPermission("class.assassin")) {
-        $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
-        $p->addEffect($effect); //gives assassin speed with feather
+          if ($p->getFood () >= 1) {
+            $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
+            $p->addEffect($effect); //gives assassin speed with feather
+            $p->setFood ($p->getFood () - 1);
+            $p->sendPopup (TF::AQUA . "-1 Mana");
+          }
         }
     } elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.tanker")&& $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-        $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
-        $p->addEffect($effect);  //gives tanker resistance if experience level is higher than 8 with brick
+          if($p->getFood () >= 5) {
+            $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
+            $p->addEffect($effect);  //gives tanker resistance if experience level is higher than 8 with brick
+            $p->setFood ($p->getFood () - 5);
+            $p->sendPopup (TF::AQUA . "-5 Mana");
+          }
         }
     } elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.assassin") && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-        $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
-        $p->addEffect($effect);
-        $x = $p->x;
-        $y = $p->y;
-        $z = $p->z;
-        $level->addParticle(new LavaParticle(new Vector3($x, $y, $z))); //Cloak of invisibility
+          if ($p->getFood () >= 4) {
+            $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
+            $p->addEffect($effect);
+            $x = $p->x;
+            $y = $p->y;
+            $z = $p->z;
+            $level->addParticle(new LavaParticle(new Vector3($x, $y, $z))); //Cloak of invisibility
+            $p->setFood ($p->getFood () - 4);
+            $p->sendPopup (TF::AQUA . "-4 Mana");
+          }
         }
     } elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.mage") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-        $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
-        $p->addEffect($effect);
-        $x = $p->x;
-        $y = $p->y;
-        $z = $p->z;
-        $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z))); //Bone of life
+          if ($p->getFood () >= 6) {
+            $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
+            $p->addEffect($effect);
+            $x = $p->x;
+            $y = $p->y;
+            $z = $p->z;
+            $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z))); //Bone of life
+            $p->setFood ($p->getFood () - 6);
+            $p->sendPopup (TF::AQUA . "-6 Mana");
+          }
         }
     } elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.warrior") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-        $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
-        $p->addEffect($effect);
-        $x = $p->x;
-        $y = $p->y;
-        $z = $p->z;
-        $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z))); //Rage powder
+          if ($p->getFood () >= 6) {
+            $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
+            $p->addEffect($effect);
+            $x = $p->x;
+            $y = $p->y;
+            $z = $p->z;
+            $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z))); //Rage powder
+            $p->setFood ($p->getFood () - 6);
+            $p->sendPopup (TF::AQUA . "-6 Mana");
+          }
         }
     } 
     if($p->getItemInHand()->getId() == Item::STICK) {
