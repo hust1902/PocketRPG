@@ -83,14 +83,14 @@ class EventListener extends Main implements Listener {
             $level = $damager->getLevel();
             if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
               if($damager->hasPermission("class.assassin")) {
-                if ($p->getFood >= 1){
+                if ($p->getFood() >= 1){
                   $x = $hit->x;
                   $y = $hit->y;
                   $z = $hit->z;
                   $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                   $event->setDamage(4);  //adds a critical particle and does extra damage
-                  $p->setFood ($p->getFood () - 1);
-                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                  $damager->setFood ($p->getFood () - 1);
+                  $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
             } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
@@ -103,8 +103,8 @@ class EventListener extends Main implements Listener {
                   $hit->setOnFire(5);
                   $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
                   $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
-                  $p->setFood ($p->getFood () - 1);
-                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                  $damager->setFood ($p->getFood () - 1);
+                  $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
             } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
@@ -116,8 +116,8 @@ class EventListener extends Main implements Listener {
                   $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
                   $event->setKnockBack(1);
                   $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
-                  $p->setFood ($p->getFood () - 1);
-                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                  $damager->setFood ($p->getFood () - 1);
+                  $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
@@ -129,8 +129,8 @@ class EventListener extends Main implements Listener {
                   $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                   $event->setKnockBack(0.8);
                   $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
-                  $p->setFood ($p->getFood () - 1);
-                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                  $damager->setFood ($p->getFood () - 1);
+                  $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
             } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
@@ -140,7 +140,7 @@ class EventListener extends Main implements Listener {
                   $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
                   $event->setKnockBack(1.5);
                   $event->setDamage(1);
-                  $p->sendPopup (TF::AQUA . "-1 Mana");
+                  $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
             }
