@@ -89,7 +89,7 @@ class EventListener extends Main implements Listener {
                   $z = $hit->z;
                   $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                   $event->setDamage(4);  //adds a critical particle and does extra damage
-                  $damager->setFood ($p->getFood () - 1);
+                  $damager->setFood ($damager->getFood () - 1);
                   $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
@@ -103,7 +103,7 @@ class EventListener extends Main implements Listener {
                   $hit->setOnFire(5);
                   $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
                   $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
-                  $damager->setFood ($p->getFood () - 1);
+                  $damager->setFood ($damager->getFood () - 1);
                   $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
@@ -116,7 +116,7 @@ class EventListener extends Main implements Listener {
                   $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
                   $event->setKnockBack(1);
                   $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
-                  $damager->setFood ($p->getFood () - 1);
+                  $damager->setFood ($damager->getFood () - 1);
                   $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
@@ -129,7 +129,7 @@ class EventListener extends Main implements Listener {
                   $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                   $event->setKnockBack(0.8);
                   $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
-                  $damager->setFood ($p->getFood () - 1);
+                  $damager->setFood ($damager->getFood () - 1);
                   $damager->sendPopup (TF::AQUA . "-1 Mana");
                 }
               }
@@ -185,15 +185,15 @@ class EventListener extends Main implements Listener {
         }
     } elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.mage") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-          if ($p->getFood () >= 6) {
+          if ($p->getFood () >= 7) {
             $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
             $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z))); //Bone of life
-            $p->setFood ($p->getFood () - 6);
-            $p->sendPopup (TF::AQUA . "-6 Mana");
+            $p->setFood ($p->getFood () - 7);
+            $p->sendPopup (TF::AQUA . "-7 Mana");
           }
         }
     } elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
