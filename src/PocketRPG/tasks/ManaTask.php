@@ -3,7 +3,7 @@
 namespace PocketRPG\tasks;
 
 use PocketRPG\Main;
-use pocketmine\plugin\PluginTask;
+use pocketmine\scheduler\PluginTask;
 use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\utils\Config;
