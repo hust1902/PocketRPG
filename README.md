@@ -1,4 +1,4 @@
-# PocketRPG  -  Version 0.2.0
+# PocketRPG  -  Version 0.3.0
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
 Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/PocketRPG/releases !
@@ -8,7 +8,7 @@ Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/Pocke
 **Features:**
 
 PocketRPG is made for servers to create a better adventure experience, using quests and special classes which there are 4 of. (Mage, Warrior, Assassin, Tanker) Each using different items to fight and abilities in battle. Assassin class is only available to those who have the permission class.special, so you could give that out on voterewards! This only works when RPGworld in config is defined.
-use the command /rpg start <class> to begin.
+use the command /rpg start <class> to begin. Using weapons and items from classes requires mana, which regenerates over time. (Hunger bar) Make sure hunger is on in your server for this to work.
 
 
 Next to classes PocketRPG provides Quests which you can create, edit, start and finish in any way you'd like. Please use /quest help in game to see all quest commands. Subcommands of the /quest edit command are as follows:
