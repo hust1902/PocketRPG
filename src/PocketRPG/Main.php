@@ -31,7 +31,7 @@ class Main extends PluginBase implements Listener {
     $this->getCommand("rpg")->setExecutor(new RpgCommands($this));
     $this->getCommand("quest")->setExecutor(new QuestCommands($this));
     $this->getCommand("party")->setExecutor(new PartyCommands($this));
-    $this->getServer ()->getScheduler()->scheduleRepeatingTask (new ManaTask($this), 20);
+    $this->getServer ()->getScheduler()->scheduleRepeatingTask (new ManaTask($this), 40);
     
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
