@@ -13,10 +13,6 @@ AllowBlockBreaking: false
 #Message sent to players when a player reaches level 10:
 LevelUpMessage: ""
 
-#Allow special chat format with classes in RPG world:
-#Not working yet
-AllowClassChat: true
-
 #Switch for not being able to lose items in RPG world (crafting, furnace smelting, dropping etc...):
 DisableItemLosing: true
 ...
