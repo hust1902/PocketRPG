@@ -1,5 +1,15 @@
 <?php
 
+/*
+*  _____           _        _   _____  _____   _____ 
+* |  __ \         | |      | | |  __ \|  __ \ / ____|
+* | |__) |__   ___| | _____| |_| |__) | |__) | |  __ 
+* |  ___/ _ \ / __| |/ / _ \ __|  _  /|  ___/| | |_ |
+* | |  | (_) | (__|   <  __/ |_| | \ \| |    | |__| |
+* |_|   \___/ \___|_|\_\___|\__|_|  \_\_|     \_____|
+*
+*/     
+
 namespace FWAcoreclasses;
 
 use pocketmine\scheduler\PluginTask;
@@ -30,7 +40,7 @@ class ExplodeTask extends PluginTask implements Listener{
   }
   
   public function onRun($tick) {
-    $p->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($p->x, $p->y, $p->z)));
-    $p->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
+    $this->player->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($this->player->x, $this->player->y, $this->player->z)));
+    $this->player->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
   }
 }
