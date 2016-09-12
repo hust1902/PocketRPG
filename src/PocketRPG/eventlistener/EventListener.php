@@ -1,5 +1,15 @@
 <?php
 
+/*
+*  _____           _        _   _____  _____   _____ 
+* |  __ \         | |      | | |  __ \|  __ \ / ____|
+* | |__) |__   ___| | _____| |_| |__) | |__) | |  __ 
+* |  ___/ _ \ / __| |/ / _ \ __|  _  /|  ___/| | |_ |
+* | |  | (_) | (__|   <  __/ |_| | \ \| |    | |__| |
+* |_|   \___/ \___|_|\_\___|\__|_|  \_\_|     \_____|
+*
+*/     
+
 namespace PocketRPG\eventlistener;
 
 use PocketRPG\Main;
@@ -54,7 +64,7 @@ class EventListener extends Main implements Listener {
   public function onQuit (PlayerQuitEvent $event) {
     $p = $event->getPlayer ();
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
-    unlink ($party);
+    unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
   }
 
   public function onJoin (PlayerJoinEvent $event) {
@@ -72,81 +82,95 @@ class EventListener extends Main implements Listener {
         $damager = $event->getDamager();
         $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit . ".yml");
         $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager . ".yml");
-          if(!$damager instanceof Player){
+        
+        if(!$damager instanceof Player){
             return false;
-          } if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
+        } 
+        
+        if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
             $event->setCancelled();
-          } else {
+            
+         } else {
             if ($damager->getFood() == 0) {
-              $event->setCancelled ();
+            $event->setCancelled ();
+            
             } else {
-            $level = $damager->getLevel();
-            if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
-              if($damager->hasPermission("class.assassin")) {
-                if ($damager->getFood() >= 1){
-                  $x = $hit->x;
-                  $y = $hit->y;
-                  $z = $hit->z;
-                  $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
-                  $event->setDamage(4);  //adds a critical particle and does extra damage
-                  $damager->setFood ($damager->getFood () - 1);
-                  $damager->sendPopup (TF::AQUA . "-1 Mana");
-                }
-              }
-            } elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-              if($damager->hasPermission("class.mage")) {
-                if ($damager->getFood () >= 1) {
-                  $x = $hit->x;
-                  $y = $hit->y;
-                  $z = $hit->z;
-                  $event->setKnockBack(0.6);
-                  $hit->setOnFire(5);
-                  $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
-                  $event->setDamage(3); //sets the player on fire, does extra damage and adds a lava particle
-                  $damager->setFood ($damager->getFood () - 1);
-                  $damager->sendPopup (TF::AQUA . "-1 Mana");
-                }
-              }
-            } elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-              if($damager->hasPermission("class.tanker")) {
-                if ($damager->getFood () >= 1) {
-                  $x = $hit->x;
-                  $y = $hit->y;
-                  $z = $hit->z;
-                  $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
-                  $event->setKnockBack(1);
-                  $event->setDamage(2);  //sets knockback very high, does extra damage and adds an explosion particle
-                  $damager->setFood ($damager->getFood () - 1);
-                  $damager->sendPopup (TF::AQUA . "-1 Mana");
-                }
-              }
-            } elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-              if($damager->hasPermission("class.warrior")) {
-                if ($damager->getFood () >= 1) {
-                  $x = $hit->x;
-                  $y = $hit->y;
-                  $z = $hit->z;
-                  $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
-                  $event->setKnockBack(0.8);
-                  $event->setDamage(4);  //sets knockback high, does extra damage and adds a critical particle
-                  $damager->setFood ($damager->getFood () - 1);
-                  $damager->sendPopup (TF::AQUA . "-1 Mana");
-                }
-              }
-            } elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-              if($damager->hasPermission("class.warrior")) {
-                if ($damager->getFood () >= 1) {
-                  $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
-                  $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
-                  $event->setKnockBack(1.5);
-                  $event->setDamage(1);
-                  $damager->sendPopup (TF::AQUA . "-1 Mana");
-                }
-              }
+                $level = $damager->getLevel();
+            
+                if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
+                  if($damager->hasPermission("class.assassin")) {
+                    if ($damager->getFood() >= 1){
+                      $x = $hit->x;
+                      $y = $hit->y;
+                      $z = $hit->z;
+                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
+                      $event->setDamage(4);
+                      $damager->setFood ($damager->getFood () - 1);
+                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                    }
+                  }
+                } //Dagger
+            
+                elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                  if($damager->hasPermission("class.mage")) {
+                    if($damager->getFood () >= 1) {
+                      $x = $hit->x;
+                      $y = $hit->y;
+                      $z = $hit->z;
+                      $event->setKnockBack(0.6);
+                      $hit->setOnFire(5);
+                      $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
+                      $event->setDamage(3);
+                      $damager->setFood ($damager->getFood () - 1);
+                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                    }
+                  }
+                } //Wand
+            
+                elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                  if($damager->hasPermission("class.tanker")) {
+                    if ($damager->getFood () >= 1) {
+                      $x = $hit->x;
+                      $y = $hit->y;
+                      $z = $hit->z;
+                      $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
+                      $event->setKnockBack(1);
+                      $event->setDamage(2);
+                      $damager->setFood ($damager->getFood () - 1);
+                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                    }
+                  }
+                } //Shield
+            
+                elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                  if($damager->hasPermission("class.warrior")) {
+                    if ($damager->getFood () >= 1) {
+                      $x = $hit->x;
+                      $y = $hit->y;
+                      $z = $hit->z;
+                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
+                      $event->setKnockBack(0.8);
+                      $event->setDamage(4);
+                      $damager->setFood ($damager->getFood () - 1);
+                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                    }
+                  }
+                } //Sword
+            
+                elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                  if($damager->hasPermission("class.warrior")) {
+                    if ($damager->getFood () >= 1) {
+                      $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
+                      $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
+                      $event->setKnockBack(1.5);
+                      $event->setDamage(1);
+                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                    }
+                  }
+                } //Hammer (WIP)
             }
-           }
-         }
-    }
+        }
+     }
   }
   public function onItemHeld(PlayerItemHeldEvent $event) {
     $p = $event->getPlayer();
@@ -161,7 +185,9 @@ class EventListener extends Main implements Listener {
             $p->sendPopup (TF::AQUA . "-1 Mana");
           }
         }
-    } elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
+      } //Dagger speed
+    
+      elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.tanker")&& $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if($p->getFood () >= 5) {
             $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
@@ -170,7 +196,9 @@ class EventListener extends Main implements Listener {
             $p->sendPopup (TF::AQUA . "-5 Mana");
           }
         }
-    } elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
+      } //Shield resistance
+    
+      elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.assassin") && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 4) {
             $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
@@ -183,7 +211,9 @@ class EventListener extends Main implements Listener {
             $p->sendPopup (TF::AQUA . "-4 Mana");
           }
         }
-    } elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
+      } //Assassin Cloak
+    
+      elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.mage") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 7) {
             $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
@@ -196,7 +226,9 @@ class EventListener extends Main implements Listener {
             $p->sendPopup (TF::AQUA . "-7 Mana");
           }
         }
-    } elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
+      } //Mage bone
+    
+      elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
         if($p->hasPermission("class.warrior") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 6) {
             $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
@@ -209,26 +241,41 @@ class EventListener extends Main implements Listener {
             $p->sendPopup (TF::AQUA . "-6 Mana");
           }
         }
-    } 
-    if($p->getItemInHand()->getId() == Item::STICK) {
+      } //Warrior powder
+    
+      if($p->getItemInHand()->getId() == Item::STICK) {
         $p->sendPopup(TF:: AQUA . "Wand\n" . TF:: GRAY . "Fireball - Mage");
-    } elseif($p->getItemInHand()->getId() == Item::FEATHER) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::FEATHER) {
         $p->sendPopup(TF:: AQUA . "Dagger\n" . TF::GRAY . "Stab - Assassin");
-    } elseif($p->getItemInHand()->getId() == Item::BRICK) {
-      if($p->getExpLevel() >= 8) {
-        $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam + Resistance - Warrior");
-      } else {
-        $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Warrior");
-      }
-    } elseif($p->getItemInHand()->getId() == Item::CLOCK) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::BRICK) {
+        if($p->getExpLevel() >= 8) {
+          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam + Resistance - Warrior");
+        } else {
+          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Warrior");
+        }
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::CLOCK) {
         $p->sendPopup(TF:: AQUA . "Cloak of Invisibility\n" . TF::GRAY . "Invisibility - Assassin");
-    } elseif($p->getItemInHand()->getId() == Item::IRON_SWORD) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::IRON_SWORD) {
         $p->sendPopup(TF:: AQUA . "Sword\n" . TF::GRAY . "Strike - Warrior");
-    } elseif($p->getItemInHand()->getId() == Item::BONE) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::BONE) {
         $p->sendPopup(TF:: AQUA . "Bone of Life\n" . TF::GRAY . "Regeneration - Mage");
-    } elseif($p->getItemInHand()->getId() == Item::REDSTONE) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::REDSTONE) {
         $p->sendPopup(TF:: AQUA . "Rage Powder\n" . TF::GRAY . "Strength - Warrior");
-    } elseif($p->getItemInHand()->getId() == Item::BOOK) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::BOOK) {
         $p->sendPopup(TF:: AQUA . "Abilities Book");
         if($p->hasPermission("class.assassin")) {
           $p->sendMessage(TF:: GREEN . "---Assassin Abilities---");
@@ -251,9 +298,11 @@ class EventListener extends Main implements Listener {
           $p->sendMessage(TF:: AQUA . "Strength - Lvl. 10 - Rage Powder");
           $p->sendMessage(TF:: AQUA . "Fissure - Lvl. 20 - Fissure Hammer");
         }
-    } elseif($p->getItemInHand()->getId() == Item::IRON_SHOVEL) {
+      } 
+    
+      elseif($p->getItemInHand()->getId() == Item::IRON_SHOVEL) {
        $p->sendPopup(TF:: AQUA . "Fissure Hammer\n" . TF:: GRAY . "Fissure - Warrior");
-    }
+      }
     }
   }
   public function onCraft(CraftItemEvent $event) {
@@ -329,28 +378,5 @@ class EventListener extends Main implements Listener {
        }
       }
     }
-  }
-
-  //class chat
-
-  public function onChat(PlayerChatEvent $event) {
-    $p = $event->getPlayer();
-    $rpglevel = $this->getOwner()->config->get("RPGworld");
-    if($p->getLevel()->getName() == $rpglevel) {
-     if($this->getOwner()->config->get("EnableClassChat") == true) {
-      if($p->hasPermission("class.tanker")) {
-        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Tanker >" . TF::GRAY . $event->getMessage());
-      } elseif($p->hasPermission("class.warrior")) {
-        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Warrior >" . TF::GRAY . $event->getMessage());
-        $event->setFormat ($format);
-      } elseif($p->hasPermission("class.mage")) {
-        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Mage >" . TF::GRAY . $event->getMessage());
-        $event->setFormat ($format);
-      } elseif($p->hasPermission("class.assassin")) {
-        $format = $this->getOwner()->getChatFormat(TF::WHITE . "< " . $p->getName() . " > Assassin >" . TF::GRAY . $event->getMessage());
-        $event->setFormat($format);
-      }
-    }
-   }
   }
 }
