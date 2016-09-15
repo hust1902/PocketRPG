@@ -49,7 +49,7 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
-
+use pocketmine\inventory\PlayerInventory;
 class EventListener extends Main implements Listener {
 
   public $plugin;
