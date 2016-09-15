@@ -50,6 +50,8 @@ use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 use pocketmine\inventory\PlayerInventory;
+use pocketmine\entity\human;
+
 class EventListener extends Main implements Listener {
 
   public $plugin;
