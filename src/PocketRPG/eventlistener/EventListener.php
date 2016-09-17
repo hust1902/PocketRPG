@@ -71,11 +71,13 @@ class EventListener extends Main implements Listener {
 
   public function onJoin (PlayerJoinEvent $event) {
     $p = $event->getPlayer ();
+    if ($p instanceof Player) {
     @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
     @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
     "Pending" => array (),
     "Allies" => array ()
     ]));
+    }
   }
 
   public function onFight(EntityDamageEvent $event) {
