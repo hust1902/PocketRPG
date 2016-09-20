@@ -176,7 +176,7 @@ class EventListener extends Main implements Listener {
          }
         
          if ($damager->getLevel ()->getFolderName () == $this->getOwner ()->config->get ("RPGworld") {
-           $event->setDamage ($event->getDamage () + ($p->getExpLevel() * 0.15));
+           $event->setDamage ($event->getDamage () + ($p->getExpLevel() * 0.15)));
          }
      }
   }
