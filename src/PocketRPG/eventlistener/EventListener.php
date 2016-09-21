@@ -334,6 +334,12 @@ class EventListener extends Main implements Listener {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
   }
+  public function onDeath(PlayerDeathEvent $event) {
+    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->config->get("DisableItemLosing") == true) {
+      $event->setKeepInventory(); 
+      $event->setKeepExperience();
+      }
+  }
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
