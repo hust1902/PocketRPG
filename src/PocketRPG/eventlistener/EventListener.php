@@ -84,17 +84,17 @@ class EventListener extends Main implements Listener {
     if($event instanceof EntityDamageByEntityEvent) {
         $hit = $event->getEntity();
         $damager = $event->getDamager();
-        $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit . ".yml");
-        $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager . ".yml");
+        if($hit instanceof Player && $damager instanceof Player) {
+          $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit->getName() . ".yml");
+          $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager->getName() . ".yml");
+          if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
+            $event->setCancelled();
+          } 
+        }
         
         if(!$damager instanceof Player){
             return false;
-        } 
-        
-        if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
-            $event->setCancelled();
-            
-         } else {
+        } else {
             if ($damager->getFood() == 0) {
             $event->setCancelled ();
             
