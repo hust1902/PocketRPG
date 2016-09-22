@@ -79,7 +79,7 @@ class EventListener extends Main implements Listener {
       "Allies" => array ()
       ]));
     }
-    if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld") {
+    if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
       $p->setHealth($p->getXpLevel() * 0.20 + 20);
     }
