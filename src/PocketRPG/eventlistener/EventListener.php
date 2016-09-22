@@ -47,6 +47,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerExperienceChangeEvent;
+use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 use pocketmine\inventory\PlayerInventory;
@@ -72,11 +73,15 @@ class EventListener extends Main implements Listener {
   public function onJoin (PlayerJoinEvent $event) {
     $p = $event->getPlayer ();
     if ($p instanceof Player) {
-    @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
-    @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
-    "Pending" => array (),
-    "Allies" => array ()
-    ]));
+      @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
+      @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
+      "Pending" => array (),
+      "Allies" => array ()
+      ]));
+    }
+    if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld") {
+      $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
+      $p->setHealth($p->getXpLevel() * 0.20 + 20);
     }
   }
 
@@ -176,7 +181,7 @@ class EventListener extends Main implements Listener {
          }
         
          if ($damager->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-           $event->setDamage ($event->getDamage () + ($damager->getExpLevel() * 0.15));
+           $event->setDamage ($event->getDamage () + ($damager->getXpLevel() * 0.20));
          }
      }
   }
@@ -338,7 +343,7 @@ class EventListener extends Main implements Listener {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setKeepInventory(true); 
       $event->setKeepExperience(true);
-      }
+    }
   }
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
@@ -390,6 +395,20 @@ class EventListener extends Main implements Listener {
        if(!$p->hasPermission("rpg.place")) {
         $event->setCancelled();
        }
+      }
+    }
+  }
+  
+  public function onLevelChange(EntityLevelChangeEvent $event) {
+    $p = $event->getEntity();
+    if($p instanceof Player) {
+      $original = $event->getOrigin();
+      $target = $event->getTarget();
+      if($original->getName() == $this->getOwner()->config->get("RPGworld")) {
+        $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
+        $p->setHealth($p->getXpLevel() * 0.20 + 20);
+      } elseif($original->getName() == $this->getOwner()->config->get("RPGworld")) {
+        $p->setMaxHealth(20);
       }
     }
   }
