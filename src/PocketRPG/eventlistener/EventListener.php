@@ -65,8 +65,8 @@ class EventListener extends Main implements Listener {
   }
   public function onQuit (PlayerQuitEvent $event) {
     $p = $event->getPlayer ();
-    $party = new Config ($this->getDataFolder () . "/plugins/PocketRPG/party/" . $p->getName () . ".yml");
-    unlink ($this->getDataFolder() . "/plugins/PocketRPG/party/" . $p->getName() . ".yml");
+    $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
+    unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
   }
 
   public function onJoin (PlayerJoinEvent $event) {
