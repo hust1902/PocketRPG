@@ -10,7 +10,7 @@
 *
 */     
 
-namespace FWAcoreclasses;
+namespace PocketRPG\tasks;
 
 use pocketmine\scheduler\PluginTask;
 use PocketRPG\eventlistener\EventListener;
