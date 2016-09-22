@@ -325,12 +325,12 @@ class EventListener extends Main implements Listener {
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
+    if($event->getFurnace()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
   public function onBurn(FurnaceBurnEvent $event) {
-    if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
+    if($event->getFurnace()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
