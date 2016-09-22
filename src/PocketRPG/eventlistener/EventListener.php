@@ -107,7 +107,7 @@ class EventListener extends Main implements Listener {
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
-                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)), 5);
+                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                       $event->setDamage(4);
                       $damager->setFood ($damager->getFood () - 1);
                       $damager->sendPopup (TF::AQUA . "-1 Mana");
@@ -123,7 +123,7 @@ class EventListener extends Main implements Listener {
                       $z = $hit->z;
                       $event->setKnockBack(0.6);
                       $hit->setOnFire(5);
-                      $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)), 5);
+                      $level->addParticle(new LavaParticle(new Vector3($x, $y, $z)));
                       $event->setDamage(3);
                       $damager->setFood ($damager->getFood () - 1);
                       $damager->sendPopup (TF::AQUA . "-1 Mana");
@@ -152,7 +152,7 @@ class EventListener extends Main implements Listener {
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
-                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)), 5);
+                      $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z)));
                       $event->setKnockBack(0.8);
                       $event->setDamage(4);
                       $damager->setFood ($damager->getFood () - 1);
