@@ -362,7 +362,7 @@ class EventListener extends Main implements Listener {
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
-    if($p->getExp() == 170 && $p instanceof Player) {
+    if($p instanceof Player && $p->getXp() == 170) {
       if($p->hasPermission("class.mage")) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
@@ -384,10 +384,10 @@ class EventListener extends Main implements Listener {
         $p->getInventory()->addItem($redstone);
         $p->sendMessage($this->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
-        
-      } else {
-        return false;
       }
+
+    } elseif($p->instanceof Player && $p->getXp() == 370) {
+      //start for special weapons
     } 
   }
   
