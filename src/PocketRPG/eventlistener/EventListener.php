@@ -177,6 +177,21 @@ class EventListener extends Main implements Listener {
                     }
                   }
                 } //Hammer (WIP)
+
+                elseif($damager->getItemInHand()->getId() == Item::IRON_HOE && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                  if($damager->hasPermission("class.warrior")) {
+                    if ($damager->getFood () >= 8) {
+                      $level->addParticle(new LavaParticle(new Vector3($damager->x, $damager->y, $damager->z), 4));
+                      $event->setKnockBack(0);
+                      $event->setDamage(7);
+                      $damager->sendPopup (TF::AQUA . "-8 Mana");
+                      $damager->setFood ($damager->getFood () - 8);
+                      $hitlocation = new Vector3 ($hit->x, $hit->y, $hit->z);
+                      $damager->teleport ($hitlocation);
+    
+                    }
+                  }
+                } //Hook
             }
          }
         
