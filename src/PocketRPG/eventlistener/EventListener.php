@@ -366,23 +366,23 @@ class EventListener extends Main implements Listener {
       if($p->hasPermission("class.mage")) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
-        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
         
       } elseif($p->hasPermission("class.assassin")) {
         $clock = Item::get(Item::CLOCK, 0, 1); 
         $p->getInventory()->addItem($clock); 
-        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
         
       } elseif($p->hasPermission("class.tanker")) {
-        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         
       } elseif($p->hasPermission("class.warrior")) {
         $redstone = Item::get(Item::REDSTONE, 0, 1);
         $p->getInventory()->addItem($redstone);
-        $p->sendMessage($this->config->get("LevelUpMessage"));
+        $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
       }
 
