@@ -386,7 +386,7 @@ class EventListener extends Main implements Listener {
         $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
       }
 
-    } elseif($p->instanceof Player && $p->getXp() == 370) {
+    } elseif($p instanceof Player && $p->getXp() == 370) {
       //start for special weapons
     } 
   }
