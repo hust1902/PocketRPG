@@ -362,24 +362,24 @@ class EventListener extends Main implements Listener {
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
-    if($p instanceof Player && $p->getXp() == 170) {
-      if($p->hasPermission("class.mage")) {
+    if($p instanceof Player) {
+      if($p->hasPermission("class.mage") && $p->getXp() == 170) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
         
-      } elseif($p->hasPermission("class.assassin")) {
+      } elseif($p->hasPermission("class.assassin") && $p->getXp() == 170) {
         $clock = Item::get(Item::CLOCK, 0, 1); 
         $p->getInventory()->addItem($clock); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
         
-      } elseif($p->hasPermission("class.tanker")) {
+      } elseif($p->hasPermission("class.tanker") && $p->getXp() == 170) {
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         
-      } elseif($p->hasPermission("class.warrior")) {
+      } elseif($p->hasPermission("class.warrior") && $p->getXp() == 170) {
         $redstone = Item::get(Item::REDSTONE, 0, 1);
         $p->getInventory()->addItem($redstone);
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
