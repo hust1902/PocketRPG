@@ -53,6 +53,11 @@ class Main extends PluginBase implements Listener {
       $this->playerclass->set($player->getName(),$class);
       $this->playerclass->set($player->getName().".class",true);
   }
+  
+  public function getClass(Player $player) {
+    $class = $this->playerclass->get($player->getName());
+    return $class;
+  }
 
   public function onDisable() {
     $this->getLogger()->info(TF:: RED . "Disabling PocketRPG");
