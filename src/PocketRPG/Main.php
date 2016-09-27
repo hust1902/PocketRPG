@@ -55,19 +55,25 @@ class Main extends PluginBase implements Listener {
 
       ////////// API \\\\\\\\\\
 
-  public function setClass(Player $player, $class) {
-      $this->playerclass->set($player->getName(), $class);
-      $this->playerclass->set($player->getName() . ".class", true);
+  public function setClass(Player $p, $class) {
+      $this->playerclass->set($p->getName(), $class);
+      $this->playerclass->set($p->getName() . ".class", true);
   }
   
-  public function getClass(Player $player) {
-    $class = $this->playerclass->get($player->getName());
+  public function getClass(Player $p) {
+    $class = $this->playerclass->get($p->getName());
     return $class;
   }
 
   public function hasQuestFinished(Player $p, $quest) {
     $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml);
     if($this->quest->get("Finished", $p->getName() != NULL)) {
+      return true;
+    }
+
+  public function hasQuestStarted(Player $p, $quest) {
+    $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml);
+    if($this->quest->get("Started", $p->getName() != NULL)) {
       return true;
     }
   }
