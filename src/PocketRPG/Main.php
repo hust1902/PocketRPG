@@ -64,6 +64,10 @@ class Main extends PluginBase implements Listener {
     $class = $this->playerclass->get($p->getName());
     return $class;
   }
+  
+  public function unsetClass(Player $p){
+    $this->playerclass->set($p->getName(). ".class"), false);
+  }
 
   public function hasQuestFinished(Player $p, $quest) {
     $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml");
