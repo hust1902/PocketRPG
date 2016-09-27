@@ -70,6 +70,7 @@ class Main extends PluginBase implements Listener {
     if($this->quest->get("Finished", $p->getName() != NULL)) {
       return true;
     }
+  }
 
   public function hasQuestStarted(Player $p, $quest) {
     $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml");
