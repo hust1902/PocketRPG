@@ -121,7 +121,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
           case "reset":
             $p->getInventory()->clearAll();
             $player = $p;
-            $this->unsetClass($p);
+            $this->getOwner()->unsetClass($p);
             $default = "world"; // Edit todo okay? :3
             $player->removeAllEffects();
             $player->getInventory()->clearAll();
