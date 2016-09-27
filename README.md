@@ -7,7 +7,7 @@ Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/Pocke
 
 **Features:**
 
-PocketRPG is made for servers to create a better adventure experience, using quests and special classes which there are 4 of. (Mage, Warrior, Assassin, Tanker) Each using different items to fight and abilities in battle. Assassin class is only available to those who have the permission class.special, so you could give that out on voterewards! This only works when RPGworld in config is defined.
+PocketRPG is made for servers to create a better adventure experience, using quests and special classes which there are 4 of. (Mage, Warrior, Assassin, Tanker) Each using different items to fight and abilities to use. This only works when RPGworld in config is defined.
 use the command /rpg start <class> to begin. Using weapons and items from classes requires mana, which regenerates over time. (Hunger bar) Make sure hunger is on in your server for this to work.
 
 
