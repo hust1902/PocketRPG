@@ -103,8 +103,6 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->getInventory ()->addItem ($book);
               $this->getOwner()->updateClass($sender, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
-            } else {
-              $p->sendMessage(TF:: RED . "You do not have permission to access this class! You have to vote to use this class!");
             }
             return true;
             break;
