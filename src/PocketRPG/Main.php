@@ -67,6 +67,7 @@ class Main extends PluginBase implements Listener {
   
   public function unsetClass(Player $p){
     $this->playerclass->set($p->getName(). ".class"), false);
+    unset($this->playerclass->get($p->getName()));
   }
 
   public function hasQuestFinished(Player $p, $quest) {
