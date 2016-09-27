@@ -49,7 +49,7 @@ class Main extends PluginBase implements Listener {
     $this->playerclass = new Config($this->getDataFolder(). "class.yml", Config::YAML);
   }
   
-  public function updateClass(Player $player, $class){
+  public function setClass(Player $player, $class){
       $this->playerclass->set($player->getName(),$class);
       $this->playerclass->set($player->getName().".class",true);
   }
