@@ -118,15 +118,13 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF::RED . "You haven't chosen a class yet!");
             }
             break;
+
           case "reset":
-            $p->getInventory()->clearAll();
-            $player = $p;
             $this->getOwner()->unsetClass($p);
-            $default = "world"; // Edit todo okay? :3
-            $player->removeAllEffects();
-            $player->getInventory()->clearAll();
-            $world = $player->getOwner()->getServer()->getLevelByName($default);
-            $player->teleport($world->getSpawnLocation(), 0, 0);
+            $p->removeAllEffects();
+            $p->getInventory()->clearAll();
+            $default = $player->getOwner()->getServer()->getDefaultLevel();
+            $player->teleport($default->getSpawnLocation());
             break;
         }
     }
