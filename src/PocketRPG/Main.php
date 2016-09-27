@@ -49,9 +49,15 @@ class Main extends PluginBase implements Listener {
     $this->playerclass = new Config($this->getDataFolder(). "class.yml", Config::YAML);
   }
   
-  public function setClass(Player $player, $class){
-      $this->playerclass->set($player->getName(),$class);
-      $this->playerclass->set($player->getName().".class",true);
+  public function onDisable() {
+    $this->getLogger()->info(TF:: RED . "Disabling PocketRPG");
+  }
+
+      ////////// API \\\\\\\\\\
+
+  public function setClass(Player $player, $class) {
+      $this->playerclass->set($player->getName(), $class);
+      $this->playerclass->set($player->getName() . ".class", true);
   }
   
   public function getClass(Player $player) {
@@ -59,7 +65,10 @@ class Main extends PluginBase implements Listener {
     return $class;
   }
 
-  public function onDisable() {
-    $this->getLogger()->info(TF:: RED . "Disabling PocketRPG");
+  public function hasQuestFinished(Player $p, $quest) {
+    $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml);
+    if($this->quest->get("Finished", $p->getName() != NULL)) {
+      return true;
+    }
   }
 }
