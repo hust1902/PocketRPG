@@ -56,7 +56,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($wand);
               $book = Item::get (Item::BOOK, 0, 1);
               $p->getInventory ()->addItem ($book);
-              $this->getOwner()->updateClass($p, $args[1]);
+              $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -71,7 +71,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($sword);
               $book = Item::get (Item::BOOK, 0, 1);
               $p->getInventory ()->addItem ($book);
-              $this->getOwner()->updateClass($p, $args[1]);
+              $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -86,7 +86,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($shield);
               $book = Item::get (Item::BOOK, 0, 1);
               $p->getInventory ()->addItem ($book);
-              $this->getOwner()->updateClass($p, $args[1]);
+              $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -101,7 +101,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->getInventory()->addItem($knife);
               $book = Item::get (Item::BOOK, 0, 1);
               $p->getInventory ()->addItem ($book);
-              $this->getOwner()->updateClass($p, $args[1]);
+              $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
