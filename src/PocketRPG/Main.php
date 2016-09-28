@@ -34,8 +34,11 @@ use pocketmine\level\Level;
 use pocketmine\level\Position;
 
 class Main extends PluginBase implements Listener {
-  
-  public function onEnable() {
+
+    /**
+     * return $this->config
+     */
+    public function onEnable() {
     $this->getLogger()->info(TF:: GREEN . "Enabling PocketRPG");
     $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
     $this->getCommand("rpg")->setExecutor(new RpgCommands($this));

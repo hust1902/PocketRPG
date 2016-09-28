@@ -48,6 +48,10 @@ use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\event\entity\EntityLevelChangeEvent;
+
+use pocketmine\event\player\PlayerToggleSprintEvent;
+use pocketmine\event\player\PlayerMoveEvent;
+
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
 use pocketmine\inventory\PlayerInventory;
@@ -64,6 +68,23 @@ class EventListener extends Main implements Listener {
   public function getOwner() {
      return $this->plugin;
   }
+
+    // Beta System //
+    public function onMove(PlayerMoveEvent $event){
+        if($event instanceof PlayerToggleSprintEvent){
+
+            $p = $event->getPlayer();
+            if($event->isSprinting()){
+                if($this->getOwner()->playerclass->get($p->getName()) === "mage"){
+                    $p->setFood($p->getFood () - 0.5);
+                } else {
+                    $p->setFood($p->getFood () - 1.4);
+                }
+            }
+
+        }
+    }
+
   public function onQuit (PlayerQuitEvent $event) {
     $p = $event->getPlayer ();
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
@@ -362,7 +383,7 @@ class EventListener extends Main implements Listener {
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
-    //if($p instanceof Player) {
+    if($p instanceof Player) {
       if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getFilledXp() >= 170) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
@@ -389,7 +410,7 @@ class EventListener extends Main implements Listener {
     } //elseif($p instanceof Player && $event->getExp() >= 370) {
       //start for special weapons
     //} 
-  //}
+  }
   
   public function onBreak(BlockBreakEvent $event) {
     $p = $event->getPlayer();
