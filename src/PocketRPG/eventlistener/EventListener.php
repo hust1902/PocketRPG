@@ -364,7 +364,7 @@ class EventListener extends Main implements Listener {
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
-    //if($p instanceof Player) {
+    if($p instanceof Player) {
       if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getFilledXp() >= 170) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
