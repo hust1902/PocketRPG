@@ -11,10 +11,8 @@
 */     
 
 namespace PocketRPG\eventlistener;
-
 use PocketRPG\Main;
 use PocketRPG\tasks\ExplodeTask;
-
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\event\Listener;
@@ -56,7 +54,6 @@ use pocketmine\entity\human;
 class EventListener extends Main implements Listener {
 
   public $plugin;
-
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
   }
@@ -64,6 +61,7 @@ class EventListener extends Main implements Listener {
   public function getOwner() {
      return $this->plugin;
   }
+
   public function onQuit (PlayerQuitEvent $event) {
     $p = $event->getPlayer ();
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
@@ -79,6 +77,7 @@ class EventListener extends Main implements Listener {
       "Allies" => array ()
       ]));
     }
+
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
       $p->setHealth($p->getXpLevel() * 0.20 + 20);
@@ -107,7 +106,7 @@ class EventListener extends Main implements Listener {
                 $level = $damager->getLevel();
             
                 if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
-                  if($damager->hasPermission("class.assassin")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "assassin"){
                     if ($damager->getFood() >= 1){
                       $x = $hit->x;
                       $y = $hit->y;
@@ -121,7 +120,7 @@ class EventListener extends Main implements Listener {
                 } //Dagger
             
                 elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                  if($damager->hasPermission("class.mage")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "mage"){
                     if($damager->getFood () >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
@@ -137,7 +136,7 @@ class EventListener extends Main implements Listener {
                 } //Wand
             
                 elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                  if($damager->hasPermission("class.tanker")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "tanker"){
                     if ($damager->getFood () >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
@@ -152,7 +151,7 @@ class EventListener extends Main implements Listener {
                 } //Shield
             
                 elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                  if($damager->hasPermission("class.warrior")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "warrior"){
                     if ($damager->getFood () >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
@@ -167,7 +166,7 @@ class EventListener extends Main implements Listener {
                 } //Sword
             
                 elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                  if($damager->hasPermission("class.warrior")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "warrior"){
                     if ($damager->getFood () >= 1) {
                       $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
                       $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
@@ -177,9 +176,8 @@ class EventListener extends Main implements Listener {
                     }
                   }
                 } //Hammer (WIP)
-
                 elseif($damager->getItemInHand()->getId() == Item::IRON_HOE && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                  if($damager->hasPermission("class.assassin")) {
+                  if($this->getOwner()->playerclass->get($damager->getName()) === "assassin"){
                     if ($damager->getFood () >= 8 && $damager->getXpLevel () >= 20) {
                       $level->addParticle(new LavaParticle(new Vector3($damager->x, $damager->y, $damager->z), 4));
                       $event->setKnockBack(0);
@@ -204,7 +202,7 @@ class EventListener extends Main implements Listener {
     $level = $p->getLevel();
     if($level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
-        if($p->hasPermission("class.assassin")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "assassin"){
           if ($p->getFood () >= 1) {
             $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
             $p->addEffect($effect); //gives assassin speed with feather
@@ -215,7 +213,7 @@ class EventListener extends Main implements Listener {
       } //Dagger speed
     
       elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.tanker")&& $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if($p->getFood () >= 5) {
             $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
             $p->addEffect($effect);  //gives tanker resistance if experience level is higher than 8 with brick
@@ -226,7 +224,7 @@ class EventListener extends Main implements Listener {
       } //Shield resistance
     
       elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.assassin") && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 4) {
             $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
@@ -241,7 +239,7 @@ class EventListener extends Main implements Listener {
       } //Assassin Cloak
     
       elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.mage") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 7) {
             $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
@@ -256,7 +254,7 @@ class EventListener extends Main implements Listener {
       } //Mage bone
     
       elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
-        if($p->hasPermission("class.warrior") && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 6) {
             $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
@@ -304,7 +302,7 @@ class EventListener extends Main implements Listener {
     
       elseif($p->getItemInHand()->getId() == Item::BOOK) {
         $p->sendPopup(TF:: AQUA . "Abilities Book");
-        if($p->hasPermission("class.assassin")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "assassin") {
           $p->sendMessage(TF:: GREEN . "---Assassin Abilities---");
           $p->sendMessage(TF:: AQUA . "Stab - Lvl. 0 - Dagger");
           $p->sendMessage(TF:: AQUA . "Invisibility - Lvl. 10 - Cloak of Invisibility");
@@ -332,6 +330,7 @@ class EventListener extends Main implements Listener {
       }
     }
   }
+
   public function onCraft(CraftItemEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //denies any crafting, since that could get rid of important items
@@ -343,16 +342,19 @@ class EventListener extends Main implements Listener {
       $event->setCancelled(); //same counts for smelting items in a furnace
     }
   }
+
   public function onBurn(FurnaceBurnEvent $event) {
     if($event->getFurnace()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setCancelled(); //same counts for burning items in a furnace
       }
   }
+
   public function onDrop(PlayerDropItemEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setCancelled();  //same counts for dropping items out of your inventory
     }
   }
+
   public function onDeath(PlayerDeathEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setKeepInventory(true); 
@@ -362,34 +364,33 @@ class EventListener extends Main implements Listener {
   
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
-    if($p instanceof Player) {
-      if($p->hasPermission("class.mage") && $p->getXp() == 170) {
+    //if($p instanceof Player) {
+      if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getFilledXp() >= 170) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
         
-      } elseif($p->hasPermission("class.assassin") && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $p->getFilledXp() >= 170) {
         $clock = Item::get(Item::CLOCK, 0, 1); 
         $p->getInventory()->addItem($clock); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
         
-      } elseif($p->hasPermission("class.tanker") && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "tanker" && $p->getFilledXp() >= 170) {
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         
-      } elseif($p->hasPermission("class.warrior") && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $p->getFilledXp() >= 170) {
         $redstone = Item::get(Item::REDSTONE, 0, 1);
         $p->getInventory()->addItem($redstone);
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
       }
-
-    } elseif($p instanceof Player && $p->getXp() == 370) {
+    } //elseif($p instanceof Player && $event->getExp() >= 370) {
       //start for special weapons
-    } 
-  }
+    //} 
+  //}
   
   public function onBreak(BlockBreakEvent $event) {
     $p = $event->getPlayer();
