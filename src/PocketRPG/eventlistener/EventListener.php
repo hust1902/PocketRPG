@@ -390,7 +390,7 @@ class EventListener extends Main implements Listener {
     } //elseif($p instanceof Player && $event->getExp() >= 370) {
       //start for special weapons
     //} 
-  //}
+  }
   
   public function onBreak(BlockBreakEvent $event) {
     $p = $event->getPlayer();
