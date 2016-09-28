@@ -58,7 +58,7 @@ class Main extends PluginBase implements Listener {
   public function setClass(Player $p, $class) {
       $this->playerclass->set($p->getName(), $class);
       $this->playerclass->set($p->getName() . ".class", true);
-      $this->playerclass->save();
+	  $this->playerclass->save();
   }
   
   public function getClass(Player $p) {
@@ -69,7 +69,7 @@ class Main extends PluginBase implements Listener {
   public function unsetClass(Player $p){
     $this->playerclass->set($p->getName(). ".class", false);
     //unset($this->playerclass->get($p->getName()));
-     $this->playerclass->save();
+    $this->playerclass->save();
   }
 
   public function hasQuestFinished(Player $p, $quest) {
