@@ -17,6 +17,7 @@ use PocketRPG\commands\RpgCommands;
 use PocketRPG\commands\PartyCommands;
 use PocketRPG\eventlistener\EventListener;
 use PocketRPG\tasks\ManaTask;
+use PocketRPG\events\QuestFinishEvent;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
