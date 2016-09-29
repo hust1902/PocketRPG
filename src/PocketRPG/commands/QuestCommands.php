@@ -194,7 +194,8 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->getInventory ()->addItem ($items);
                 $p->setExpLevel ($p->getExpLevel () + 1);
                 $p->getInventory ()->remove ($item);
-                $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p));
+                $questid = $p;
+                $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
               }
               }
             }
