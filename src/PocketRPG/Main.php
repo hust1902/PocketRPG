@@ -68,8 +68,8 @@ class Main extends PluginBase implements Listener {
   
   public function unsetClass(Player $p){
     $this->playerclass->set($p->getName(). ".class", false);
-    //unset($this->playerclass->get($p->getName()));
-     $this->playerclass->save();
+    unset($this->playerclass->get($p->getName()));
+    $this->playerclass->save();
   }
 
   public function hasQuestFinished(Player $p, $quest) {
@@ -92,6 +92,7 @@ class Main extends PluginBase implements Listener {
       $this->quests = new Config($quest);
       unset($this->quest->get("Finished", $p->getName()));
       unset($this->quest->get("Started", $p->getName()));
+      $this->quest->save();
     }
   }
 }
