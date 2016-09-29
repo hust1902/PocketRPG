@@ -127,6 +127,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             $default = $this->getOwner()->getServer()->getDefaultLevel();
             $p->teleport($default->getSpawnLocation());
             $p->setXpLevel(0);
+            $p->sendMessage(TF:: YELLOW . "Your class has been reset.");
             break;
         }
     }
