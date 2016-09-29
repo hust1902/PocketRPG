@@ -181,7 +181,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
               foreach ( $p->getInventory()->getContents()  as  $item) {
-              if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
+                if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
 
                 $player = $quest->get("Finished", []);
                 $player[] = $p->getName ();
@@ -194,9 +194,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->getInventory ()->addItem ($items);
                 $p->setExpLevel ($p->getExpLevel () + 1);
                 $p->getInventory ()->remove ($item);
-                $questid = $p;
+                $questid = $args[1];
                 $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
-              }
+                }
               }
             }
           }
