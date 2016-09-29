@@ -69,7 +69,7 @@ class Main extends PluginBase implements Listener {
   
   public function unsetClass(Player $p){
     $this->playerclass->set($p->getName(). ".class", false);
-    unset($this->playerclass->get($p->getName()));
+    $this->playerclass->remove($p->getName());
     $this->playerclass->save();
   }
 
