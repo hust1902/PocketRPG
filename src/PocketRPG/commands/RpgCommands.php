@@ -117,6 +117,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF::RED . "You haven't chosen a class yet!");
             }
+            return true;
             break;
 
           case "reset":
@@ -128,6 +129,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             $p->teleport($default->getSpawnLocation());
             $p->setXpLevel(0);
             $p->sendMessage(TF:: YELLOW . "Your class has been reset.");
+            return true;
             break;
         }
     }
