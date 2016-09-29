@@ -120,6 +120,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;
 
           case "reset":
+            $this->getOwner()->clearAllQuests($p);
             $this->getOwner()->unsetClass($p);
             $p->removeAllEffects();
             $p->getInventory()->clearAll();
