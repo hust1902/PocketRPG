@@ -98,11 +98,24 @@ class Main extends PluginBase implements Listener {
     }
   }
 
-  //public function startQuest(Player $p, $questid) {
+  public function startQuest(Player $p, $questid) {
+    $quest = new Config($this->getDataFolder () . "quests/" . $questid . ".yml");
+    $player = $quest->get("Started", []);
+    $player[] = $p->getName();
+    $quest->set("Started", $player);
+    $quest->save();
+    $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestStartEvent($this, $p, $questid));
+  }
 
-  //}
-
-  //public function finishQuest(Player $p, $questid) {
-  
-  //}
+  public function finishQuest(Player $p, $questid) {
+    $quest = new Config($this->getDataFolder () . "quests/" . $questid . ".yml");
+    $player = $quest->get("Finished", []);
+    $player[] = $p->getName ();
+    $quest->set("Finished", $player);
+    $quest->save();
+    $item = Item::get($quest->get("RewardID"), 0, $quest->get("RewardAmount"));
+    $p->getInventory ()->addItem($item);
+    $p->getInventory ()->remove ($item);
+    $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
+  }
 }
