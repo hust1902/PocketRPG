@@ -97,4 +97,12 @@ class Main extends PluginBase implements Listener {
       $this->quest->save();
     }
   }
+
+  //public function startQuest(Player $p, $questid) {
+
+  //}
+
+  //public function finishQuest(Player $p, $questid) {
+  
+  //}
 }
