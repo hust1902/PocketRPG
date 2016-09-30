@@ -70,16 +70,14 @@ class EventListener extends Main implements Listener {
   }
 
     // Beta System //
-    public function onMove(PlayerToggleSprintEvent $event){
+    public function onMove(PlayerMoveEvent $event){
 
             $p = $event->getPlayer();
-            if($event->isSprinting()){
                 if($this->getOwner()->playerclass->get($p->getName()) === "mage"){
-                    $p->setFood($p->getFood () - 0.5);
+                    $p->setFood($p->getFood () - 0.1);
                 } else {
-                    $p->setFood($p->getFood () - 1.4);
+                    $p->setFood($p->getFood () - 0.5);
                 }
-            }
 
     }
 
