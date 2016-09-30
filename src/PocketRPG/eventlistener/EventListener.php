@@ -70,8 +70,7 @@ class EventListener extends Main implements Listener {
   }
 
     // Beta System //
-    public function onMove(PlayerMoveEvent $event){
-        if($event instanceof PlayerToggleSprintEvent){
+    public function onMove(PlayerToggleSprintEvent $event){
 
             $p = $event->getPlayer();
             if($event->isSprinting()){
@@ -82,7 +81,6 @@ class EventListener extends Main implements Listener {
                 }
             }
 
-        }
     }
 
   public function onQuit (PlayerQuitEvent $event) {
