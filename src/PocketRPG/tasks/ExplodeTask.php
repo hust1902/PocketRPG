@@ -29,10 +29,10 @@ class ExplodeTask extends PluginTask implements Listener{
   private $plugin;
   private $p;
 
-  public function __construct(EventListener $plugin, Player $p) {
+  public function __construct(EventListener $plugin, Entity $p) {
     parent::__construct($plugin);
     $this->plugin = $plugin;
-    $this->player = $p;
+    $this->entity = $p;
   }
   
   public function getPlugin() {
@@ -40,7 +40,7 @@ class ExplodeTask extends PluginTask implements Listener{
   }
   
   public function onRun($tick) {
-    $this->player->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($this->player->x, $this->player->y, $this->player->z)));
+    $this->player->getLevel()->addParticle(new HugeExplodeParticle(new Vector3($this->entity->x, $this->entity->y, $this->entity->z)));
     $this->player->attack(6, EntityDamageEvent::CAUSE_ENTITY_ATTACK);
   }
 }
