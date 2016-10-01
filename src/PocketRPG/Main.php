@@ -113,9 +113,6 @@ class Main extends PluginBase implements Listener {
     $player[] = $p->getName ();
     $quest->set("Finished", $player);
     $quest->save();
-    $item = Item::get($quest->get("RewardID"), 0, $quest->get("RewardAmount"));
-    $p->getInventory ()->addItem($item);
-    $p->getInventory ()->remove ($item);
     $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
   }
 }
