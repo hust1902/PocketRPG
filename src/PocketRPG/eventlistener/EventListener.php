@@ -79,8 +79,8 @@ class EventListener extends Main implements Listener {
     }
 
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
-      $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
-      $p->setHealth($p->getXpLevel() * 0.20 + 20);
+      $p->setMaxHealth($p->getExpLevel() * 0.20 + 20);
+      $p->setHealth($p->getExpLevel() * 0.20 + 20);
     }
   }
 
@@ -178,7 +178,7 @@ class EventListener extends Main implements Listener {
                 } //Hammer (WIP)
                 elseif($damager->getItemInHand()->getId() == Item::IRON_HOE && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "assassin"){
-                    if ($damager->getFood () >= 8 && $damager->getXpLevel () >= 20) {
+                    if ($damager->getFood () >= 8 && $damager->getExpLevel () >= 20) {
                       $level->addParticle(new LavaParticle(new Vector3($damager->x, $damager->y, $damager->z), 4));
                       $event->setKnockBack(0);
                       $event->setDamage(7);
@@ -193,7 +193,7 @@ class EventListener extends Main implements Listener {
          }
         
          if ($damager->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-           $event->setDamage ($event->getDamage () + ($damager->getXpLevel() * 0.20));
+           $event->setDamage ($event->getDamage () + ($damager->getExpLevel() * 0.20));
          }
      }
   }
@@ -205,7 +205,7 @@ class EventListener extends Main implements Listener {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin"){
           if ($p->getFood () >= 1) {
             $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
-            $p->addEffect($effect); //gives assassin speed with feather
+            $p->addEffect($effect); 
             $p->setFood ($p->getFood () - 1);
             $p->sendPopup (TF::AQUA . "-1 Mana");
           }
@@ -216,7 +216,7 @@ class EventListener extends Main implements Listener {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if($p->getFood () >= 5) {
             $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
-            $p->addEffect($effect);  //gives tanker resistance if experience level is higher than 8 with brick
+            $p->addEffect($effect);
             $p->setFood ($p->getFood () - 5);
             $p->sendPopup (TF::AQUA . "-5 Mana");
           }
@@ -231,7 +231,7 @@ class EventListener extends Main implements Listener {
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
-            $level->addParticle(new LavaParticle(new Vector3($x, $y, $z), 5)); //Cloak of invisibility
+            $level->addParticle(new LavaParticle(new Vector3($x, $y, $z), 5)); 
             $p->setFood ($p->getFood () - 4);
             $p->sendPopup (TF::AQUA . "-4 Mana");
           }
@@ -246,7 +246,7 @@ class EventListener extends Main implements Listener {
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
-            $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z), 5)); //Bone of life
+            $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z), 5)); 
             $p->setFood ($p->getFood () - 7);
             $p->sendPopup (TF::AQUA . "-7 Mana");
           }
@@ -261,7 +261,7 @@ class EventListener extends Main implements Listener {
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
-            $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z), 3)); //Rage powder
+            $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z), 3)); 
             $p->setFood ($p->getFood () - 6);
             $p->sendPopup (TF::AQUA . "-6 Mana");
           }
@@ -365,23 +365,23 @@ class EventListener extends Main implements Listener {
   public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
     if($p instanceof Player) {
-      if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getXp() == 170) {
+      if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getExp() == 170) {
         $bone = Item::get(Item::BONE, 0, 1); 
         $p->getInventory()->addItem($bone); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
         
-      } elseif($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $p->getExp() == 170) {
         $clock = Item::get(Item::CLOCK, 0, 1); 
         $p->getInventory()->addItem($clock); 
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
         
-      } elseif($this->getOwner()->playerclass->get($p->getName()) === "tanker" && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "tanker" && $p->getExp() == 170) {
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
         $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         
-      } elseif($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $p->getXp() == 170) {
+      } elseif($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $p->getExp() == 170) {
         $redstone = Item::get(Item::REDSTONE, 0, 1);
         $p->getInventory()->addItem($redstone);
         $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
@@ -420,8 +420,8 @@ class EventListener extends Main implements Listener {
       $original = $event->getOrigin();
       $target = $event->getTarget();
       if($original->getName() == $this->getOwner()->config->get("RPGworld")) {
-        $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
-        $p->setHealth($p->getXpLevel() * 0.20 + 20);
+        $p->setMaxHealth($p->getExpLevel() * 0.20 + 20);
+        $p->setHealth($p->getExpLevel() * 0.20 + 20);
       } elseif($original->getName() == $this->getOwner()->config->get("RPGworld")) {
         $p->setMaxHealth(20);
       }
