@@ -3,6 +3,10 @@ An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
 Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/PocketRPG/releases !
 
+Report bugs, questions and problems in the gitter chat or the issue tab of github.
+
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/NL-4-DEVS-PocketRPG/Lobby?source=orgpage)
+
 **This plugin depends on PurePerms to work properly!**
 
 **Features:**
