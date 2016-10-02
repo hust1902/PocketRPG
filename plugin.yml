@@ -40,7 +40,4 @@ permissions:
   class.assassin:
     default: false
     description: Assassin class
-  class.special: 
-    default: false 
-    description: Allows access to assassin class 
 ...
