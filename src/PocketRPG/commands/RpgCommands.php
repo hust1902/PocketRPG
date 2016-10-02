@@ -131,6 +131,16 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             $p->sendMessage(TF:: YELLOW . "Your class has been reset.");
             return true;
             break;
+            
+          case "help":
+            $p->sendMessage(TF::GREEN . "--- RPG Help ---");
+            $p->sendMessage(TF::GREEN . "/rpg start <class> -" . TF::YELLOW . " Choose your class");
+            $p->sendMessage(TF::YELLOW . "Classes available: tanker, assassin, mage, warrior");
+            $p->sendMessage(TF::GREEN . "/rpg warp -" . TF::YELLOW . " Warp to RPG world");
+            $p->sendMessage(TF::GREEN . "/rpg reset -" . TF::YELLOW . " Reset your class");
+            $p->sendMessage(TF::RED . "(If you have a rare item in your inventory, make sure to put it in your chest before using this command!)");
+            return true;
+            break;
         }
     }
   }
