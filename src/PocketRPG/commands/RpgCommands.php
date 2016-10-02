@@ -106,6 +106,21 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             }
             return true;
             break;
+
+          case "archer":
+            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+              $p->sendMessage(TF:: RED . "You have already picked a class!");
+            } else {
+              $p->sendMessage(TF:: AQUA . "You have joined the world as an archer!");
+              $bow = Item::get(Item::BOW, 0, 1);
+              $p->getInventory()->addItem($bow);
+              $arrow = Item::get (Item::ARROW, 0, 5);
+              $p->getInventory ()->addItem ($arrow);
+              $this->getOwner()->setClass($p, $args[1]);
+              $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
+            }
+            return true;
+            break;
           }
           break;
 
