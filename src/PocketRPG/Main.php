@@ -17,6 +17,7 @@ use PocketRPG\commands\RpgCommands;
 use PocketRPG\commands\PartyCommands;
 use PocketRPG\eventlistener\EventListener;
 use PocketRPG\tasks\ManaTask;
+use PocketRPG\tasks\ArrowObtainTask;
 use PocketRPG\events\QuestFinishEvent;
 use PocketRPG\events\QuestStartEvent;
 
@@ -44,7 +45,8 @@ class Main extends PluginBase implements Listener {
     $this->getCommand("quest")->setExecutor(new QuestCommands($this));
     $this->getCommand("party")->setExecutor(new PartyCommands($this));
     $this->getServer ()->getScheduler()->scheduleRepeatingTask (new ManaTask($this), 40);
-    
+    $this->getServer ()->getScheduler()->scheduleRepeatingTask (new ArrowObtainTask($this), 80); 
+
     @mkdir($this->getDataFolder());
     $this->saveResource("config.yml");
     $this->config = new Config($this->getDataFolder(). "config.yml", Config::YAML);
