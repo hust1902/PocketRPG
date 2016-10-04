@@ -149,14 +149,25 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   }
                 return true;
                 break;
+
+                case "rewarddexpamount":
+                  if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest->set ("RewardExpAmount", $args [3]);
+                    $p->sendMessage (TF::GREEN . "You succesfully changed the reward Experience level of " . $args [1] . " to " . $args[3] . ".");
+                    $quest->save ();
+                  } else {
+                    $p->sendMessage (TF::RED . "There is no quest with that quest ID!");
+                  }
+                return true;
+                break;
               }
             }
           }
         break;
 
         case "start":
-          $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+            $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
