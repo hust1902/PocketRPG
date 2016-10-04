@@ -48,6 +48,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             "RequiredAmount" => "",
             "RewardID" => "",
             "RewardAmount" => "",
+            "RewardExpAmount" => "",
             "Started" => array (),
             "Finished" => array ()
             ]));
@@ -194,7 +195,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->sendPopup (TF::AQUA . "You leveled up!");
                 $items = Item::get($quest->get ("RewardID"), 0, $quest->get ("RewardAmount"));
                 $p->getInventory ()->addItem ($items);
-                $p->setExpLevel ($p->getExpLevel () + 1);
+                $p->setExpLevel ($p->getExpLevel () + $this->config->get("RewardExpAmount"));
                 $p->getInventory ()->remove ($item);
                 $questid = $args[1];
                 $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
