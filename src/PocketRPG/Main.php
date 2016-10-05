@@ -93,10 +93,10 @@ class Main extends PluginBase implements Listener {
   public function clearAllQuests(Player $p) {
     $quests = @scandir($this->getDataFolder() . "quests/");
     foreach($quests as $quest) {
-      $this->quests = new Config($quest);
-      $this->quests->remove("Finished", $p->getName());
-      $this->quests->remove("Started", $p->getName());
-      $this->quests->save();
+      $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml");
+      $this->quest->remove("Finished", $p->getName());
+      $this->quest->remove("Started", $p->getName());
+      $this->quest->save();
     }
   }
 
