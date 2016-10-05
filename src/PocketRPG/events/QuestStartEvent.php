@@ -2,7 +2,7 @@
 
 namespace PocketRPG\events;
 
-use pocketmine\plugin\PluginEvent;
+use pocketmine\event\plugin\PluginEvent;
 use pocketmine\event\Cancellable;
 use pocketmine\Player;
 use PocketRPG\Main;
