@@ -95,11 +95,18 @@ class Main extends PluginBase implements Listener {
     foreach($quests as $quest) {
       if($quest != "." && $quest != "..") {
         $this->quest = new Config("quests/" . $quest);
-        //unset(array_search($p->getName(), $this->quest->get("Finished", array())));
-        $started = $this->quest->get("Started", array());
-        unset($started[array_search($p->getName(), $started)]);
-        $this->quest->set("Started", $started);
-        $this->quest->save();
+        if(is_array($this->quest->get("Finished"))) {
+          $finished = $this->quest->get("Finished", array());
+          unset($finished[array_search($p->getName(), $finished)]);
+          $this->quest->set("Finished", $finished);
+          $this->quest->save();
+
+        } if(is_array($this->quest->get("Started"))) {
+          $started = $this->quest->get("Started", array());
+          unset($started[array_search($p->getName(), $started)]);
+          $this->quest->set("Started", $started);
+          $this->quest->save();
+        }
       }
     }
   }
