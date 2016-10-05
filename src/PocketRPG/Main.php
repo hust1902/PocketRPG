@@ -91,7 +91,7 @@ class Main extends PluginBase implements Listener {
   }
   
   public function clearAllQuests(Player $p) {
-    $quests = scandir($this->getDataFolder() . "/quests/");
+    $quests = scandir($this->getDataFolder() . "quests/");
     foreach($quests as $quest) {
       $this->quests = new Config($quest);
       $this->quests->remove("Finished", $p->getName());
