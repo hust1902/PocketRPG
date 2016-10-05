@@ -181,7 +181,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               $quest->save ();
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
-              $p->sendMessage (TF::GRAY . "To finish this quest you need " . $quest->get ("RequiredAmount") . " items of item ID " . $quest->get ("RequiredID"));
+              $p->sendMessage (TF::GRAY . "To finish this quest you need " . $quest->get ("RequiredAmount") . " item(s) of item ID " . $quest->get ("RequiredID"));
               $questid = $args[1];
               $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestStartEvent($this, $p, $questid));
             } else {
