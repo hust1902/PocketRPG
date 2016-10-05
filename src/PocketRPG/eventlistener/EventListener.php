@@ -358,7 +358,6 @@ class EventListener extends Main implements Listener {
   public function onDeath(PlayerDeathEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
       $event->setKeepInventory(true); 
-      $event->setKeepExperience(true);
     }
   }
   
