@@ -152,9 +152,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 return true;
                 break;
 
-                case "rewarddexplevel":
+                case "rewardexplvl":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
-                    $quest->set ("RewardExpLeve", $args [3]);
+                    $quest->set ("RewardExpLevel", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward Experience level of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
                   } else {
