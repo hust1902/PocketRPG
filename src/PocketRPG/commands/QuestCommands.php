@@ -62,7 +62,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         break;
         
         case "edit":
-          $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if($p->hasPermission("quests.command")) {
             if(isset($args[3]) && is_numeric($args[1])) {
               switch(strtolower($args[2])) {
@@ -70,6 +69,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "questname":
                 case "name":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                   $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     unset($args[0]);
                     unset($args[2]);
                     $questname = implode (" ", $args);
@@ -85,6 +85,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "questdescription":
                 case "description":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     unset($args[0]);
                     unset($args[2]);
                     $questdescription = implode (" ", $args);
@@ -99,6 +100,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "requiredid":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RequiredID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required ID of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -110,6 +112,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "requiredamount":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RequiredAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required amount of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -121,6 +124,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "rewardid":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RewardID", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward ID of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -132,6 +136,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 
                 case "rewardamount":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RewardAmount", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward amount of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -143,6 +148,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   
                 case "requiredexplvl":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RequiredExpLvl", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the required Experience level of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -155,6 +161,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 case "rewardexplvl":
                 case "rewardexplevel":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
+                    $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
                     $quest->set ("RewardExpLevel", $args [3]);
                     $p->sendMessage (TF::GREEN . "You succesfully changed the reward Experience level of " . $args [1] . " to " . $args[3] . ".");
                     $quest->save ();
@@ -171,20 +178,15 @@ class QuestCommands extends PluginBase implements CommandExecutor{
         case "start":
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
-            if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
+            if ($this->getOwner->hasQuestFinished($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
-            } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
+            } elseif($this->getOwner()->hasQuestFinished($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already started this quest!");
             } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
-              $player = $quest->get("Started", []);
-              $player[] = $p->getName ();
-              $quest->set("Started", $player);
-              $quest->save ();
+              $this->getOwner()->startQuest($p, $args[1]);
               $p->sendMessage (TF::GREEN . "Quest started: " . $quest->get ("QuestName"));
               $p->sendMessage (TF::GRAY . $quest->get ("QuestDescription"));
               $p->sendMessage (TF::GRAY . "To finish this quest you need " . $quest->get ("RequiredAmount") . " item(s) of item ID " . $quest->get ("RequiredID"));
-              $questid = $args[1];
-              $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestStartEvent($this, $p, $questid));
             } else {
               $p->sendMessage (TF::RED . "Your experience level is not high enough to start this quest!");
             }
@@ -200,15 +202,14 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               foreach ( $p->getInventory()->getContents()  as  $item) {
                 if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
                 
-                $this->getOwner()->finishQuest($p, $args[1])
-                $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
-                $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
-                $p->sendPopup (TF::AQUA . "You leveled up!");
-                $items = Item::get($quest->get ("RewardID"), 0, $quest->get ("RewardAmount"));
-                $p->getInventory ()->addItem ($items);
-                $p->setExpLevel ($p->getExpLevel () + $quest->get("RewardExpLevel"));
-                $p->getInventory ()->remove ($item);
-                $questid = $args[1];
+                  $this->getOwner()->finishQuest($p, $args[1])
+                  $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
+                  $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
+                  $p->sendPopup (TF::AQUA . "You leveled up!");
+                  $items = Item::get($quest->get ("RewardID"), 0, $quest->get ("RewardAmount"));
+                  $p->getInventory ()->addItem ($items);
+                  $p->setExpLevel ($p->getExpLevel () + $quest->get("RewardExpLevel"));
+                  $p->getInventory ()->remove ($item);
                 }
               }
             }
@@ -217,13 +218,13 @@ class QuestCommands extends PluginBase implements CommandExecutor{
       break;
   
       case "help":
-       if ($p->hasPermission ("quests.command")) {
-        $p->sendMessage (TF::GREEN . " --- " . TF::YELLOW . "Quest Help" . TF::GREEN . " --- ");
-        $p->sendMessage (TF::GREEN . "/quest create <number>:" . TF::YELLOW . " Create a Quest with the given quest ID.");
-        $p->sendMessage (TF::GREEN . "/quest edit <ID> <subcommand> <value>:" . TF:: YELLOW . " Edit a property of a Quest.");
-        $p->sendMessage (TF::GREEN . "/quest start <ID>:" . TF::YELLOW . " Start a Quest with the given ID.");
-        $p->sendMessage (TF::GREEN . "/quest finish <ID>:" . TF::YELLOW . " Finish a started quest with the given ID.");
-        $p->sendMessage (TF::GREEN . "Subcommands:" . TF::YELLOW . " name, description, requiredexplvl, requiredid, requiredamount, rewardid, rewardamount, rewardexplevel.");
+        if ($p->hasPermission ("quests.command")) {
+          $p->sendMessage (TF::GREEN . " --- " . TF::YELLOW . "Quest Help" . TF::GREEN . " --- ");
+          $p->sendMessage (TF::GREEN . "/quest create <number>:" . TF::YELLOW . " Create a Quest with the given quest ID.");
+          $p->sendMessage (TF::GREEN . "/quest edit <ID> <subcommand> <value>:" . TF:: YELLOW . " Edit a property of a Quest.");
+          $p->sendMessage (TF::GREEN . "/quest start <ID>:" . TF::YELLOW . " Start a Quest with the given ID.");
+          $p->sendMessage (TF::GREEN . "/quest finish <ID>:" . TF::YELLOW . " Finish a started quest with the given ID.");
+          $p->sendMessage (TF::GREEN . "Subcommands:" . TF::YELLOW . " name, description, requiredexplvl, requiredid, requiredamount, rewardid, rewardamount, rewardexplevel.");
        }
       return true;
       break;
