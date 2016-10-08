@@ -426,4 +426,20 @@ class EventListener extends Main implements Listener {
       }
     }
   }
+
+  public function classChat(PlayerChatEvent $event) {
+    $p = $event->getPlayer();
+    $l = $p->getLevel();
+    $m = $event->getMessage();
+    if($l->getName() == $this->getOwner()->config->get("RPGworld")) {
+      foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p2) {
+        if($p2->getLevel()->getName() == $this->getOwner->config->get("RPGworld")) {
+          if($p->distance($p2) <= 50) {
+            $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::WHITE . $m);
+          }
+        }
+      $event->setCancelled();
+      }
+    }
+  }
 }
