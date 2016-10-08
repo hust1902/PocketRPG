@@ -180,7 +180,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
             if ($this->getOwner()->hasQuestFinished($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
-            } elseif($this->getOwner()->hasQuestFinished($p, $args[1])) {
+            } elseif($this->getOwner()->hasQuestStarted($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already started this quest!");
             } elseif($p->getExpLevel () >= $quest->get ("RequiredExpLvl")) {
               $this->getOwner()->startQuest($p, $args[1]);
