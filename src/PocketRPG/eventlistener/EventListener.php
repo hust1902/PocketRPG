@@ -426,6 +426,9 @@ class EventListener extends Main implements Listener {
       }
     }
   }
+  /**
+   * @priority HIGHEST
+  */
 
   public function classChat(PlayerChatEvent $event) {
     $p = $event->getPlayer();
