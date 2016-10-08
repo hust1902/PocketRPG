@@ -442,7 +442,7 @@ class EventListener extends Main implements Listener {
             $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::WHITE . $m);
           } elseif($p->distance($p2) <= 100) {
             $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::GRAY . $m);
-          } elseif(($p->distance($p2) <= 150) {
+          } elseif($p->distance($p2) <= 150) {
             $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::DARK_GRAY . $m);
           }
         }
