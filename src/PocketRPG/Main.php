@@ -59,6 +59,12 @@ class Main extends PluginBase implements Listener {
 
       ////////// API \\\\\\\\\\
 
+  public function hasClass(Player $p) {
+    if($this->playerclass->get($p->getName() . ".class") == true) {
+      return true;
+    }
+  }
+  
   public function setClass(Player $p, $class) {
       $this->playerclass->set($p->getName(), $class);
       $this->playerclass->set($p->getName() . ".class", true);
