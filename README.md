@@ -1,8 +1,5 @@
 # PocketRPG  -  Version 0.3.0
 
-#1.0 Features:
-[] Special class chat
-
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
 Get your latest official PocketRPG version at https://github.com/NL-4-DEVS/PocketRPG/releases !
