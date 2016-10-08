@@ -53,8 +53,10 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
               $wand = Item::get(Item::STICK, 0, 1);
+              $wand->setCustomName(TF:: AQUA . "Wand\n" . TF:: GRAY . "Fireball - Mage");
               $p->getInventory()->addItem($wand);
               $book = Item::get (Item::BOOK, 0, 1);
+              $book->setCustomName(TF:: AQUA . "Abilities Book");
               $p->getInventory ()->addItem ($book);
               $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -70,6 +72,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
               $p->getInventory()->addItem($sword);
               $book = Item::get (Item::BOOK, 0, 1);
+              $book->setCustomName(TF:: AQUA . "Abilities Book");
               $p->getInventory ()->addItem ($book);
               $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -85,6 +88,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $shield = Item::get(Item::BRICK, 0, 1);
               $p->getInventory()->addItem($shield);
               $book = Item::get (Item::BOOK, 0, 1);
+              $book->setCustomName(TF:: AQUA . "Abilities Book");
               $p->getInventory ()->addItem ($book);
               $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
@@ -100,6 +104,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $knife = Item::get(Item::FEATHER, 0, 1);
               $p->getInventory()->addItem($knife);
               $book = Item::get (Item::BOOK, 0, 1);
+              $book->setCustomName(TF:: AQUA . "Abilities Book");
               $p->getInventory ()->addItem ($book);
               $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
