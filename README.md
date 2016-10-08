@@ -10,7 +10,8 @@
 
  - [ ] New abilities
 
-Post your suggestions in the Issue tab or ask them on gitter
+Post your suggestions in the Issue tab or ask them on gitter    
+
 
 
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
