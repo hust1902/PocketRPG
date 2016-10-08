@@ -136,14 +136,18 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;
 
           case "reset":
-            $this->getOwner()->clearAllQuests($p);
-            $this->getOwner()->unsetClass($p);
-            $p->removeAllEffects();
-            $p->getInventory()->clearAll();
-            $default = $this->getOwner()->getServer()->getDefaultLevel();
-            $p->teleport($default->getSafeSpawn());
-            $p->setExpLevel(0);
-            $p->sendMessage(TF:: YELLOW . "Your class has been reset.");
+            if($this->getOwner()->hasClass($p)) {
+              $this->getOwner()->clearAllQuests($p);
+              $this->getOwner()->unsetClass($p);
+              $p->removeAllEffects();
+              $p->getInventory()->clearAll();
+              $default = $this->getOwner()->getServer()->getDefaultLevel();
+              $p->teleport($default->getSafeSpawn());
+              $p->setExpLevel(0);
+              $p->sendMessage(TF:: YELLOW . "Your class has been reset.");
+            } else {
+              $p->sendMessage(TF:: RED . "You haven't chosen a class yet!");
+            }
             return true;
             break;
             
