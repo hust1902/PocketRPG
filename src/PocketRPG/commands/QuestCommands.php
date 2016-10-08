@@ -202,7 +202,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
               foreach ( $p->getInventory()->getContents()  as  $item) {
                 if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
                 
-                  $this->getOwner()->finishQuest($p, $args[1])
+                  $this->getOwner()->finishQuest($p, $args[1]);
                   $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
                   $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
                   $p->sendPopup (TF::AQUA . "You leveled up!");
