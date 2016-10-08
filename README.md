@@ -1,7 +1,7 @@
 # PocketRPG  -  Version 0.3.0
 
 #1.0 Features:
--[] Special class chat
+[] Special class chat
 
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
 
