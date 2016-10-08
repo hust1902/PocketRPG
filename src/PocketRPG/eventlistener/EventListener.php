@@ -445,6 +445,7 @@ class EventListener extends Main implements Listener {
             $event->setFormat($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::DARK_GRAY . $m);
           } else {
             $event->setCancelled();
+          }
         } else {
           $event->setCancelled();
         }
