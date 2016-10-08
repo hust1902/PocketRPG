@@ -6,6 +6,7 @@ use pocketmine\event\plugin\PluginEvent;
 use pocketmine\event\Cancellable;
 use pocketmine\Player;
 use PocketRPG\commands\QuestCommands;
+use PocketRPG\Main;
 
 class QuestFinishEvent extends PluginEvent implements Cancellable {
 
