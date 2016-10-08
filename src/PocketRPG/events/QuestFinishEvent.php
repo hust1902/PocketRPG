@@ -13,7 +13,7 @@ class QuestFinishEvent extends PluginEvent implements Cancellable {
   private $p;
   private $questid;
 
-  public function __construct(QuestCommands $plugin, Player $p, $questid) {
+  public function __construct(Main $plugin, Player $p, $questid) {
     $this->player = $p;
     $this->plugin = $plugin;
     $this->questid = $questid;
