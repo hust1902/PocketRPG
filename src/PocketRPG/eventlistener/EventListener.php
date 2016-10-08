@@ -435,13 +435,15 @@ class EventListener extends Main implements Listener {
     $l = $p->getLevel();
     $m = $event->getMessage();
     if($l->getName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("ClassChat") == true) {
+      $event->setCancelled();
       foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p2) {
         if($p2->getLevel()->getName() == $this->getOwner->config->get("RPGworld")) {
           if($p->distance($p2) <= 50) {
-            $event->setCancelled(true);
             $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::WHITE . $m);
-          } else {
-            $event->setCancelled();
+          } elseif($p->distance($p2) <= 100) {
+            $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::GRAY . $m);
+          } elseif(($p->distance($p2) <= 150) {
+            $p2->sendMessage($p->getName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::DARK_GRAY . $m);
           }
         }
       }
