@@ -22,8 +22,6 @@ Report bugs, questions and problems in the gitter chat or the issue tab of githu
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/NL-4-DEVS-PocketRPG/Lobby?source=orgpage)
 
-**This plugin depends on PurePerms to work properly!**
-
 **Features:**
 
 PocketRPG is made for servers to create a better adventure experience, using quests and special classes which there are 4 of. (Mage, Warrior, Assassin, Tanker) Each using different items to fight and abilities to use. This only works when RPGworld in config is defined.
