@@ -199,11 +199,8 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
               foreach ( $p->getInventory()->getContents()  as  $item) {
                 if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
-
-                $player = $quest->get("Finished", []);
-                $player[] = $p->getName ();
-                $quest->set("Finished", $player);
-                $quest->save();
+                
+                $this->getOwner()->finishQuest($p, $args[1])
                 $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
                 $p->sendMessage (TF::GREEN . "You have received a reward for finishing the quest!");
                 $p->sendPopup (TF::AQUA . "You leveled up!");
@@ -212,7 +209,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                 $p->setExpLevel ($p->getExpLevel () + $quest->get("RewardExpLevel"));
                 $p->getInventory ()->remove ($item);
                 $questid = $args[1];
-                $this->getOwner()->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
                 }
               }
             }
