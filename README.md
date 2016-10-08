@@ -1,11 +1,16 @@
 # PocketRPG  -  Version 0.3.0
 
+
 #PocketRPG version 1.0.0 features:
  - [x] Special class chat
+
+ - [ ] Class and level nametag
 
  - [ ] Confirmation on class choosing and reset
 
  - [ ] New abilities
+
+Post your suggestions in the Issue tab or ask them on gitter
 
 
 An RPG plugin for PocketMine (and Forks(Genisys tested, Clearsky untested))
