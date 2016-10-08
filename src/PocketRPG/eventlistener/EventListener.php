@@ -431,7 +431,7 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     $l = $p->getLevel();
     $m = $event->getMessage();
-    if($l->getName() == $this->getOwner()->config->get("RPGworld")) {
+    if($l->getName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("ClassChat") == true) {
       foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p2) {
         if($p2->getLevel()->getName() == $this->getOwner->config->get("RPGworld")) {
           if($p->distance($p2) <= 50) {
