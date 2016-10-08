@@ -48,7 +48,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
           $this->getOwner()->getServer()->loadLevel($this->getOwner()->config->get("RPGworld"));
           switch(strtolower($args[1])) {
           case "mage":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+            if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a mage!");
@@ -63,7 +63,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;
             
           case "warrior":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+            if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
@@ -78,7 +78,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;
             
           case "tanker":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+            if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
@@ -93,7 +93,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;
    
           case "assassin":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+            if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
@@ -107,8 +107,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             return true;
             break;
 
-          case "archer":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+          /*case "archer":
+            if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an archer!");
@@ -120,12 +120,12 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
-            break;
+            break;*/
           }
           break;
 
           case "warp":
-            if($this->getOwner()->playerclass->get($p->getName().".class") === true){
+            if($this->getOwner()->hasClass($p)){
               $this->getOwner()->getServer()->loadLevel($this->getOwner()->config->get("RPGworld"));
               $p->sendMessage (TF::AQUA . "You warped to the RPG world!");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
