@@ -15,4 +15,7 @@ LevelUpMessage: ""
 
 #Switch for not being able to lose items in RPG world (crafting, furnace smelting, dropping etc...):
 DisableItemLosing: true
+
+#Decide if special 'class chat' is enabled or not:
+ClassChat: true
 ...
