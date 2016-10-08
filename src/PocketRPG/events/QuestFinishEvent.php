@@ -18,7 +18,6 @@ class QuestFinishEvent extends PluginEvent implements Cancellable {
     $this->player = $p;
     $this->plugin = $plugin;
     $this->questid = $questid;
-    parent::__construct($plugin);
   }
 
   public function getPlayer() {
