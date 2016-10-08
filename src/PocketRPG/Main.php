@@ -83,14 +83,14 @@ class Main extends PluginBase implements Listener {
   }
 
   public function hasQuestFinished(Player $p, $quest) {
-    $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml");
+    $this->quest = new Config("quests/" . $quest . ".yml");
     if(in_array($p->getName(), $this->quest->get("Finished", []))) {
       return true;
     }
   }
 
   public function hasQuestStarted(Player $p, $quest) {
-    $this->quest = new Config($this->getDataFolder() . "quests/" . $quest . ".yml");
+    $this->quest = new Config("quests/" . $quest . ".yml");
     if(in_array($p->getName(), $this->quest->get("Started", []))) {
       return true;
     }
@@ -100,7 +100,7 @@ class Main extends PluginBase implements Listener {
     $quests = @scandir("quests/");
     foreach($quests as $quest) {
       if($quest != "." && $quest != "..") {
-        $this->quest = new Config($this->getDataFolder() . "quests/" . $quest);
+        $this->quest = new Config("quests/" . $quest);
         if(is_array($this->quest->get("Finished"))) {
           $finished = $this->quest->get("Finished", array());
           unset($finished[array_search($p->getName(), $finished)]);
@@ -118,7 +118,7 @@ class Main extends PluginBase implements Listener {
   }
 
   public function startQuest(Player $p, $questid) {
-    $quest = new Config($this->getDataFolder() . "quests/" . $questid . ".yml");
+    $quest = new Config("quests/" . $questid . ".yml");
     $player = $quest->get("Started", []);
     $player[] = $p->getName();
     $quest->set("Started", $player);
@@ -127,7 +127,7 @@ class Main extends PluginBase implements Listener {
   }
 
   public function finishQuest(Player $p, $questid) {
-    $quest = new Config($this->getDataFolder() . "quests/" . $questid . ".yml");
+    $quest = new Config("quests/" . $questid . ".yml");
     $player = $quest->get("Finished", []);
     $player[] = $p->getName ();
     $quest->set("Finished", $player);
