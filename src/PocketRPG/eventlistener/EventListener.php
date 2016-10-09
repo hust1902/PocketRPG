@@ -212,10 +212,10 @@ class EventListener extends Main implements Listener {
         }
       } //Dagger speed
     
-      elseif($p->getItemInHand()->getId() == Item::BRICK && $p->getExpLevel() >= 10) {
+      elseif($p->getItemInHand()->getId() == Item::MINECART && $p->getExpLevel() >= 10) {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if($p->getFood () >= 5) {
-            $effect = Effect::getEffect(11)->setDuration(200)->setAmplifier(1)->setVisible(false);
+            $effect = Effect::getEffect(11)->setDuration(240)->setAmplifier(1)->setVisible(false);
             $p->addEffect($effect);
             $p->setFood ($p->getFood () - 5);
             $p->sendPopup (TF::AQUA . "-5 Mana");
@@ -268,18 +268,6 @@ class EventListener extends Main implements Listener {
         }
       } //Warrior powder
     
-      if($p->getItemInHand()->getId() == Item::CLOCK) {
-        $p->sendPopup(TF:: AQUA . "Cloak of Invisibility\n" . TF::GRAY . "Invisibility - Assassin");
-      } 
-    
-      elseif($p->getItemInHand()->getId() == Item::BONE) {
-        $p->sendPopup(TF:: AQUA . "Bone of Life\n" . TF::GRAY . "Regeneration - Mage");
-      } 
-    
-      elseif($p->getItemInHand()->getId() == Item::REDSTONE) {
-        $p->sendPopup(TF:: AQUA . "Rage Powder\n" . TF::GRAY . "Strength - Warrior");
-      } 
-    
       elseif($p->getItemInHand()->getId() == Item::BOOK) {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin") {
           $p->sendMessage(TF:: GREEN . "---Assassin Abilities---");
@@ -294,7 +282,7 @@ class EventListener extends Main implements Listener {
         } elseif($p->hasPermission("class.tanker")) {
           $p->sendMessage(TF:: GREEN . "---Tanker Abilities---");
           $p->sendMessage(TF:: AQUA . "Slam - Lvl. 0 - Shield");
-          $p->sendMessage(TF:: AQUA . "Resistance - Lvl. 10 - Shield");
+          $p->sendMessage(TF:: AQUA . "Resistance - Lvl. 10 - Barrier");
           $p->sendMessage(TF:: AQUA . "Crushing blow - Lvl. 20 - Iron Pallet");
         } elseif($p->hasPermission("class.warrior")) {
           $p->sendMessage(TF:: GREEN . "---Warrior Abilities---");
