@@ -274,17 +274,17 @@ class EventListener extends Main implements Listener {
           $p->sendMessage(TF:: AQUA . "Stab - Lvl. 0 - Dagger");
           $p->sendMessage(TF:: AQUA . "Invisibility - Lvl. 10 - Cloak of Invisibility");
           $p->sendMessage(TF:: AQUA . "Backstab - Lvl. 20 - Hook");
-        } elseif($p->hasPermission("class.mage")) {
+        } elseif($this->getOwner()->playerclass->get($p->getName()) === "mage") {
           $p->sendMessage(TF:: GREEN . "---Mage Abilities---");
           $p->sendMessage(TF:: AQUA . "Fireball - Lvl. 0 - Wand");
           $p->sendMessage(TF:: AQUA . "Regeneration - Lvl. 10 - Bone of life");
           $p->sendMessage(TF:: AQUA . "Ring of fire - Lvl. 20 - Ever burning Fire");
-        } elseif($p->hasPermission("class.tanker")) {
+        } elseif($this->getOwner()->playerclass->get($p->getName()) === "tanker") {
           $p->sendMessage(TF:: GREEN . "---Tanker Abilities---");
           $p->sendMessage(TF:: AQUA . "Slam - Lvl. 0 - Shield");
           $p->sendMessage(TF:: AQUA . "Resistance - Lvl. 10 - Barrier");
           $p->sendMessage(TF:: AQUA . "Crushing blow - Lvl. 20 - Iron Pallet");
-        } elseif($p->hasPermission("class.warrior")) {
+        } elseif($this->getOwner()->playerclass->get($p->getName()) === "warrior") {
           $p->sendMessage(TF:: GREEN . "---Warrior Abilities---");
           $p->sendMessage(TF:: AQUA . "Strike - Lvl. 0 - Sword");
           $p->sendMessage(TF:: AQUA . "Strength - Lvl. 10 - Rage Powder");
