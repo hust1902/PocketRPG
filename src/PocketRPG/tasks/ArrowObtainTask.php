@@ -23,7 +23,7 @@ class ArrowObtainTask extends PluginTask {
   public function onRun ($currentTick) {
     foreach($this->getPlugin()->getServer()->getOnlinePlayers() as $p) {
       if($p->getLevel()->getName() == $this->getPlugin()->config->get("RPGworld")) {
-        if($this->getPlugin()->playerclass->get($p->getName()) == "Mage" && !$p->getInventory()->contains(Item::get(Item::ARROW, 0, 5))) {
+        if($this->getPlugin()->playerclass->get($p->getName()) == "Archer" && !$p->getInventory()->contains(Item::get(Item::ARROW, 0, 5))) {
           $p->getInventory()->addItem(Item::get(Item::ARROW, 0, 1));
         }
       }
