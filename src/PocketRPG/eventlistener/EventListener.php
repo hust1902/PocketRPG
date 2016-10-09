@@ -347,7 +347,7 @@ class EventListener extends Main implements Listener {
         if(!$p->getInventory()->contains(Item::get(Item::MINECART))) {
           $minecart = Item::get(Item::MINECART, 0, 1);
           $minecart->setCustomName(TF:: AQUA . "Barrier\n" . TF::GRAY . "Resistance - Tanker");
-          $p->getInventory()->addItem($redstone);
+          $p->getInventory()->addItem($minecart);
           $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
           $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         }
