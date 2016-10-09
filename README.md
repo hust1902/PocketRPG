@@ -4,6 +4,8 @@
 #PocketRPG version 1.0.0 features:
  - [x] Special class chat
 
+ - [ ] Real custom item names instead of popups
+
  - [ ] Class and level nametag
 
  - [ ] Confirmation on class choosing and reset
