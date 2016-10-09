@@ -70,6 +70,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a warrior!");
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
+              $sword->setCustomName(TF:: AQUA . "Sword\n" . TF::GRAY . "Strike - Warrior");
               $p->getInventory()->addItem($sword);
               $book = Item::get (Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
@@ -86,6 +87,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as a tanker!");
               $shield = Item::get(Item::BRICK, 0, 1);
+              $shield->setCustomName(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Tanker");
               $p->getInventory()->addItem($shield);
               $book = Item::get (Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
@@ -102,6 +104,7 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             } else {
               $p->sendMessage(TF:: AQUA . "You have joined the world as an assassin!");
               $knife = Item::get(Item::FEATHER, 0, 1);
+              $knife->setCustomName(TF:: AQUA . "Dagger\n" . TF::GRAY . "Stab - Assassin");
               $p->getInventory()->addItem($knife);
               $book = Item::get (Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
