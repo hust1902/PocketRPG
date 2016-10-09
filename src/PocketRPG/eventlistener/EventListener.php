@@ -278,9 +278,9 @@ class EventListener extends Main implements Listener {
     
       elseif($p->getItemInHand()->getId() == Item::BRICK) {
         if($p->getExpLevel() >= 8) {
-          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam + Resistance - Warrior");
+          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam + Resistance - Tanker");
         } else {
-          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Warrior");
+          $p->sendPopup(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Tanker");
         }
       } 
     
