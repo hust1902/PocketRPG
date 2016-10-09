@@ -254,7 +254,7 @@ class EventListener extends Main implements Listener {
       } //Mage bone
     
       elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
-        if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+        if($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
           if ($p->getFood () >= 6) {
             $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
