@@ -6,6 +6,8 @@
 
  - [x] Real custom item names instead of popups
 
+ - [ ] Proper item obtaining when getting higher level
+
  - [ ] Class and level nametag
 
  - [ ] Full implementation of Archer class
