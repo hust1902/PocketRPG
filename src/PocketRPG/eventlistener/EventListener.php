@@ -91,7 +91,7 @@ class EventListener extends Main implements Listener {
         if($hit instanceof Player && $damager instanceof Player) {
           $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit->getName() . ".yml");
           $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager->getName() . ".yml");
-          if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($damager->getName (), $damagerparty->get ("Allies", array ()))) {
+          if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($hit->getName (), $damagerparty->get ("Allies", array ()))) {
             $event->setCancelled();
           } 
         }
