@@ -13,6 +13,7 @@
 namespace PocketRPG\eventlistener;
 use PocketRPG\Main;
 use PocketRPG\tasks\ExplodeTask;
+use PocketRPG\tasks\FireCageTask;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\event\Listener;
@@ -66,6 +67,21 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer ();
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
     unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
+  }
+  public function onInteract() {
+    $p = $event->getPlayer();
+      if($p->getItemInHand()->getId() == Item::BLAZE_POWDER) {
+        foreach($this->getServer()->getOnlinePlayers() as $ps) {
+          if($p->distance($ps) <= 10 && $p != $ps && $ps->getLevel()->getName() == $this->getOwner()->config->get ("RPGworld")) {
+            $pos = $ps->getPosition();
+            $t = new FireCageTask($this, $pos, $ps);
+            $h = $this->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
+            $t->setHandler($h);
+            $this->tasks[$t->getTaskId()] = $t->getTaskId();
+          }
+        }
+      }
+    }
   }
 
   public function onJoin (PlayerJoinEvent $event) {
