@@ -63,6 +63,10 @@ class EventListener extends Main implements Listener {
      return $this->plugin;
   }
 
+  public function getServer() {
+    return $this->plugin->getServer();
+  }
+
   public function onQuit (PlayerQuitEvent $event) {
     $p = $event->getPlayer ();
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
