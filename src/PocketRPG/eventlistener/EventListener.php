@@ -87,7 +87,7 @@ class EventListener extends Main implements Listener {
           }
         }
       }
-    }
+    
   }
 
   public function onJoin (PlayerJoinEvent $event) {
