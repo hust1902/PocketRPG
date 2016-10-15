@@ -78,7 +78,7 @@ class EventListener extends Main implements Listener {
             $pos = $ps->getPosition();
             $ps->setOnFire(10);
             $t = new FireCageTask($this, $pos, $ps);
-            $h = $this->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
+            $h = $this->getOwner()->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
             $t->setHandler($h);
             $this->tasks[$t->getTaskId()] = $t->getTaskId();
           }
