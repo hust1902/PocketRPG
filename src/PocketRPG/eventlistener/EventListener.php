@@ -70,7 +70,7 @@ class EventListener extends Main implements Listener {
   }
   public function onInteract() {
     $p = $event->getPlayer();
-      if($p->getItemInHand()->getId() == Item::BLAZE_POWDER && $this->getOwner()->playerclass->get($p->getName() == "mage")) {
+      if($p->getItemInHand()->getId() == Item::BLAZE_POWDER && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
         foreach($this->getOwner()->getServer()->getOnlinePlayers() as $ps) {
           if($p->distance($ps) <= 10 && $p->getName() != $ps->getName() && $ps->getLevel()->getName() == $this->getOwner()->config->get("RPGworld") && $p->getFood() >= 9) {
             $p->setFood($p->getFood() - 9);
