@@ -42,6 +42,7 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerChatEvent;
@@ -68,7 +69,7 @@ class EventListener extends Main implements Listener {
     $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
     unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
   }
-  public function onInteract() {
+  public function onInteract(PlayerInteractEvent $event) {
     $p = $event->getPlayer();
       if($p->getItemInHand()->getId() == Item::BLAZE_POWDER && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
         foreach($this->getOwner()->getServer()->getOnlinePlayers() as $ps) {
