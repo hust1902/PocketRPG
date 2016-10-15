@@ -1,5 +1,5 @@
 <?php
-namespace joincommands;
+namespace PocketRPG\tasks;
 
 use PocketRPG\eventlistener\EventListener;
 use pocketmine\scheduler\PluginTask;
