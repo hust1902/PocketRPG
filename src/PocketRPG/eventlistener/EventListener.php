@@ -73,10 +73,10 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
       if($p->getItemInHand()->getId() == Item::BLAZE_POWDER && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
         foreach($this->getOwner()->getServer()->getOnlinePlayers() as $ps) {
-          if($p->distance($ps) <= 15 && $p->getName() != $ps->getName() && $p->getFood() >= 9) {
-            $p->setFood($p->getFood() - 9);
+          if($p->distance($ps) <= 15 && $p->getName() != $ps->getName() && $p->getFood() >= 10) {
+            $p->setFood($p->getFood() - 10);
             $pos = $ps->getPosition();
-            $ps->setOnFire(10);
+            $ps->setOnFire($p->getExpLevel() * 0.20);
             $t = new FireCageTask($this, $pos, $ps);
             $h = $this->getOwner()->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
             $t->setHandler($h);
