@@ -193,13 +193,14 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           }
         return true;
         break;
- 
+
         case "finish":
           $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
-                if($p->getInventory()->contains(Item::get($quest->get("RequiredID"), 0, $quest->get("RequiredAmount")))){
+              foreach ( $p->getInventory()->getContents()  as  $item) {
+                if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
                 
                   $this->getOwner()->finishQuest($p, $args[1]);
                   $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
@@ -210,7 +211,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   $p->setExpLevel ($p->getExpLevel () + $quest->get("RewardExpLevel"));
                   $p->getInventory ()->remove ($item);
                 }
-              
+              }
             }
           }
       return true;
