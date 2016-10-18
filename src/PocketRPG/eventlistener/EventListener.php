@@ -343,7 +343,7 @@ class EventListener extends Main implements Listener {
     }
   }
   
-  \*public function onExpChange(PlayerExperienceChangeEvent $event) {
+  /*public function onExpChange(PlayerExperienceChangeEvent $event) {
     $p = $event->getPlayer();
     if($p instanceof Player && $p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $event->getExpLevel() >= 10) {
@@ -388,7 +388,7 @@ class EventListener extends Main implements Listener {
         }
       }
     } 
-  } *\
+  } */
   
   public function onBreak(BlockBreakEvent $event) {
     $p = $event->getPlayer();
