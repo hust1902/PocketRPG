@@ -25,19 +25,4 @@ permissions:
   rpg.place:
     default: op
     description: allow placing in RPG world
-  class.chosen:
-    default: false
-    description: Chosen a class
-  class.mage:
-    default: false
-    description: Mage class
-  class.warrior:
-    default: false
-    description: Warrior class
-  class.tanker:
-    default: false
-    description: Tanker class
-  class.assassin:
-    default: false
-    description: Assassin class
 ...
