@@ -16,6 +16,8 @@
 
  - [ ] New abilities
 
+ - [ ] New way to use mage wand
+
 Post your suggestions in the Issue tab or ask them on gitter    
 
 
