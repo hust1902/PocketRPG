@@ -8,7 +8,7 @@
 * | |  | (_) | (__|   <  __/ |_| | \ \| |    | |__| |
 * |_|   \___/ \___|_|\_\___|\__|_|  \_\_|     \_____|
 *
-*/     
+*/ 
 
 namespace PocketRPG\commands;
 
@@ -32,6 +32,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
   }
+
   public function getOwner() {
     return $this->plugin;
   }
@@ -157,7 +158,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   }
                 return true;
                 break;
-
                 case "rewardexplvl":
                 case "rewardexplevel":
                   if (file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
@@ -174,11 +174,10 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             }
           }
         break;
-
         case "start":
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             $quest = new Config ($this->getDataFolder () . "quests/" . $args [1] . ".yml");
-            if($this->getOwner()->hasQuestFinished($p, $args[1])) {
+            if ($this->getOwner()->hasQuestFinished($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already finished this quest!");
             } elseif($this->getOwner()->hasQuestStarted($p, $args[1])) {
               $p->sendMessage (TF::RED . "You have already started this quest!");
@@ -199,8 +198,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           if (isset ($args [1]) && file_exists ($this->getDataFolder () . "quests/" . $args [1] . ".yml")) {
             if (in_array ($p->getName (), $quest->get ("Started", array ())) && in_array ($p->getName (), $quest->get ("Finished", array ()))) {
             } elseif(in_array ($p->getName (), $quest->get ("Started", array ()))) {
-              foreach ( $p->getInventory()->getContents()  as  $item) {
-                if($item->getId() == $quest->get ("RequiredID") && $item->getCount() >= $quest->get ("RequiredAmount")){
+                if($p->getInventory()->contains(Item::get($quest->get("RequiredID"), 0, $quest->get("RequiredAmount")))){
                 
                   $this->getOwner()->finishQuest($p, $args[1]);
                   $p->sendMessage (TF::GREEN . "You completed quest " . $args[1] . "!");
@@ -211,7 +209,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                   $p->setExpLevel ($p->getExpLevel () + $quest->get("RewardExpLevel"));
                   $p->getInventory ()->remove ($item);
                 }
-              }
+              
             }
           }
       return true;
@@ -228,7 +226,6 @@ class QuestCommands extends PluginBase implements CommandExecutor{
        }
       return true;
       break;
-
       }
     }
   }
