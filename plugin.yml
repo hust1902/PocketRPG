@@ -11,6 +11,7 @@ commands:
     description: Quest help command
     usage: /quest help
     aliases: [q]
+    permission: quests.command
   rpg:
     description: Main RPG command
     usage: /rpg start mage|warrior|assassin|tank
@@ -25,19 +26,7 @@ permissions:
   rpg.place:
     default: op
     description: allow placing in RPG world
-  class.chosen:
-    default: false
-    description: Chosen a class
-  class.mage:
-    default: false
-    description: Mage class
-  class.warrior:
-    default: false
-    description: Warrior class
-  class.tanker:
-    default: false
-    description: Tanker class
-  class.assassin:
-    default: false
-    description: Assassin class
+  quests.command:
+    default: op
+    description: allows access to quest commands
 ...
