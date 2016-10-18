@@ -347,36 +347,44 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     if($p instanceof Player && $p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $event->getExpLevel() >= 10) {
-        if(!$p->getInventory()->contains(Item::get(Item::BONE, 0, 1))) {
-          //$bone = Item::get(Item::BONE, 0, 1); 
-          //$bone->setCustomName(TF:: AQUA . "Bone of Life\n" . TF::GRAY . "Regeneration - Mage");
-          //$p->getInventory()->addItem($bone); 
-          //$p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
-          //$p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
+        if($p->getInventory()->contains(Item::get(Item::BONE, 0, 1))) {
+          return false;
+        } else {
+          $bone = Item::get(Item::BONE, 0, 1); 
+          $bone->setCustomName(TF:: AQUA . "Bone of Life\n" . TF::GRAY . "Regeneration - Mage");
+          $p->getInventory()->addItem($bone); 
+          $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
+          $p->sendMessage(TF::GREEN . "You have unlocked the Regeneration spell!");
         }
       } elseif($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $event->getExpLevel() >= 10) {
-        if(!$p->getInventory()->contains(Item::get(Item::CLOCK, 0, 1))) {
-          //$clock = Item::get(Item::CLOCK, 0, 1); 
-          //$clock->setCustomName(TF:: AQUA . "Cloak of Invisibility\n" . TF::GRAY . "Invisibility - Assassin");
-          //$p->getInventory()->addItem($clock); 
-          //$p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
-          //$p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
+        if($p->getInventory()->contains(Item::get(Item::CLOCK, 0, 1))) {
+          return false;
+        } else {
+          $clock = Item::get(Item::CLOCK, 0, 1); 
+          $clock->setCustomName(TF:: AQUA . "Cloak of Invisibility\n" . TF::GRAY . "Invisibility - Assassin");
+          $p->getInventory()->addItem($clock); 
+          $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
+          $p->sendMessage(TF::GREEN . "You have unlocked the Invisibility spell!");
         }
       } elseif($this->getOwner()->playerclass->get($p->getName()) === "tanker" && $event->getExpLevel() >= 10) {
-        if(!$p->getInventory()->contains(Item::get(Item::MINECART, 0, 1))) {
-          //$minecart = Item::get(Item::MINECART, 0, 1);
-          //$minecart->setCustomName(TF:: AQUA . "Barrier\n" . TF::GRAY . "Resistance - Tanker");
-          //$p->getInventory()->addItem($minecart);
-          //$p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
-          //$p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
+        if($p->getInventory()->contains(Item::get(Item::MINECART, 0, 1))) {
+          return false;
+        } else {
+          $minecart = Item::get(Item::MINECART, 0, 1);
+          $minecart->setCustomName(TF:: AQUA . "Barrier\n" . TF::GRAY . "Resistance - Tanker");
+          $p->getInventory()->addItem($minecart);
+          $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
+          $p->sendMessage(TF::GREEN . "You have unlocked the Resistance spell!");
         }
       } elseif($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $event->getExpLevel() >= 10) {
-        if(!$p->getInventory()->contains(Item::get(Item::REDSTONE, 0, 1))) {
-          //$redstone = Item::get(Item::REDSTONE, 0, 1);
-          //$redstone->setCustomName(TF:: AQUA . "Rage Powder\n" . TF::GRAY . "Strength - Warrior");
-          //$p->getInventory()->addItem($redstone);
-          //$p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
-          //$p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
+        if($p->getInventory()->contains(Item::get(Item::REDSTONE, 0, 1))) {
+          return false;
+        } else {
+          $redstone = Item::get(Item::REDSTONE, 0, 1);
+          $redstone->setCustomName(TF:: AQUA . "Rage Powder\n" . TF::GRAY . "Strength - Warrior");
+          $p->getInventory()->addItem($redstone);
+          $p->sendMessage($this->getOwner ()->config->get("LevelUpMessage"));
+          $p->sendMessage(TF::GREEN . "You have unlocked the strength spell!");
         }
       }
     } //elseif($p instanceof Player && $event->getExp() >= 370) {
