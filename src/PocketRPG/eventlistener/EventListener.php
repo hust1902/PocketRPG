@@ -203,7 +203,7 @@ class EventListener extends Main implements Listener {
                       $event->setDamage(7);
                       $damager->sendPopup (TF::AQUA . "-8 Mana");
                       $damager->setFood ($damager->getFood () - 8);
-                      $hitlocation = $hit->getPosition()->add($hit->getDirectionVector());
+                      $hitlocation = $hit->getPosition();
                       $damager->teleport ($hitlocation->x, $hitlocation->y, $hitlocation->z - 1, $hit->yaw);
                     }
                   }
