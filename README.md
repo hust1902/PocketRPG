@@ -18,6 +18,8 @@
 
  - [ ] New way to use mage wand
 
+ - [ ] Make as many RPG worlds as you like
+
 Post your suggestions in the Issue tab or ask them on gitter    
 
 
