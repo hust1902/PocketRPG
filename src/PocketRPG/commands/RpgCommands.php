@@ -1,5 +1,4 @@
 <?php
-
 /*
 *  _____           _        _   _____  _____   _____ 
 * |  __ \         | |      | | |  __ \|  __ \ / ____|
@@ -9,7 +8,6 @@
 * |_|   \___/ \___|_|\_\___|\__|_|  \_\_|     \_____|
 *
 */     
-
 namespace PocketRPG\commands;
 
 use PocketRPG\Main;
@@ -17,36 +15,29 @@ use Pocketmine\item\Item;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
-use pocketmine\command\ConsoleCommandSender;
 use pocketmine\utils\TextFormat as TF;
-use pocketmine\utils\Config;
-use pocketmine\permission\Permission;
-use pocketmine\permission\PermissionAttachment;
 use pocketmine\plugin\PluginBase;
-use pocketmine\level\Level;
-use pocketmine\Server;
-use pocketmine\Player;
 
 class RpgCommands extends PluginBase implements CommandExecutor{
   
   public $plugin;
   public $config;
-
+  
   public function __construct(Main $plugin) {
     $this->plugin = $plugin;
   }
-
+  
   public function getOwner() {
      return $this->plugin;
   }
-
-  public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
+  
+  public function onCommand(CommandSender $p, Command $cmd, array $args) {
     switch(strtolower($cmd->getName())) {
       case "rpg":
         switch(strtolower($args[0])) {
           case "start":
           $this->getOwner()->getServer()->loadLevel($this->getOwner()->config->get("RPGworld"));
-          switch(strtolower($args[1])) {
+          switch(\strtolower($args[1])) {
           case "mage":
             if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
@@ -55,10 +46,10 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $wand = Item::get(Item::STICK, 0, 1);
               $wand->setCustomName(TF:: AQUA . "Wand\n" . TF:: GRAY . "Fireball - Mage");
               $p->getInventory()->addItem($wand);
-              $book = Item::get (Item::BOOK, 0, 1);
+              $book = Item::get(Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
-              $p->getInventory ()->addItem ($book);
-              $this->getOwner()->setClass($p, $args[1]);
+              $p->getInventory()->addItem($book);
+              $this->getOwner()->setClass($p, \strtolower($args[1]));
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -72,10 +63,10 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $sword = Item::get(Item::IRON_SWORD, 0, 1);
               $sword->setCustomName(TF:: AQUA . "Sword\n" . TF::GRAY . "Strike - Warrior");
               $p->getInventory()->addItem($sword);
-              $book = Item::get (Item::BOOK, 0, 1);
+              $book = Item::get(Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
-              $p->getInventory ()->addItem ($book);
-              $this->getOwner()->setClass($p, $args[1]);
+              $p->getInventory()->addItem($book);
+              $this->getOwner()->setClass($p, \strtolower($args[1]));
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -89,10 +80,10 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $shield = Item::get(Item::BRICK, 0, 1);
               $shield->setCustomName(TF:: AQUA . "Shield\n" . TF::GRAY . "Slam - Tanker");
               $p->getInventory()->addItem($shield);
-              $book = Item::get (Item::BOOK, 0, 1);
+              $book = Item::get(Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
-              $p->getInventory ()->addItem ($book);
-              $this->getOwner()->setClass($p, $args[1]);
+              $p->getInventory()->addItem($book);
+              $this->getOwner()->setClass($p, \strtolower($args[1]));
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
@@ -106,15 +97,15 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $knife = Item::get(Item::FEATHER, 0, 1);
               $knife->setCustomName(TF:: AQUA . "Dagger\n" . TF::GRAY . "Stab - Assassin");
               $p->getInventory()->addItem($knife);
-              $book = Item::get (Item::BOOK, 0, 1);
+              $book = Item::get(Item::BOOK, 0, 1);
               $book->setCustomName(TF:: AQUA . "Abilities Book");
-              $p->getInventory ()->addItem ($book);
-              $this->getOwner()->setClass($p, $args[1]);
+              $p->getInventory()->addItem($book);
+              $this->getOwner()->setClass($p, \strtolower($args[1]));
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
             return true;
             break;
-
+            
           /*case "archer":
             if($this->getOwner()->hasClass($p)){
               $p->sendMessage(TF:: RED . "You have already picked a class!");
@@ -122,8 +113,8 @@ class RpgCommands extends PluginBase implements CommandExecutor{
               $p->sendMessage(TF:: AQUA . "You have joined the world as an archer!");
               $bow = Item::get(Item::BOW, 0, 1);
               $p->getInventory()->addItem($bow);
-              $arrow = Item::get (Item::ARROW, 0, 5);
-              $p->getInventory ()->addItem ($arrow);
+              $arrow = Item::get(Item::ARROW, 0, 5);
+              $p->getInventory()->addItem($arrow);
               $this->getOwner()->setClass($p, $args[1]);
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             }
@@ -131,18 +122,18 @@ class RpgCommands extends PluginBase implements CommandExecutor{
             break;*/
           }
           break;
-
+          
           case "warp":
             if($this->getOwner()->hasClass($p)){
               $this->getOwner()->getServer()->loadLevel($this->getOwner()->config->get("RPGworld"));
-              $p->sendMessage (TF::AQUA . "You warped to the RPG world!");
+              $p->sendMessage(TF::AQUA . "You warped to the RPG world!");
               $p->teleport($this->getOwner()->getServer()->getLevelByName($this->getOwner()->config->get("RPGworld"))->getSafeSpawn());
             } else {
               $p->sendMessage(TF::RED . "You haven't chosen a class yet!");
             }
             return true;
             break;
-
+            
           case "reset":
             if($this->getOwner()->hasClass($p)) {
               $this->getOwner()->clearAllQuests($p);
@@ -172,4 +163,3 @@ class RpgCommands extends PluginBase implements CommandExecutor{
     }
   }
 }
-  

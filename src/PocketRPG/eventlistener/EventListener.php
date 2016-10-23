@@ -11,21 +11,15 @@
 */     
 
 namespace PocketRPG\eventlistener;
+
 use PocketRPG\Main;
-use PocketRPG\tasks\ExplodeTask;
+use PocketRPG\tasks\HammerExplodeTask;
 use PocketRPG\tasks\FireCageTask;
-use pocketmine\plugin\PluginBase;
-use pocketmine\command\Command;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
-use pocketmine\permission\Permission;
 use pocketmine\Player;
-use pocketmine\Server;
-use pocketmine\event\Event;
 use pocketmine\math\Vector3;
-use pocketmine\level\Position;
-use pocketmine\level\Level;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\inventory\CraftItemEvent;
@@ -50,8 +44,6 @@ use pocketmine\event\player\PlayerExperienceChangeEvent;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\item\Item;
 use pocketmine\entity\Effect;
-use pocketmine\inventory\PlayerInventory;
-use pocketmine\entity\human;
 
 class EventListener extends Main implements Listener {
 
@@ -65,8 +57,7 @@ class EventListener extends Main implements Listener {
   }
 
   public function onQuit (PlayerQuitEvent $event) {
-    $p = $event->getPlayer ();
-    $party = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml");
+    $p = $event->getPlayer();
     unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
   }
   public function onInteract(PlayerInteractEvent $event) {
@@ -88,12 +79,12 @@ class EventListener extends Main implements Listener {
   }
 
   public function onJoin (PlayerJoinEvent $event) {
-    $p = $event->getPlayer ();
+    $p = $event->getPlayer();
     if ($p instanceof Player) {
-      @mkdir($this->getDataFolder () . "plugins/PocketRPG/party/");
-      @file_put_contents ($this->getDataFolder () . "plugins/PocketRPG/party/" . $p->getName () . ".yml", yaml_emit([
-      "Pending" => array (),
-      "Allies" => array ()
+      @mkdir($this->getDataFolder() . "plugins/PocketRPG/party/");
+      \file_put_contents($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml", yaml_emit([
+      "Pending" => [],
+      "Allies" => []
       ]));
     }
 
@@ -108,9 +99,9 @@ class EventListener extends Main implements Listener {
         $hit = $event->getEntity();
         $damager = $event->getDamager();
         if($hit instanceof Player && $damager instanceof Player) {
-          $hitparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $hit->getName() . ".yml");
-          $damagerparty = new Config ($this->getDataFolder () . "plugins/PocketRPG/party/" . $damager->getName() . ".yml");
-          if(in_array ($damager->getName (), $hitparty->get ("Allies", array ())) || in_array ($hit->getName (), $damagerparty->get ("Allies", array ()))) {
+          $hitparty = new Config($this->getDataFolder() . "plugins/PocketRPG/party/" . $hit->getName() . ".yml");
+          $damagerparty = new Config($this->getDataFolder() . "plugins/PocketRPG/party/" . $damager->getName() . ".yml");
+          if(\in_array($damager->getName(), $hitparty->get("Allies", [])) || \in_array($hit->getName(), $damagerparty->get("Allies", []))) {
             $event->setCancelled();
           } 
         }
@@ -118,29 +109,29 @@ class EventListener extends Main implements Listener {
         if(!$damager instanceof Player){
             return false;
         } else {
-            if ($damager->getFood() == 0) {
-            $event->setCancelled ();
+            if($damager->getFood() == 0) {
+            $event->setCancelled();
             
             } else {
                 $level = $damager->getLevel();
             
-                if($damager->getItemInHand()->getId() == Item::FEATHER && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")){
+                if($damager->getItemInHand()->getId() === Item::FEATHER && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")){
                   if($this->getOwner()->playerclass->get($damager->getName()) === "assassin"){
-                    if ($damager->getFood() >= 1){
+                    if($damager->getFood() >= 1){
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
                       $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z), 5));
                       $event->setDamage(4);
-                      $damager->setFood ($damager->getFood () - 1);
-                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                      $damager->setFood($damager->getFood () - 1);
+                      $damager->sendPopup(TF::AQUA . "-1 Mana");
                     }
                   }
                 } //Dagger
             
-                elseif($damager->getItemInHand()->getId() == Item::STICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                elseif($damager->getItemInHand()->getId() === Item::STICK && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "mage"){
-                    if($damager->getFood () >= 1) {
+                    if($damager->getFood() >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
@@ -148,71 +139,71 @@ class EventListener extends Main implements Listener {
                       $hit->setOnFire(5);
                       $level->addParticle(new LavaParticle(new Vector3($x, $y, $z), 5));
                       $event->setDamage(3);
-                      $damager->setFood ($damager->getFood () - 1);
-                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                      $damager->setFood($damager->getFood () - 1);
+                      $damager->sendPopup(TF::AQUA . "-1 Mana");
                     }
                   }
                 } //Wand
             
-                elseif($damager->getItemInHand()->getId() == Item::BRICK && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                elseif($damager->getItemInHand()->getId() === Item::BRICK && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "tanker"){
-                    if ($damager->getFood () >= 1) {
+                    if($damager->getFood() >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
                       $level->addParticle(new HugeExplodeParticle(new Vector3($x, $y, $z)));
                       $event->setKnockBack(1);
                       $event->setDamage(2);
-                      $damager->setFood ($damager->getFood () - 1);
-                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                      $damager->setFood($damager->getFood () - 1);
+                      $damager->sendPopup(TF::AQUA . "-1 Mana");
                     }
                   }
                 } //Shield
             
-                elseif($damager->getItemInHand()->getId() == Item::IRON_SWORD && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                elseif($damager->getItemInHand()->getId() === Item::IRON_SWORD && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "warrior"){
-                    if ($damager->getFood () >= 1) {
+                    if($damager->getFood() >= 1) {
                       $x = $hit->x;
                       $y = $hit->y;
                       $z = $hit->z;
                       $level->addParticle(new CriticalParticle(new Vector3($x, $y, $z), 5));
                       $event->setKnockBack(0.8);
                       $event->setDamage(4);
-                      $damager->setFood ($damager->getFood () - 1);
-                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                      $damager->setFood($damager->getFood () - 1);
+                      $damager->sendPopup(TF::AQUA . "-1 Mana");
                     }
                   }
                 } //Sword
             
-                elseif($damager->getItemInHand()->getId() == Item::IRON_SHOVEL && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                elseif($damager->getItemInHand()->getId() === Item::IRON_SHOVEL && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "warrior"){
-                    if ($damager->getFood () >= 1) {
-                      $this->getOwner ()->getServer()->getScheduler()->scheduleDelayedTask(new ExplodeTask($this, $hit), 20);
+                    if($damager->getFood() >= 1) {
+                      $this->getOwner()->getServer()->getScheduler()->scheduleDelayedTask(new HammerExplodeTask($this, $hit), 20);
                       $level->addParticle(new ExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
                       $event->setKnockBack(1.5);
                       $event->setDamage(1);
-                      $damager->sendPopup (TF::AQUA . "-1 Mana");
+                      $damager->sendPopup(TF::AQUA . "-1 Mana");
                     }
                   }
                 } //Hammer (WIP)
-                elseif($damager->getItemInHand()->getId() == Item::IRON_HOE && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+                elseif($damager->getItemInHand()->getId() === Item::IRON_HOE && $level->getFolderName() === $this->getOwner()->config->get("RPGworld")) {
                   if($this->getOwner()->playerclass->get($damager->getName()) === "assassin"){
-                    if ($damager->getFood () >= 8 && $damager->getExpLevel () >= 20) {
+                    if($damager->getFood() >= 8 && $damager->getExpLevel() >= 20) {
                       $level->addParticle(new LavaParticle(new Vector3($damager->x, $damager->y, $damager->z), 4));
                       $event->setKnockBack(0);
                       $event->setDamage(7);
-                      $damager->sendPopup (TF::AQUA . "-8 Mana");
-                      $damager->setFood ($damager->getFood () - 8);
+                      $damager->sendPopup(TF::AQUA . "-8 Mana");
+                      $damager->setFood($damager->getFood () - 8);
                       $hitlocation = $hit->getPosition();
-                      $damager->teleport ($hitlocation->x, $hitlocation->y, $hitlocation->z - 1, $hit->yaw);
+                      $damager->teleport($hitlocation->x, $hitlocation->y, $hitlocation->z - 1, $hit->yaw);
                     }
                   }
                 } //Hook
             }
          }
         
-         if ($damager->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-           $event->setDamage ($event->getDamage () + ($damager->getExpLevel() * 0.20));
+         if($damager->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
+           $event->setDamage($event->getDamage () + ($damager->getExpLevel() * 0.20));
          }
      }
   }
@@ -222,67 +213,67 @@ class EventListener extends Main implements Listener {
     if($level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
       if($p->getItemInHand()->getId() == Item::FEATHER) {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin"){
-          if ($p->getFood () >= 1) {
+          if($p->getFood() >= 1) {
             $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
             $p->addEffect($effect); 
-            $p->setFood ($p->getFood () - 1);
-            $p->sendPopup (TF::AQUA . "-1 Mana");
+            $p->setFood($p->getFood () - 1);
+            $p->sendPopup(TF::AQUA . "-1 Mana");
           }
         }
       } //Dagger speed
     
       elseif($p->getItemInHand()->getId() == Item::MINECART && $p->getExpLevel() >= 10) {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-          if($p->getFood () >= 5) {
+          if($p->getFood() >= 5) {
             $effect = Effect::getEffect(11)->setDuration(240)->setAmplifier(1)->setVisible(false);
             $p->addEffect($effect);
-            $p->setFood ($p->getFood () - 5);
-            $p->sendPopup (TF::AQUA . "-5 Mana");
+            $p->setFood($p->getFood() - 5);
+            $p->sendPopup(TF::AQUA . "-5 Mana");
           }
         }
       } //Shield resistance
     
       elseif($p->getItemInHand()->getId() == Item::CLOCK && $p->getExpLevel() >= 10) {
         if($this->getOwner()->playerclass->get($p->getName()) === "assassin" && $level->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-          if ($p->getFood () >= 4) {
+          if ($p->getFood() >= 4) {
             $effect = Effect::getEffect(14)->setDuration(60)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
             $level->addParticle(new LavaParticle(new Vector3($x, $y, $z), 5)); 
-            $p->setFood ($p->getFood () - 4);
-            $p->sendPopup (TF::AQUA . "-4 Mana");
+            $p->setFood($p->getFood () - 4);
+            $p->sendPopup(TF::AQUA . "-4 Mana");
           }
         }
       } //Assassin Cloak
     
       elseif($p->getItemInHand()->getId() == Item::BONE && $p->getExpLevel() >= 10) {
         if($this->getOwner()->playerclass->get($p->getName()) === "mage" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-          if ($p->getFood () >= 7) {
+          if ($p->getFood() >= 7) {
             $effect = Effect::getEffect(10)->setDuration(100)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
             $level->addParticle(new HeartParticle(new Vector3($x, $y + 2, $z), 5)); 
-            $p->setFood ($p->getFood () - 7);
-            $p->sendPopup (TF::AQUA . "-7 Mana");
+            $p->setFood ($p->getFood() - 7);
+            $p->sendPopup(TF::AQUA . "-7 Mana");
           }
         }
       } //Mage bone
     
       elseif($p->getItemInHand()->getId() == Item::REDSTONE && $p->getExpLevel() >= 10) {
         if($this->getOwner()->playerclass->get($p->getName()) === "warrior" && $p->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-          if ($p->getFood () >= 6) {
+          if ($p->getFood() >= 6) {
             $effect = Effect::getEffect(5)->setDuration(200)->setAmplifier(1)->setVisible(true);
             $p->addEffect($effect);
             $x = $p->x;
             $y = $p->y;
             $z = $p->z;
             $level->addParticle(new EntityFlameParticle(new Vector3($x, $y+3, $z), 3)); 
-            $p->setFood ($p->getFood () - 6);
-            $p->sendPopup (TF::AQUA . "-6 Mana");
+            $p->setFood($p->getFood () - 6);
+            $p->sendPopup(TF::AQUA . "-6 Mana");
           }
         }
       } //Warrior powder
@@ -315,25 +306,25 @@ class EventListener extends Main implements Listener {
 
   public function onCraft(CraftItemEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
-      $event->setCancelled(); //denies any crafting, since that could get rid of important items
+      $event->setCancelled();
       }
   }
   
   public function onSmelt(FurnaceSmeltEvent $event) {
     if($event->getFurnace()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
-      $event->setCancelled(); //same counts for smelting items in a furnace
+      $event->setCancelled();
     }
   }
 
   public function onBurn(FurnaceBurnEvent $event) {
     if($event->getFurnace()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
-      $event->setCancelled(); //same counts for burning items in a furnace
+      $event->setCancelled();
       }
   }
 
   public function onDrop(PlayerDropItemEvent $event) {
     if($event->getPlayer()->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld") && $this->getOwner()->config->get("DisableItemLosing") == true) {
-      $event->setCancelled();  //same counts for dropping items out of your inventory
+      $event->setCancelled();
     }
   }
 
@@ -394,9 +385,9 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->config->get("AllowBlockBreaking") == false) {
-       if(!$p->hasPermission("rpg.break")) {
-        $event->setCancelled();
-       }
+        if(!$p->hasPermission("rpg.break")) {
+          $event->setCancelled();
+        }
       }
     }
   }
@@ -405,9 +396,9 @@ class EventListener extends Main implements Listener {
     $p = $event->getPlayer();
     if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
       if($this->getOwner()->config->get("AllowBlockPlacing") == false) {
-       if(!$p->hasPermission("rpg.place")) {
-        $event->setCancelled();
-       }
+        if(!$p->hasPermission("rpg.place")) {
+          $event->setCancelled();
+        }
       }
     }
   }
@@ -417,7 +408,7 @@ class EventListener extends Main implements Listener {
     if($p instanceof Player) {
       $original = $event->getOrigin();
       $target = $event->getTarget();
-      if($original->getName() == $this->getOwner()->config->get("RPGworld")) {
+      if($target->getName() == $this->getOwner()->config->get("RPGworld")) {
         $p->setMaxHealth($p->getExpLevel() * 0.20 + 20);
         $p->setHealth($p->getExpLevel() * 0.20 + 20);
       } elseif($original->getName() == $this->getOwner()->config->get("RPGworld")) {

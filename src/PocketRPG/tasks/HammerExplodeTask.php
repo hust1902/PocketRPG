@@ -1,5 +1,4 @@
 <?php
-
 /*
 *  _____           _        _   _____  _____   _____ 
 * |  __ \         | |      | | |  __ \|  __ \ / ____|
@@ -9,33 +8,27 @@
 * |_|   \___/ \___|_|\_\___|\__|_|  \_\_|     \_____|
 *
 */     
-
 namespace PocketRPG\tasks;
 
 use pocketmine\scheduler\PluginTask;
 use PocketRPG\eventlistener\EventListener;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\item\Item;
-use pocketmine\Player;
-use pocketmine\Server;
 use pocketmine\math\Vector3;
-use pocketmine\level\Position;
 use pocketmine\level\particle\HugeExplodeParticle;
 
-class ExplodeTask extends PluginTask implements Listener{
+class HammerExplodeTask extends PluginTask implements Listener{
   
-  private $plugin;
-  private $p;
-
+  public $plugin;
+  public $p;
+  
   public function __construct(EventListener $plugin, Entity $p) {
     parent::__construct($plugin);
     $this->plugin = $plugin;
     $this->entity = $p;
   }
   
-  public function getPlugin() {
+  public function getOwner() {
     return $this->plugin;
   }
   
