@@ -50,7 +50,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             $p->sendMessage(TF::RED . "That player is not online!");
           }
         return true;
-        break;
         
         case "accept":
           if(\file_exists($this->getDataFolder() . "plugins/PocketRPG/party/" . $args[1] . ".yml")) {
@@ -76,7 +75,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             $p->sendMessage(TF::RED . "That player did not make a party yet!");
           }
         return true;
-        break;
         
         case "reject":
           if(\file_exists($this->getDataFolder() . "plugins/PocketRPG/party/" . $args[1] . ".yml")) {
@@ -97,7 +95,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             $p->sendMessage(TF::RED . "That player did not make a party yet!");
           }
         return true;
-        break;
         
         case "leave":
           if(\file_exists($this->getDataFolder() . "plugins/PocketRPG/party/" . $args[1] . ".yml")) {
@@ -115,7 +112,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
             $p->sendMessage(TF::RED . "That player did not make a party yet!");
           }
         return true;
-        break;
         
         case "help":
           $p->sendMessage(TF::GREEN . " --- " . TF::YELLOW . "Party help" . TF::GREEN . " --- ");
@@ -124,7 +120,6 @@ class PartyCommands extends PluginBase implements CommandExecutor {
           $p->sendMessage(TF::GREEN . "/party reject <playername>:" . TF::AQUA . "Reject a party invite.");
           $p->sendMessage(TF::GREEN . "/party leave <playername>:" . TF::AQUA . "Leave your current party.");
         return true;
-        break;
       }
     }
    }
