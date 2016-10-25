@@ -114,4 +114,16 @@ class Main extends PluginBase implements Listener {
     $quest->save();
     $this->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
   }
+  
+  public function meetsRequirements(Player $p, $requiredclass, $requiredexp, $requiredmana) {
+    if($this->playerclass->get($p->getName()) === $requiredclass) {
+      if($p->getExp() >= $requiredexp) {
+        if($p->getFood() >= $requiredmana) {
+          if(\in_array($p->getLevel()->getName(), $this->config->get("RPGworld", []))) {
+            return true;
+          }
+        }
+      }
+    }
+  }
 }
