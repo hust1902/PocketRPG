@@ -30,7 +30,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
     return $this->plugin;
   }
  
-  public function onCommand(CommandSender $p, Command $cmd, array $args) {
+  public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     if(strtolower($cmd->getName() == "quest")) {
       switch(strtolower($args[0])) {
         case "create":

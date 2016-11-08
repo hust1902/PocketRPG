@@ -20,12 +20,10 @@ class ManaGainTask extends PluginTask {
     parent::__construct($plugin);
     $this->plugin = $plugin;
   }
-  public function getOwner() {
-    return $this->plugin;
-  }
+
   public function onRun($tick) {
-    foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
-      if($p->getLevel()->getName() === $this->getOwner()->config->get("RPGworld")) {
+    foreach($this->plugin->getServer()->getOnlinePlayers() as $p) {
+      if($p->getLevel()->getName() === $this->plugin->config->get("RPGworld")) {
         if($p->getFood() === 20) {
           $p->setFood(20);
         } else {

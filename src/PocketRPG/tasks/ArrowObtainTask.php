@@ -19,16 +19,14 @@ class ArrowObtainTask extends PluginTask {
   public $plugin;
   
   public function __construct(Main $plugin) {
-    parent::__construct ($plugin);
+    parent::__construct($plugin);
     $this->plugin = $plugin;
   }
-  public function getOwner () {
-    return $this->plugin;
-  }
+
   public function onRun($tick) {
-    foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p) {
-      if($p->getLevel()->getName() == $this->getOwner()->config->get("RPGworld")) {
-        if($this->getOwner()->playerclass->get($p->getName()) == "Archer" && !$p->getInventory()->contains(Item::get(Item::ARROW, 0, 5))) {
+    foreach($this->plugin->getServer()->getOnlinePlayers() as $p) {
+      if($p->getLevel()->getName() == $this->plugin->config->get("RPGworld")) {
+        if($this->plugin->playerclass->get($p->getName()) == "Archer" && !$p->getInventory()->contains(Item::get(Item::ARROW, 0, 5))) {
           $p->getInventory()->addItem(Item::get(Item::ARROW, 0, 1));
         }
       }

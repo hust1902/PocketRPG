@@ -27,9 +27,7 @@ class FireCageTask extends PluginTask {
           $this->halfseconds = 0;
           $this->p = $p;
       }
-      public function getOwner() {
-          return $this->plugin->getOwner();
-      }
+
       public function onRun($tick) {
         for($k = 0; $k < 7; $k++) {
           $this->p->teleport($this->pos, $this->p->yaw, $this->p->pitch);
@@ -40,7 +38,7 @@ class FireCageTask extends PluginTask {
         }
         if($this->halfseconds === 10) {
           unset($this->tasks[$this->getTaskId()]);
-          $this->getOwner()->getServer()->getScheduler()->cancelTask($this->getTaskId());
+          $this->plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
         }
         $this->halfseconds++;
       }

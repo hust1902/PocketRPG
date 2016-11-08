@@ -31,7 +31,7 @@ class PartyCommands extends PluginBase implements CommandExecutor {
     return $this->plugin;
   }
   
-  public function onCommand(CommandSender $p, Command $cmd, array $args) {
+  public function onCommand(CommandSender $p, Command $cmd, $label, array $args) {
     if($cmd->getName() == "party") {
      if(isset($args [1])) {
       switch(strtolower($args[0])) {
