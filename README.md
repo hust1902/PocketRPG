@@ -6,7 +6,7 @@
 
  - [x] Real custom item names instead of popups
 
- - [ ] Proper item obtaining when getting higher level
+ - [x] Proper item obtaining when getting higher level
 
  - [ ] Class and level nametag
 
@@ -18,7 +18,7 @@
 
  - [ ] New way to use mage wand
 
- - [ ] Make as many RPG worlds as you like
+ - [x] Make as many RPG worlds as you like
 
 Post your suggestions in the Issue tab or ask them on gitter    
 
