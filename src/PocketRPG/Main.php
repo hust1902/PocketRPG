@@ -111,7 +111,7 @@ class Main extends PluginBase implements Listener {
         $player[] = $p->getName();
         $quest->set("Started", $player);
         $quest->save();
-        $this->getServer()->getPluginManager()->callEvent(new QuestStartEvent($this, $p, $questid));
+        //$this->getServer()->getPluginManager()->callEvent(new QuestStartEvent($this, $p, $questid));
     }
     
     public function finishQuest(Player $p, $questid) {
@@ -120,7 +120,7 @@ class Main extends PluginBase implements Listener {
         $player[] = $p->getName ();
         $quest->set("Finished", $player);
         $quest->save();
-        $this->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
+        //$this->getServer()->getPluginManager()->callEvent(new QuestFinishEvent($this, $p, $questid));
     }
   
     public function meetsRequirements(Player $p, $requiredclass, $requiredexp, $requiredmana) {
