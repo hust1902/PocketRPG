@@ -23,7 +23,7 @@ class ManaGainTask extends PluginTask {
 
   public function onRun($tick) {
     foreach($this->plugin->getServer()->getOnlinePlayers() as $p) {
-      if($p->getLevel()->getName() === $this->plugin->config->get("RPGworld")) {
+      if($this->plugin->inRpgWorld($p)) {
         if($p->getFood() === 20) {
           $p->setFood(20);
         } else {
