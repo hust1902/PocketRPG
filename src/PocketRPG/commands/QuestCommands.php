@@ -191,16 +191,19 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           if(isset($args[1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml")) {
             if(\in_array($p->getName(), $quest->get("Started", [])) && \in_array($p->getName(), $quest->get("Finished", []))) {
             } elseif(\in_array($p->getName(), $quest->get("Started", []))) {
-                if($p->getInventory()->contains(Item::get($quest->get("RequiredID"), 0, $quest->get("RequiredAmount")))){
-                
-                  $this->getOwner()->finishQuest($p, $args[1]);
-                  $p->sendMessage(TF::GREEN . "You completed quest " . $args[1] . "!");
-                  $p->sendMessage(TF::GREEN . "You have received a reward for finishing the quest!");
-                  $p->sendPopup(TF::AQUA . "You leveled up!");
-                  $items = Item::get($quest->get("RewardID"), 0, $quest->get("RewardAmount"));
-                  $p->getInventory()->addItem($items);
-                  $p->setExpLevel($p->getExpLevel() + $quest->get("RewardExpLevel"));
-                  $p->getInventory()->remove($item);
+                foreach($p->getInventory()->getContents() as $item) {
+                    if($item->getAmount() >= $quest->get("RequiredAmount") && $item->getId() == $quest->get("RequiredID")) {
+                        $this->getOwner()->finishQuest($p, $args[1]);
+                        $p->sendMessage(TF::GREEN . "You completed quest " . $args[1] . "!");
+                        $p->sendMessage(TF::GREEN . "You have received a reward for finishing the quest!");
+                        $p->sendPopup(TF::AQUA . "You leveled up!");
+                        $items = Item::get($quest->get("RewardID"), 0, $quest->get("RewardAmount"));
+                        $p->getInventory()->addItem($items);
+                        $p->setExpLevel($p->getExpLevel() + $quest->get("RewardExpLevel"));
+                        $p->getInventory()->remove($item);
+                    } else {
+                        return false;
+                    }
                 }
             }
           }
