@@ -192,7 +192,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
             if(\in_array($p->getName(), $quest->get("Started", [])) && \in_array($p->getName(), $quest->get("Finished", []))) {
             } elseif(\in_array($p->getName(), $quest->get("Started", []))) {
                 foreach($p->getInventory()->getContents() as $item) {
-                    if($item->getAmount() >= $quest->get("RequiredAmount") && $item->getId() == $quest->get("RequiredID")) {
+                    if($item->getCount() >= $quest->get("RequiredAmount") && $item->getId() == $quest->get("RequiredID")) {
                         $this->getOwner()->finishQuest($p, $args[1]);
                         $p->sendMessage(TF::GREEN . "You completed quest " . $args[1] . "!");
                         $p->sendMessage(TF::GREEN . "You have received a reward for finishing the quest!");
@@ -201,6 +201,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                         $p->getInventory()->addItem($items);
                         $p->setExpLevel($p->getExpLevel() + $quest->get("RewardExpLevel"));
                         $p->getInventory()->remove($item);
+                        return true;
                     } else {
                         return false;
                     }
