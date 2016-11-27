@@ -202,11 +202,9 @@ class QuestCommands extends PluginBase implements CommandExecutor{
                         $p->setExpLevel($p->getExpLevel() + $quest->get("RewardExpLevel"));
                         $p->getInventory()->remove($item);
                         return true;
-                    } else {
-                        return false;
                     }
                 }
-            }
+             }
           }
       return true;
       break;
