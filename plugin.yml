@@ -26,8 +26,11 @@ permissions:
   rpg.place:
     default: op
     description: allow placing in RPG world
+  quests.opcommands:
+    default: 
+    description: allows access to OP quest commands
   quests.command:
-    default: op
+    default: true
     description: allows access to quest commands
   quests.defaultcommands:
     default: true
