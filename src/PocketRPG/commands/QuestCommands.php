@@ -168,7 +168,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           }
         break;
         case "start":
-          if(isset($args [1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml")) {
+          if(isset($args [1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml") && $p->hasPermission("quest.defaultcommands")) {
             $quest = new Config($this->getDataFolder() . "quests/" . $args[1] . ".yml");
             if($this->getOwner()->hasQuestFinished($p, $args[1])) {
               $p->sendMessage(TF::RED . "You have already finished this quest!");
@@ -188,7 +188,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
  
         case "finish":
           $quest = new Config($this->getDataFolder() . "quests/" . $args[1] . ".yml");
-          if(isset($args[1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml")) {
+          if(isset($args[1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml") && $p->hasPermission("quests.defaultcommands")) {
             if(\in_array($p->getName(), $quest->get("Started", [])) && \in_array($p->getName(), $quest->get("Finished", []))) {
             } elseif(\in_array($p->getName(), $quest->get("Started", []))) {
                 foreach($p->getInventory()->getContents() as $item) {
