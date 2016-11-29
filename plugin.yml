@@ -29,4 +29,7 @@ permissions:
   quests.command:
     default: op
     description: allows access to quest commands
+  quests.defaultcommands:
+    default: 
+    description: allows access to default quest commands
 ...
