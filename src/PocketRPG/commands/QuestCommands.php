@@ -168,7 +168,7 @@ class QuestCommands extends PluginBase implements CommandExecutor{
           }
         break;
         case "start":
-          if(isset($args [1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml") && $p->hasPermission("quest.defaultcommands")) {
+          if(isset($args [1]) && \file_exists($this->getDataFolder() . "quests/" . $args[1] . ".yml") && $p->hasPermission("quests.defaultcommands")) {
             $quest = new Config($this->getDataFolder() . "quests/" . $args[1] . ".yml");
             if($this->getOwner()->hasQuestFinished($p, $args[1])) {
               $p->sendMessage(TF::RED . "You have already finished this quest!");
