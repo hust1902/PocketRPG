@@ -30,6 +30,6 @@ permissions:
     default: op
     description: allows access to quest commands
   quests.defaultcommands:
-    default: 
+    default: true
     description: allows access to default quest commands
 ...
