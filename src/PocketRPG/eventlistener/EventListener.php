@@ -64,7 +64,7 @@ class EventListener extends Main implements Listener {
     
     public function onInteract(PlayerInteractEvent $event) {
         $p = $event->getPlayer();
-        if($p->getItemInHand()->getId() == Item::MAGMA_CREAM && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
+        if($p->getInventory()->getItemInHand()->getId() == Item::MAGMA_CREAM && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
             foreach($this->getOwner()->getServer()->getOnlinePlayers() as $ps) {
                 if($p->distance($ps) <= 15 && $p->getName() != $ps->getName() && $p->getFood() >= 10 && $this->getOwner()->inRpgWorld($ps)) {
                     $p->setFood($p->getFood() - 6);
@@ -115,7 +115,7 @@ class EventListener extends Main implements Listener {
             $event->setCancelled();
             } else {
                 $level = $damager->getLevel();
-                switch($damager->getItemInHand()->getId()) {
+                switch($damager->getInventory()->getItemInHand()->getId()) {
                     case "288":
                         if($this->getOwner()->meetsRequirements($damager, "assassin", 0, 1)) {
                             $level->addParticle(new CriticalParticle(new Vector3($hit->x, $hit->y, $hit->z), 5));
@@ -187,7 +187,7 @@ class EventListener extends Main implements Listener {
     public function onItemHeld(PlayerItemHeldEvent $event) {
         $p = $event->getPlayer();
         $level = $p->getLevel();
-        switch($p->getItemInHand()->getId()) {
+        switch($p->getInventory()->getItemInHand()->getId()) {
             case "288":
                 if($this->getOwner()->meetsRequirements($p, "assassin", 0, 1)) {
                     $effect = Effect::getEffect(1)->setDuration(240)->setAmplifier(1)->setVisible(false);
