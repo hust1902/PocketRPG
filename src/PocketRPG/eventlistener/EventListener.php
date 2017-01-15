@@ -19,6 +19,7 @@ use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 use pocketmine\Player;
+use pocketmine\level\Position;
 use pocketmine\math\Vector3;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -69,7 +70,7 @@ class EventListener extends Main implements Listener {
                 if($p->distance($ps) <= 15 && $p->getName() != $ps->getName() && $p->getFood() >= 10 && $this->getOwner()->inRpgWorld($ps)) {
                     $p->setFood($p->getFood() - 6);
                     $pos = $ps->getPosition();
-                    $ps->setOnFire($p->getExpLevel() * 0.15);
+                    $ps->setOnFire($p->getXpLevel() * 0.15);
                     $t = new FireCageTask($this, $pos, $ps);
                     $h = $this->getOwner()->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
                     $t->setHandler($h);
@@ -90,8 +91,8 @@ class EventListener extends Main implements Listener {
         }
 
         if($this->getOwner()->inRpgWorld($p)) {
-            $p->setMaxHealth($p->getExpLevel() * 0.20 + 20);
-            $p->setHealth($p->getExpLevel() * 0.20 + 20);
+            $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
+            $p->setHealth($p->getXpLevel() * 0.20 + 20);
         } else {
             $p->setMaxHealth(20);
         }
@@ -174,13 +175,13 @@ class EventListener extends Main implements Listener {
                             $damager->sendPopup(TF::AQUA . "-8 Mana");
                             $damager->setFood($damager->getFood () - 8);
                             $hitlocation = $hit->getPosition();
-                            $damager->teleport($hitlocation->x, $hitlocation->y, $hitlocation->z - 1, $hit->yaw);
+                            $damager->teleport(new Position($hitlocation->x, $hitlocation->y, $hitlocation->z, $hit->level));
                         }
                     }
                 }
             }
             if($damager->getLevel()->getFolderName() == $this->getOwner()->config->get("RPGworld")) {
-                $event->setDamage($event->getDamage() + ($damager->getExpLevel() * 0.20));
+                $event->setDamage($event->getDamage() + ($damager->getXpLevel() * 0.20));
             }
         }
     }
@@ -374,8 +375,8 @@ class EventListener extends Main implements Listener {
             $original = $event->getOrigin();
             $target = $event->getTarget();
             if(\in_array($target->getName(), $this->getOwner()->config->get("RPGworld"))) {
-                $p->setMaxHealth($p->getExpLevel() * 0.20 + 20);
-                $p->setHealth($p->getExpLevel() * 0.20 + 20);
+                $p->setMaxHealth($p->getXpLevel() * 0.20 + 20);
+                $p->setHealth($p->getXpLevel() * 0.20 + 20);
             } else {
                 $p->setMaxHealth(20);
             }
@@ -391,15 +392,14 @@ class EventListener extends Main implements Listener {
         $l = $p->getLevel();
         $m = $event->getMessage();
         if($this->getOwner()->inRpgWorld($p) && $this->getOwner()->config->get("ClassChat") == true) {
-            $event->setCancelled();
             foreach($this->getOwner()->getServer()->getOnlinePlayers() as $p2) {
                 if($this->getOwner()->inRpgWorld($p2)) {
                     if($p->distance($p2) <= 50) {
-                        $p2->sendMessage($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::WHITE . $m);
+                        $event->setFormat($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getXpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::WHITE . $m);
                     } elseif($p->distance($p2) <= 100) {
-                        $p2->sendMessage($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::GRAY . $m);
+                        $event->setFormat($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getXpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::GRAY . $m);
                     } elseif($p->distance($p2) <= 150) {
-                        $p2->sendMessage($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getExpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::DARK_GRAY . $m);
+                        $event->setFormat($p->getDisplayName() . TF::GRAY . " / Lvl" . $p->getXpLevel() . " / " . TF::GRAY . $this->getOwner()->playerclass->get ($p->getName()) . TF::GRAY . " > " . TF::DARK_GRAY . $m);
                     }
                 }
             }
