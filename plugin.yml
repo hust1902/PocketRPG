@@ -11,7 +11,7 @@ commands:
     description: Quest help command
     usage: /quest help
     aliases: [q]
-    permission: quests.command
+    permission: quests.defaultcommands
   rpg:
     description: Main RPG command
     usage: /rpg start mage|warrior|assassin|tank
