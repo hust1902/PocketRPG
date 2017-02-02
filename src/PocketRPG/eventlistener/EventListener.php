@@ -120,7 +120,7 @@ class EventListener extends Main implements Listener {
                     case "288":
                         if($this->getOwner()->meetsRequirements($damager, "assassin", 0, 1)) {
                             $level->addParticle(new CriticalParticle(new Vector3($hit->x, $hit->y, $hit->z), 5));
-                            $event->setDamage(4);
+                            $event->setDamage(3.5);
                             $damager->setFood($damager->getFood () - 1);
                             $damager->sendPopup(TF::AQUA . "-1 Mana");
                         }
@@ -140,8 +140,8 @@ class EventListener extends Main implements Listener {
                     case "336":
                         if($this->getOwner()->meetsRequirements($damager, "tanker", 0, 1)){
                             $level->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
-                            $event->setKnockBack(1);
-                            $event->setDamage(2);
+                            $event->setKnockBack(1.5);
+                            $event->setDamage(2.5);
                             $damager->setFood($damager->getFood () - 1);
                             $damager->sendPopup(TF::AQUA . "-1 Mana");
                         }
@@ -151,10 +151,12 @@ class EventListener extends Main implements Listener {
                         if($this->getOwner()->meetsRequirements($damager, "warrior", 0, 1)) {
                             $level->addParticle(new CriticalParticle(new Vector3($hit->x, $hit->y, $hit->z), 5));
                             $event->setKnockBack(0.8);
-                            $event->setDamage(4);
+                            $event->setDamage(3);
                             $damager->setFood($damager->getFood () - 1);
                             $damager->sendPopup(TF::AQUA . "-1 Mana");
-                        }
+                        } else {
+                            $event->setDamage(1);
+                        }    
                     break;
             
                     case "256":
