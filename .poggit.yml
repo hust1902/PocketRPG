@@ -1,0 +1,7 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/NL-4-DEVS/PocketRPG
+branches:
+- Stable-Version
+projects:
+  PocketRPG:
+    path: ""
+...
