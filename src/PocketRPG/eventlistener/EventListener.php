@@ -62,23 +62,6 @@ class EventListener extends Main implements Listener {
         $p = $event->getPlayer();
         unlink ($this->getDataFolder() . "plugins/PocketRPG/party/" . $p->getName() . ".yml");
     }
-    
-    public function onInteract(PlayerInteractEvent $event) {
-        $p = $event->getPlayer();
-        if($p->getInventory()->getItemInHand()->getId() == Item::MAGMA_CREAM && $this->getOwner()->playerclass->get($p->getName()) == "mage") {
-            foreach($this->getOwner()->getServer()->getOnlinePlayers() as $ps) {
-                if($p->distance($ps) <= 15 && $p->getName() != $ps->getName() && $p->getFood() >= 10 && $this->getOwner()->inRpgWorld($ps)) {
-                    $p->setFood($p->getFood() - 6);
-                    $pos = $ps->getPosition();
-                    $ps->setOnFire($p->getXpLevel() * 0.15);
-                    $t = new FireCageTask($this, $pos, $ps);
-                    $h = $this->getOwner()->getServer()->getScheduler()->scheduleRepeatingTask($t, 10);
-                    $t->setHandler($h);
-                    $this->tasks[$t->getTaskId()] = $t->getTaskId();
-                }
-            }
-        }
-    }
 
     public function onJoin (PlayerJoinEvent $event) {
         $p = $event->getPlayer();
@@ -140,7 +123,7 @@ class EventListener extends Main implements Listener {
                     case "336":
                         if($this->getOwner()->meetsRequirements($damager, "tanker", 0, 1)){
                             $level->addParticle(new HugeExplodeParticle(new Vector3($hit->x, $hit->y, $hit->z)));
-                            $event->setKnockBack(1.5);
+                            $event->setKnockBack(1.4);
                             $event->setDamage(2.5);
                             $damager->setFood($damager->getFood () - 1);
                             $damager->sendPopup(TF::AQUA . "-1 Mana");
@@ -150,7 +133,7 @@ class EventListener extends Main implements Listener {
                     case "267":
                         if($this->getOwner()->meetsRequirements($damager, "warrior", 0, 1)) {
                             $level->addParticle(new CriticalParticle(new Vector3($hit->x, $hit->y, $hit->z), 5));
-                            $event->setKnockBack(0.8);
+                            $event->setKnockBack(0.6);
                             $event->setDamage(3);
                             $damager->setFood($damager->getFood () - 1);
                             $damager->sendPopup(TF::AQUA . "-1 Mana");
